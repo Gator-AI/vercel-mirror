@@ -2,7 +2,7 @@ import React from "react";
 
 function Hero() {
   return (
-    <div className="container mx-auto mt-10">
+    <div className="container mx-auto mt-10 h-screen">
       <h1 className="font-neighbor text-5xl font-semibold leading-10">
         UF Artificial Intelligence
       </h1>

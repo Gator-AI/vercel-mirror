@@ -6,6 +6,8 @@ export default function Home() {
     <>
       <div className="container mx-auto">
         <Hero />
+        <Hero />
+        <Hero />
       </div>
     </>
   );
