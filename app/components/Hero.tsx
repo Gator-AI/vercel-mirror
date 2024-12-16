@@ -1,5 +1,5 @@
 import React from "react";
-
+// organize into sections for the entire homepage animation
 function Hero() {
   return (
     <div className="container mx-auto mt-10 h-screen">
