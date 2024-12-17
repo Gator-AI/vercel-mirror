@@ -1,4 +1,4 @@
-import Navbar from './components/Navbar';
+import Navbar from "@components/Navbar";
 
 export const metadata = {
   title: "Next.js",
@@ -15,9 +15,7 @@ export default function RootLayout({
       <body className="h-screen flex flex-col">
         <Navbar />
         <main className="flex-grow bg-green-400 w-screen flex justify-center">
-          <div className="w-[80%] flex flex-col items-center">
-            {children}
-          </div>
+          <div className="w-[80%] flex flex-col items-center">{children}</div>
         </main>
       </body>
     </html>

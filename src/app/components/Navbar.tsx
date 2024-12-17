@@ -9,8 +9,8 @@ import {
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
-import StarIcon from "../images/icons/star-icon.png";
-import {House, Info, CodeXml, CircleHelp} from "lucide-react";
+import StarIcon from "@/images/icons/star-icon.png";
+import { House, Info, CodeXml, CircleHelp } from "lucide-react";
 
 export const FloatingNav = ({
   navItems,
@@ -77,10 +77,42 @@ export const FloatingNav = ({
 
 function Navbar() {
   const navItems = [
-    { name: "Home", link: "/", icon: <span><House size={20} /></span> },
-    { name: "About", link: "/about", icon: <span><Info size={20} /></span> },
-    { name: "Programs", link: "/programs", icon: <span><CodeXml size={20} /></span> },
-    { name: "FAQs", link: "/faqs", icon: <span><CircleHelp size={20} /></span> },
+    {
+      name: "Home",
+      link: "/",
+      icon: (
+        <span>
+          <House size={20} />
+        </span>
+      ),
+    },
+    {
+      name: "About",
+      link: "/about",
+      icon: (
+        <span>
+          <Info size={20} />
+        </span>
+      ),
+    },
+    {
+      name: "Programs",
+      link: "/programs",
+      icon: (
+        <span>
+          <CodeXml size={20} />
+        </span>
+      ),
+    },
+    {
+      name: "FAQs",
+      link: "/faqs",
+      icon: (
+        <span>
+          <CircleHelp size={20} />
+        </span>
+      ),
+    },
   ];
 
   return (
