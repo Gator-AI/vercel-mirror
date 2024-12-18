@@ -1,11 +1,11 @@
-import Hero from "@components/Hero";
+import Home from "@/components/Home";
 import "./globals.css";
 
-export default function Home() {
+export default function Index() {
   return (
     <>
       <div className="container mx-auto">
-        <Hero />
+        <Home />
       </div>
     </>
   );
