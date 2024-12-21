@@ -1,12 +1,12 @@
-import Home from "@/components/Home";
 import "./globals.css";
+import HomeAnimation from "./components/HomeAnimation";
+import Home from "@/components/Home";
 
 export default function Index() {
   return (
-    <>
-      <div className="container mx-auto">
-        <Home />
-      </div>
-    </>
+    <div className="hidden homeAnim:block">
+      <Home />
+      <HomeAnimation />
+    </div>
   );
 }

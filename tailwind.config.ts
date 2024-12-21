@@ -25,7 +25,8 @@ const config: Config = {
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
+          // DEFAULT: "hsl(var(--secondary))",
+          DEFAULT: "#6fffe4",
           foreground: "hsl(var(--secondary-foreground))",
         },
         muted: {
@@ -58,6 +59,10 @@ const config: Config = {
       },
       fontFamily: {
         neighbor: ["Neighbor", "sans-serif"],
+      },
+      screens: {
+        homeAnim: "800px",
+        xlg: "1400px",
       },
     },
   },
