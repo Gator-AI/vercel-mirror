@@ -53,7 +53,7 @@ export const FloatingNav = ({
           duration: 0.2,
         }}
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 flex w-full border border-transparent dark:border-white/[0.2] dark:bg-black shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] px-3 py-2 items-center justify-between backdrop-blur-md",
+          "fixed top-0 left-0 right-0 z-50 flex w-full border border-transparent bg-[#00272b] dark:border-white/[0.2] dark:bg-black shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] px-10 py-5 items-center justify-between backdrop-blur-2xl",
           className
         )}
       >
@@ -71,10 +71,10 @@ export const FloatingNav = ({
               href={navItem.link}
               className="group flex items-center gap-2 relative font-neighbor font-light text-neutral-50 transition-colors"
             >
-              <span className="block sm:hidden transition-colors group-hover:oapcity-80">
+              <span className="block sm:hidden transition-colors group-hover:opacity-80">
                 {navItem.icon}
               </span>
-              <span className="text-sm transition-colors group-hover:opacity-80">
+              <span className="text-md transition-colors group-hover:text-secondary">
                 {navItem.name}
               </span>
             </Link>

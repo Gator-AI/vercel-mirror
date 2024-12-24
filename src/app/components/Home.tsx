@@ -1,13 +1,26 @@
 "use client";
 import React from "react";
+import Image from "next/image";
+import sun from "@/images/sun.png";
+import earth from "@/images/earth.png";
 
 function Home() {
   return (
-    <div className="fixed mx-auto border border-black top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-neighbor font-normal min-w-fit">
-      <h1 className="text-5xl font-bold whitespace-nowrap">
-        Welcome to <span className="text-secondary">GatorAI</span>
-      </h1>
-      {/* Your home page content */}
+    <div className="relative mx-auto font-neighbor font-normal h-screen w-full flex flex-col items-center pt-64 gap-6 z-30">
+      <Image
+        className="absolute top-0 right-0"
+        src={sun}
+        width={300}
+        height={300}
+        alt="sun image"
+      />
+      <Image
+        className="absolute -bottom-72 -left-60"
+        width={600}
+        height={600}
+        src={earth}
+        alt="earth image"
+      />
     </div>
   );
 }
