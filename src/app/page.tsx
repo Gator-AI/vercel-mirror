@@ -1,3 +1,4 @@
+"use client";
 import "./globals.css";
 import HomeAnimation from "./components/HomeAnimation";
 import Home from "@/components/Home";
@@ -9,7 +10,6 @@ export default function Index() {
       {/* Home page */}
       {/* Render only if the screen is wide enough (for large devices) */}
       <div className="hidden homeAnim:block w-screen">
-        {/* <Home /> */}
         <HomeAnimation />
       </div>
 

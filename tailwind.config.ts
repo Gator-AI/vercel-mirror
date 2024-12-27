@@ -9,6 +9,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        yellowGlow: "0 0 50px rgba(255, 255, 0, 0.6)",
+        greenGlow: "0 0 50px rgba(0, 255, 0, 0.6)",
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -61,7 +65,7 @@ const config: Config = {
         neighbor: ["Neighbor", "sans-serif"],
       },
       screens: {
-        homeAnim: "800px",
+        homeAnim: "700px",
         xlg: "1400px",
       },
     },

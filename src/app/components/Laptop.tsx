@@ -48,7 +48,7 @@ export function Laptop() {
       "<"
     );
 
-    // Scale the laptop down as it moves into position
+    // scale the laptop down as it moves into position
     timeline.to(
       groupRef.current.scale,
       {
@@ -60,7 +60,17 @@ export function Laptop() {
       "<"
     );
 
-    // Smooth camera zoom and focus
+    // scale header down
+    timeline.to(
+      "#header-container",
+      {
+        scale: 0.8,
+        ease: "power2.out",
+      },
+      "<"
+    );
+
+    // smooth camera zoom and focus
     timeline.to(
       camera.position,
       {
@@ -90,7 +100,7 @@ export function Laptop() {
   return (
     <group
       ref={groupRef}
-      position={[0, -0.95, 0]}
+      position={[0, -0.5, 0]}
       rotation={[0, 0, Math.PI]}
       scale={0.5}
     >

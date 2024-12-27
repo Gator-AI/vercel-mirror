@@ -7,15 +7,20 @@ import { Laptop } from "./Laptop";
 import { ContactShadows, OrbitControls } from "@react-three/drei";
 import Image from "next/image";
 import homeImage from "@/images/home-page.png";
-import sun from "@/images/sun.png";
-import earth from "@/images/earth.png";
+import ParticlesComponent from "@/components/ui/particles";
+import { FloatingDock } from "./ui/floating-dock";
+import {
+  IconBrandGithub,
+  IconBrandInstagram,
+  IconBrandDiscord,
+} from "@tabler/icons-react";
 
 function Scene() {
   return (
     <Canvas camera={{ position: [0, 0, 10], fov: 60 }}>
-      <directionalLight intensity={3.5} position={[1, 2, 3]} />
+      <directionalLight intensity={3.4} position={[1, 2, 3]} />
       <Laptop />
-      <ContactShadows opacity={0.3} position={[0, -1.15, 0]} />
+      {/* <ContactShadows opacity={0.3} position={[0, -0.2, 0]} /> */}
     </Canvas>
   );
 }
@@ -32,8 +37,32 @@ function HomeAnimation() {
   const modelOpacity = useTransform(scrollYProgress, [0, 0.99, 1], [1, 1, 0]);
   const headerOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0, 0]);
 
+  // array for social media icons
+  const socialItems = [
+    {
+      title: "Discord",
+      icon: <IconBrandDiscord color="#00272b" />,
+      href: "https://discord.com",
+    },
+    {
+      title: "GitHub",
+      icon: <IconBrandGithub color="#00272b" />,
+      href: "https://github.com",
+    },
+    {
+      title: "Instagram",
+      icon: <IconBrandInstagram color="#00272b" />,
+      href: "https://instagram.com",
+    },
+  ];
+
   return (
-    <main className="w-full">
+    <main className="w-full overflow-hidden">
+      {/*particles background*/}
+      <div className="absolute w-full h-[300vh] z-20">
+        <ParticlesComponent />
+      </div>
+      {/*main content*/}
       <div
         id="animation-container"
         className="h-[300vh] w-full flex justify-center"
@@ -41,32 +70,29 @@ function HomeAnimation() {
       >
         {/*header*/}
         <motion.div
-          className="fixed flex my-56 flex-col items-center justify-center w-full gap-4"
+          id="header-container"
+          className="fixed flex mt-48 flex-col items-center justify-center w-full gap-4"
           style={{ opacity: headerOpacity }}
         >
           <h1 className="font-neighbor text-6xl font-bold whitespace-nowrap">
             Welcome to <span className="text-secondary">GatorAI</span>
           </h1>
-          <p className="font-neighbor text-lg">Scroll to continue.</p>
-          <Image
-            src={sun}
-            alt="Description"
-            width={300}
-            height={300}
-            className="fixed top-0 right-0"
-          ></Image>
-          <Image
-            src={earth}
-            alt="Description"
-            width={800}
-            height={800}
-            className="fixed -bottom-96 -left-96"
-          ></Image>
+          <p className="font-neighbor text-lg font-light opacity-70">
+            The University of Florida's Premier Artificial Intelligence Club
+          </p>
+        </motion.div>
+
+        {/*floating dock*/}
+        <motion.div
+          style={{ opacity: headerOpacity }}
+          className="fixed bottom-32 left-1/2 transform -translate-x-1/2 z-50"
+        >
+          <FloatingDock items={socialItems} />
         </motion.div>
 
         {/*mouse indicator*/}
         <motion.div
-          className="fixed bottom-10 left-1/2 transform -translate-x-1/2 flex justify-center z-10"
+          className="fixed z-20 bottom-8 left-1/2 transform -translate-x-1/2 flex justify-center"
           style={{ opacity: modelOpacity }}
         >
           <div className="w-7 h-12 border-2 border-neutral-50 rounded-full flex justify-center items-start">
@@ -78,7 +104,7 @@ function HomeAnimation() {
         </motion.div>
 
         <motion.div
-          className="fixed lg:w-[70%] md:w-[90%] h-full pointer-events-none flex items-center justify-center"
+          className="fixed lg:w-[70%] md:w-[90%] sm:w-[100%] h-full pointer-events-none flex items-center justify-center z-10"
           style={{ opacity: modelOpacity }}
         >
           <Scene />
@@ -88,9 +114,7 @@ function HomeAnimation() {
           <Image
             src={homeImage}
             alt="Description"
-            width={1300}
-            height={900}
-            className="w-full max-w-6xl mx-auto object-cover"
+            className="mx-auto w-[1180px]  sm:h-[670px] object-cover"
           />
         </motion.div>
       </div>
