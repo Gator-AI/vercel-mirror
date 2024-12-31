@@ -1,8 +1,8 @@
 "use client";
 import "./globals.css";
-import HomeAnimation from "./components/HomeAnimation";
 import Home from "@/components/Home";
-import About from "./components/About";
+import About from "@/components/About";
+import Involve from "@/components/Involve";
 
 export default function Index() {
   return (
@@ -10,11 +10,14 @@ export default function Index() {
       {/* Home page */}
       {/* Render only if the screen is wide enough (for large devices) */}
       <div className="hidden homeAnim:block w-screen">
-        <HomeAnimation />
+        <Home />
       </div>
 
       {/* About page */}
       <About />
+
+      {/*Involvement page*/}
+      <Involve />
     </>
   );
 }

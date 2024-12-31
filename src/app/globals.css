@@ -60,6 +60,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: "Poppins";
+  overflow-x: hidden;
 }
 
 @layer utilities {
@@ -149,3 +150,12 @@ body {
   left: 0;
   z-index: 100;
 } */
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
