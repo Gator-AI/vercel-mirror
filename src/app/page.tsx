@@ -9,10 +9,8 @@ export default function Index() {
     <>
       {/* Home page */}
       {/* Render only if the screen is wide enough (for large devices) */}
-      <div className="hidden homeAnim:block w-screen">
-        <Home />
-      </div>
-
+      {/* <div className="hidden homeAnim:block w-screen"></div> */}
+      <Home />
       {/* About page */}
       <About />
 

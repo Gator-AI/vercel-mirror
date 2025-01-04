@@ -124,32 +124,11 @@ body {
     --chart-5: 340 75% 55%;
   }
 }
-/* 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-} */
 
 #tsparticles {
   width: 100%;
   height: 100%;
-  /* position: fixed;
-  background-image: url("");
-  background-size: cover;
-  background-position: 50% 50%;
-  background-repeat: no-repeat; */
 }
-
-/* .body-particles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 100;
-} */
 
 @layer base {
   * {
@@ -158,4 +137,14 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* hide the scrollbar */
+
+#no-scrollbar {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }

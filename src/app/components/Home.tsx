@@ -7,7 +7,7 @@ import { Laptop } from "./Laptop";
 import { ContactShadows, OrbitControls } from "@react-three/drei";
 import Image from "next/image";
 import homeImage from "@/images/home-page.png";
-import light from "@/images/light.png";
+import light from "@/images/light.svg";
 import ParticlesComponent from "@/components/ui/particles";
 import { FloatingDock } from "./ui/floating-dock";
 import {
@@ -37,6 +37,7 @@ function Home() {
   const scrollIndicatorY = useTransform(scrollYProgress, [0, 1], [10, 30]);
   const modelOpacity = useTransform(scrollYProgress, [0, 0.99, 1], [1, 1, 0]);
   const headerOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0, 0]);
+  const socialOpacity = useTransform(scrollYProgress, [0, 0.05, 1], [1, 0, 0]);
 
   // array for social media icons
   const socialItems = [
@@ -74,6 +75,16 @@ function Home() {
           className="absolute bottom-0 w-full"
         />
       </div>
+      {/*floating dock*/}
+      <motion.div
+        style={{
+          opacity: socialOpacity,
+        }}
+        className="absolute bottom-40 left-1/2 transform -translate-x-1/2 z-20"
+      >
+        <FloatingDock items={socialItems} />
+      </motion.div>
+
       {/*main content*/}
       <div
         id="animation-container"
@@ -94,14 +105,6 @@ function Home() {
           </p>
         </motion.div>
 
-        {/*floating dock*/}
-        <motion.div
-          style={{ opacity: headerOpacity }}
-          className="fixed bottom-32 left-1/2 transform -translate-x-1/2 z-20"
-        >
-          <FloatingDock items={socialItems} />
-        </motion.div>
-
         {/*mouse indicator*/}
         <motion.div
           className="fixed z-20 bottom-8 left-1/2 transform -translate-x-1/2 flex justify-center"
@@ -116,7 +119,7 @@ function Home() {
         </motion.div>
 
         <motion.div
-          className="fixed lg:w-[70%] md:w-[90%] sm:w-[100%] h-full pointer-events-none flex items-center justify-center z-10"
+          className="fixed lg:w-[70%] md:w-[90%] sm:w-[100%] h-full pointer-events-none flex items-center justify-center"
           style={{ opacity: modelOpacity }}
         >
           <Scene />
