@@ -36,3 +36,16 @@ yarn-error.log*
 next-env.d.ts
 
 package-lock.json
+# next-video
+videos/*
+!videos/*.json
+!videos/*.js
+!videos/*.ts
+public/_next-video
+
+# next-video
+app/*
+!app/*.json
+!app/*.js
+!app/*.ts
+public/_next-video

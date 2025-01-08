@@ -129,7 +129,7 @@ function Home() {
           <Image
             src={homeImage}
             alt="Description"
-            className="mx-auto sm:w-[730px] sm:h-[750px] md:w-[680px] md:h-[700px] lg:w-[770px] lg:h-[750px] object-cover"
+            className="mx-auto sm:w-[730px] sm:h-[750px] md:w-[680px] md:h-[700px] lg:w-[770px] lg:h-[700px] xl:h-[750px] object-cover"
           />
         </motion.div>
       </div>

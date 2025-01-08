@@ -14,11 +14,6 @@ interface BrowserWindowProps {
   tabs: Tab[];
 }
 
-// const tabs: Tab[] = [
-//   { id: "1", title: "Gator Education", content: "Welcome to the home page!" },
-//   { id: "2", title: "Gator Applied", content: "This is the about page." },
-// ];
-
 export default function BrowserWindow({ tabs }: BrowserWindowProps) {
   const [activeTab, setActiveTab] = useState<string>(tabs[0].id);
 
