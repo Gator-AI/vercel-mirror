@@ -11,7 +11,7 @@ import ShimmerButton from "./ui/shimmer-button";
 import { Lens } from "@/components/ui/lens";
 import { AnimatedList } from "@/components/ui/animated-list";
 import { Notification } from "@/components/ui/notification";
-import { useOnScreen } from "./hooks/useOnScreen";
+
 import { useEffect, useState, useRef } from "react";
 
 const Skeleton = () => (
@@ -30,7 +30,7 @@ function Involve() {
   // check if animatedlist is within view if so then animate
 
   const elementRef = useRef(null);
-  const isOnScreen = useOnScreen(elementRef);
+
   const [listHovering, setListHovering] = useState(false);
 
   const testimonials = [
@@ -112,12 +112,12 @@ function Involve() {
       description: "Workshops led by passionate mentors",
       header: (
         <div className="w-full h-full overflow-hidden items-center justify-center rounded-xl bg-dot-white/[0.2] flex flex-col gap-4">
-          <div className="mx-auto w-[90%] relative">
-            <Lens hovering={hovering} setHovering={setHovering}>
+          <div className="mx-auto w-[95%] relative">
+            <Lens lensSize={150} hovering={hovering} setHovering={setHovering}>
               <Image
                 src={SebastianLectureImg}
                 alt="Lecture"
-                className="w-full rounded-lg hover:cursor-none"
+                className="w-full rounded-lg hover:cursor-none scale-x-[-1]"
               />
             </Lens>
           </div>
@@ -146,20 +146,25 @@ function Involve() {
             topics in AI and ML.<br></br> Check our calendar for upcoming
             events!
           </p>
-          <ShimmerButton className="ml-auto px-3 py-2" shimmerDuration="2.5s">
-            <CalendarDays className="w-4" />
+          <ShimmerButton
+            className="ml-auto px-4 py-2 flex gap-2"
+            shimmerDuration="2.5s"
+            background="#00272b"
+          >
+            Calendar
+            <CalendarDays className="w-3.5" />
           </ShimmerButton>
         </div>
       ),
       header: (
         <div
-          className="w-full h-full overflow-hidden flex items-center justify-center rounded-lg bg-dot-white/[0.2]"
+          className="w-full h-full overflow-hidden flex items-center justify-center rounded-lg bg-dot-white/[0.2] p-2 lg:p-0"
           ref={elementRef}
           onMouseEnter={() => setListHovering(true)}
           onMouseLeave={() => setListHovering(false)}
         >
           {/* <Image src={AiWorkshopImg} alt="Ai workshop" className="w-full" /> */}
-          <AnimatedList listHovering={listHovering}>
+          <AnimatedList listHovering={listHovering} className="lg:w-3/4">
             {notifications.map((item, idx) => (
               <Notification {...item} key={idx} />
             ))}
