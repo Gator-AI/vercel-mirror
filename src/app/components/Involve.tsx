@@ -69,7 +69,7 @@ function Involve() {
     },
     {
       name: "President",
-      description: "Workshops a is at Informatics Institute!",
+      description: "Workshops are in the Informatics Institute!",
       time: "9m ago",
 
       icon: "P",
