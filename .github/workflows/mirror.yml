@@ -1,0 +1,20 @@
+name: Mirror to Personal Repo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Enterprise Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push to Personal Repo
+        run: |
+          git remote add mirror https://x-access-token:${{ secrets.PERSONAL_TOKEN }}@github.com/Gator-AI/vercel-mirror.git
+          git push mirror main --force  # Adjust branch name if needed
