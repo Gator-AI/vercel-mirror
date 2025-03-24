@@ -1,25 +1,30 @@
-name: Mirror to Personal Repo
+name: Push to Personal GitHub Repo via SSH
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
-  mirror:
+  sync:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Enterprise Repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Push to Mirrored Deployed GitHub Repo
-        env:
-          GITHUB_PAT: ${{ secrets.PERSONAL_TOKEN }}
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      - name: Push to Vercel Mirror Repo
         run: |
           git config --global user.email "ufgatorai@gmail.com"
           git config --global user.name "Gator-AI"
 
-          # Add mirror repo as a new remote
-          git remote add mirror https://Gator-AI:${GITHUB_PAT}@github.com/Gator-AI/vercel-mirror.git
-          git push -u mirror main --force
+          git remote add mirror git@github.com:Gator-AI/vercel-mirror.git
+          git push mirror main --force
