@@ -3,7 +3,7 @@ import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import AnimatedChangingCards from "@/components/ui/animated-changing-cards";
 import { IconArrowWaveLeftUp } from "@tabler/icons-react";
 import BrowserWindow from "@/components/ui/browser-window";
-import { GraduationCap, Wrench, CalendarDays } from "lucide-react";
+import { GraduationCap, CalendarDays } from "lucide-react";
 import SebastianLectureImg from "@/images/sebastian-lecturing.png";
 import Image from "next/image";
 import ShimmerButton from "./ui/shimmer-button";
@@ -200,37 +200,37 @@ function Involve() {
     },
   ];
 
-  const itemsApplied = [
-    {
-      title: "Test",
-      description: "Explore the birth of groundbreaking ideas and inventions.",
-      header: <Skeleton />,
-      className: "md:col-span-2",
-      icon: <IconArrowWaveLeftUp className="h-4 w-4 text-neutral-500" />,
-    },
-    {
-      title: "Test",
-      description: "Dive into the transformative power of technology.",
-      header: <Skeleton />,
-      className: "md:col-span-1",
-      icon: <IconArrowWaveLeftUp className="h-4 w-4 text-neutral-500" />,
-    },
-    {
-      title: "Test",
-      description: "Discover the beauty of thoughtful and functional design.",
-      header: <Skeleton />,
-      className: "md:col-span-1",
-      icon: <IconArrowWaveLeftUp className="h-4 w-4 text-neutral-500" />,
-    },
-    {
-      title: "Test",
-      description:
-        "Understand the impact of effective communication in our lives.",
-      header: <Skeleton />,
-      className: "md:col-span-2",
-      icon: <IconArrowWaveLeftUp className="h-4 w-4 text-neutral-500" />,
-    },
-  ];
+  // const itemsApplied = [
+  //   {
+  //     title: "Test",
+  //     description: "Explore the birth of groundbreaking ideas and inventions.",
+  //     header: <Skeleton />,
+  //     className: "md:col-span-2",
+  //     icon: <IconArrowWaveLeftUp className="h-4 w-4 text-neutral-500" />,
+  //   },
+  //   {
+  //     title: "Test",
+  //     description: "Dive into the transformative power of technology.",
+  //     header: <Skeleton />,
+  //     className: "md:col-span-1",
+  //     icon: <IconArrowWaveLeftUp className="h-4 w-4 text-neutral-500" />,
+  //   },
+  //   {
+  //     title: "Test",
+  //     description: "Discover the beauty of thoughtful and functional design.",
+  //     header: <Skeleton />,
+  //     className: "md:col-span-1",
+  //     icon: <IconArrowWaveLeftUp className="h-4 w-4 text-neutral-500" />,
+  //   },
+  //   {
+  //     title: "Test",
+  //     description:
+  //       "Understand the impact of effective communication in our lives.",
+  //     header: <Skeleton />,
+  //     className: "md:col-span-2",
+  //     icon: <IconArrowWaveLeftUp className="h-4 w-4 text-neutral-500" />,
+  //   },
+  // ];
 
   const tabs = [
     {
