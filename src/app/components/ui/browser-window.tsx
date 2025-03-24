@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import tabSvg from "@/images/tab-vector.svg";
-import Image from "next/image";
+// import tabSvg from "@/images/tab-vector.svg";
+// import Image from "next/image";
 
 interface Tab {
   id: string;

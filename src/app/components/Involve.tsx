@@ -5,14 +5,17 @@ import { IconArrowWaveLeftUp } from "@tabler/icons-react";
 import BrowserWindow from "@/components/ui/browser-window";
 import { GraduationCap, Wrench, CalendarDays } from "lucide-react";
 import SebastianLectureImg from "@/images/sebastian-lecturing.png";
-
 import Image from "next/image";
 import ShimmerButton from "./ui/shimmer-button";
 import { Lens } from "@/components/ui/lens";
 import { AnimatedList } from "@/components/ui/animated-list";
 import { Notification } from "@/components/ui/notification";
-
 import { useEffect, useState, useRef } from "react";
+
+import Danny from "@/images/guest-photos/danny.jpg";
+import Brianna from "@/images/guest-photos/brianna.jpg";
+import Shawn from "@/images/guest-photos/shawn.jpeg";
+import Vaibhav from "@/images/guest-photos/vaibhav.jpg";
 
 const Skeleton = () => (
   <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-900 to-neutral-800"></div>
@@ -28,53 +31,37 @@ function Involve() {
   const [hovering, setHovering] = useState(false);
 
   // check if animatedlist is within view if so then animate
-
   const elementRef = useRef(null);
 
   const [listHovering, setListHovering] = useState(false);
 
   const testimonials = [
     {
-      quote:
-        "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
-      name: "Sarah Chen",
-      designation: "Product Manager at TechFlow",
-      src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      name: "Danny Avila",
+      designation: "Founder of Libre Chat",
+      src: Danny,
     },
     {
-      quote:
-        "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
-      name: "Michael Rodriguez",
-      designation: "CTO at InnovateSphere",
-      src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      name: "Brianna Schuch",
+      designation: "Generative AI applications in Finance",
+      src: Brianna,
     },
     {
-      quote:
-        "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
-      name: "Emily Watson",
-      designation: "Operations Director at CloudScale",
-      src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      name: "Shawn Wang",
+      designation: "Devtools Startup Advisor",
+      src: Shawn,
     },
     {
-      quote:
-        "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
-      name: "James Kim",
-      designation: "Engineering Lead at DataPro",
-      src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      quote:
-        "The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.",
-      name: "Lisa Thompson",
-      designation: "VP of Technology at FutureNet",
-      src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      name: "Vaibhav Gupta",
+      designation: "CEO of Boundary ML",
+      src: Vaibhav,
     },
   ];
 
-  let notifications = [
+  const notifications = [
     {
       name: "GatorAI",
-      description: "Don't forget to come to the workshop Monday!",
+      description: "Don't forget to come to the workshop Monday at 6PM!",
       time: "15m ago",
 
       icon: "G",
@@ -82,7 +69,7 @@ function Involve() {
     },
     {
       name: "President",
-      description: "The workshop is at TURL007.",
+      description: "Workshops a is at Informatics Institute!",
       time: "9m ago",
 
       icon: "P",
@@ -90,18 +77,18 @@ function Involve() {
     },
     {
       name: "Jeff the Land Shark",
-      description: "Chomp chomp chomp...",
+      description: "Guest speaker at the workshop today CHOMP",
       time: "8m ago",
 
       icon: "🦈",
       color: "#7fbdf0",
     },
     {
-      name: "Stanley",
-      description: "sup!",
-      time: "0.002m ago",
+      name: "Bro",
+      description: "They're going over graph neural networks today 😍",
+      time: "1 sec ago",
 
-      icon: "S",
+      icon: "B",
       color: "#7ff07f",
     },
   ];
@@ -146,14 +133,17 @@ function Involve() {
             topics in AI and ML.<br></br> Check our calendar for upcoming
             events!
           </p>
-          <ShimmerButton
-            className="ml-auto px-4 py-2 flex gap-2"
-            shimmerDuration="2.5s"
-            background="#00272b"
-          >
-            Calendar
-            <CalendarDays className="w-3.5" />
-          </ShimmerButton>
+          <a href="/calendar" className="ml-auto">
+            <ShimmerButton
+              className="px-4 py-2 flex gap-2"
+              shimmerDuration="2.5s"
+              borderRadius="10px"
+              background="#00272b"
+            >
+              Calendar
+              <CalendarDays className="w-3.5" />
+            </ShimmerButton>
+          </a>
         </div>
       ),
       header: (
@@ -183,7 +173,7 @@ function Involve() {
           {isHydrated ? (
             <video
               src="/videos/jupyter-notebook-demo.mp4"
-              loop={true} // change this back to true later
+              loop={true}
               autoPlay
               muted
               className="rounded-md"
@@ -212,28 +202,28 @@ function Involve() {
 
   const itemsApplied = [
     {
-      title: "BRUH BRUHS",
+      title: "Test",
       description: "Explore the birth of groundbreaking ideas and inventions.",
       header: <Skeleton />,
       className: "md:col-span-2",
       icon: <IconArrowWaveLeftUp className="h-4 w-4 text-neutral-500" />,
     },
     {
-      title: "HUZ BUSZZD",
+      title: "Test",
       description: "Dive into the transformative power of technology.",
       header: <Skeleton />,
       className: "md:col-span-1",
       icon: <IconArrowWaveLeftUp className="h-4 w-4 text-neutral-500" />,
     },
     {
-      title: "WOOPP",
+      title: "Test",
       description: "Discover the beauty of thoughtful and functional design.",
       header: <Skeleton />,
       className: "md:col-span-1",
       icon: <IconArrowWaveLeftUp className="h-4 w-4 text-neutral-500" />,
     },
     {
-      title: "WEEEEEEE",
+      title: "Test",
       description:
         "Understand the impact of effective communication in our lives.",
       header: <Skeleton />,
@@ -271,42 +261,44 @@ function Involve() {
         </div>
       ),
     },
-    {
-      id: "2",
-      title: (
-        <div className="flex items-center justify-center gap-2">
-          <Wrench className="w-4 md:w-5" />
-          <p className="text-sm md:text-md">Gator Applied</p>
-        </div>
-      ),
-      content: (
-        <BentoGrid className="max-w-6xl mx-auto md:auto-rows-[20rem]">
-          {itemsApplied.map((item, i) => (
-            <BentoGridItem
-              key={i}
-              title={item.title}
-              description={item.description}
-              header={item.header}
-              className={item.className}
-              icon={item.icon}
-            />
-          ))}
-        </BentoGrid>
-      ),
-    },
+    // {
+    //   id: "2",
+    //   title: (
+    //     <div className="flex items-center justify-center gap-2">
+    //       <Wrench className="w-4 md:w-5" />
+    //       <p className="text-sm md:text-md">Gator Applied</p>
+    //     </div>
+    //   ),
+    //   content: (
+    //     <BentoGrid className="max-w-6xl mx-auto md:auto-rows-[20rem]">
+    //       {itemsApplied.map((item, i) => (
+    //         <BentoGridItem
+    //           key={i}
+    //           title={item.title}
+    //           description={item.description}
+    //           header={item.header}
+    //           className={item.className}
+    //           icon={item.icon}
+    //         />
+    //       ))}
+    //     </BentoGrid>
+    //   ),
+    // },
   ];
 
   return (
-    <div className=" min-h-screen w-[90%] md:w-[80%] my-24 flex flex-col gap-16">
+    <div className="min-h-screen mx-auto w-[90%] md:w-[80%] my-24 flex flex-col gap-16">
       {/* header */}
-      <div className="w-full flex flex-col gap-3">
-        <p className="font-neighbor font-bold text-base text-secondary">
-          Get Involved
-        </p>
-        <p className="font-neighbor text-2xl md:text-5xl font-thin leading-none">
-          Join a community of students <br></br>enthusiastic about the future of
-          AI.
-        </p>
+      <div className="w-full flex flex-col gap-4">
+        <div className="flex flex-col">
+          <p className="font-neighbor font-bold text-base text-secondary">
+            Get Involved
+          </p>
+          <p className="font-neighbor text-2xl md:text-5xl font-thin leading-none">
+            Join a community of students <br></br>enthusiastic about the future
+            of AI.
+          </p>
+        </div>
         <p className="font-neighbor text-xs max-w-sm md:text-lg md:max-w-xl font-thin text-white/80 leading-snug">
           Our club has two programs to headstart your AI/ML journey. Learn more
           about how to get involved in Gator Education and Gator Applied below.

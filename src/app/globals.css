@@ -55,6 +55,11 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
@@ -146,4 +151,31 @@ body {
 }
 .no-scrollbar::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
+}
+
+.blur-edges {
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask: linear-gradient(
+      90deg,
+      transparent 0,
+      white 10% 75%,
+      transparent
+    )
+    0 50% / 100% 100% no-repeat;
+  /* mask: linear-gradient(90deg, transparent 0, white 10% 90%, transparent) 0 50% /
+    100% 100% no-repeat; */
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    black 10% 90%,
+    transparent 100%
+  );
+}
+
+.radial-gradient {
+  border-image: linear-gradient(to right, darkblue, darkorchid) 1;
+  border-radius: 8px;
+  padding: 9px;
+  box-sizing: border-box;
 }

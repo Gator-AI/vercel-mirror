@@ -3,12 +3,12 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import type { StaticImageData } from "next/image";
 
 type Testimonial = {
-  quote: string;
   name: string;
   designation: string;
-  src: string;
+  src: string | StaticImageData;
 };
 
 export default function AnimatedChangingCards({
@@ -69,7 +69,7 @@ export default function AnimatedChangingCards({
             <AnimatePresence>
               {testimonials.map((testimonial, index) => (
                 <motion.div
-                  key={testimonial.src}
+                  key={index}
                   initial={{
                     opacity: 0,
                     scale: 0.9,
@@ -96,14 +96,13 @@ export default function AnimatedChangingCards({
                     duration: 0.4,
                     ease: "easeInOut",
                   }}
-                  className="absolute inset-0 origin-bottom"
+                  className="absolute inset-0 origin-bottom w-[200px]"
                 >
                   <Image
                     src={testimonial.src}
                     alt={testimonial.name}
                     width={400}
                     height={400}
-                    draggable={false}
                     className="h-full w-full rounded-3xl object-cover object-center"
                   />
                 </motion.div>

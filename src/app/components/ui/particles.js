@@ -28,7 +28,7 @@ const ParticlesComponent = (props) => {
 
   const options = useMemo(
     () => ({
-      fpsLimit: 120,
+      fpsLimit: 30,
       interactivity: {
         events: {
           onClick: {
@@ -78,16 +78,16 @@ const ParticlesComponent = (props) => {
           density: {
             enable: true,
           },
-          value: 200,
+          value: 100,
         },
         opacity: {
-          value: 1.0,
+          value: 0.8,
         },
         shape: {
           type: "circle",
         },
         size: {
-          value: { min: 1, max: 3 },
+          value: { min: 0.5, max: 2 },
         },
       },
       detectRetina: true,

@@ -23,7 +23,6 @@ export function Laptop() {
 
     const timeline = gsap.timeline({
       scrollTrigger: {
-        trigger: "animation-container",
         start: "top top",
         end: "bottom top",
         scrub: true,
