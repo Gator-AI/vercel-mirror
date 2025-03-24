@@ -300,8 +300,9 @@ function Involve() {
           </p>
         </div>
         <p className="font-neighbor text-xs max-w-sm md:text-lg md:max-w-xl font-thin text-white/80 leading-snug">
-          Our club has two programs to headstart your AI/ML journey. Learn more
-          about how to get involved in Gator Education and Gator Applied below.
+          Our club has the Gator Educaiton program to headstart your AI/ML
+          journey. Learn more about how to get involved below. (Gator Applied
+          section coming soon...)
         </p>
       </div>
 

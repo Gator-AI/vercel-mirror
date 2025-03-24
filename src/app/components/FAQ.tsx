@@ -84,14 +84,15 @@ export default function FAQPage() {
         <div className="mt-20 text-center flex items-center justify-between gap-10">
           <div className="flex flex-col items-center gap-4">
             <p className="text-2xl">Still have questions?</p>
-
-            <ShimmerButton
-              borderRadius="10px"
-              background="#00272b"
-              className="py-2 px-8 mx-auto text-base font-neighbor font-light w-fit shadow-md"
-            >
-              <a href="mailto:gatorai@university.edu">Email us</a>
-            </ShimmerButton>
+            <a href="mailto:gatorai@university.edu">
+              <ShimmerButton
+                borderRadius="10px"
+                background="#00272b"
+                className="py-2 px-8 mx-auto text-base font-neighbor font-light w-fit shadow-md"
+              >
+                Email us
+              </ShimmerButton>
+            </a>
           </div>
 
           <div className="flex flex-col items-center gap-4">
@@ -109,7 +110,7 @@ export default function FAQPage() {
                 />
               </a>
               <a
-                href="https://www.instagram.com/uf_gaitor/"
+                href="https://www.instagram.com/uf_gatorai/"
                 target="_blank"
                 className="group"
               >

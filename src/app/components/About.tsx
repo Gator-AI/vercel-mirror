@@ -68,7 +68,11 @@ function About() {
               impact as a transformative tool in today&apos;s technological
               society.
             </p>
-            <a href="https://discord.com/invite/WGWrZqtDvm" className="mx-auto">
+            <a
+              href="https://discord.com/invite/WGWrZqtDvm"
+              className="mx-auto"
+              target="_blank"
+            >
               <ShimmerButton
                 borderRadius="10px"
                 background="#00272b"

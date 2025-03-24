@@ -82,7 +82,7 @@ function Home() {
     {
       title: "Instagram",
       icon: <IconBrandInstagram color="#00272b" />,
-      href: "https://www.instagram.com/uf_gaitor/",
+      href: "https://www.instagram.com/uf_gatorai/",
     },
   ];
 
