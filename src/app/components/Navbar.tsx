@@ -98,11 +98,6 @@ function Navbar() {
       icon: <House size={20} />,
     },
     {
-      name: "Involve",
-      link: "/#involve",
-      icon: <House size={20} />,
-    },
-    {
       name: "FAQS",
       link: "/#faqs",
       icon: <House size={20} />,
