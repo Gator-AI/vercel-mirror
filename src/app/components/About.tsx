@@ -32,7 +32,8 @@ function About() {
 
   return (
     <div
-      className=" w-full bg-[#409C8C] flex justify-center items-center bg-cover bg-center bg-no-repeat rounded-b-2xl z-50"
+      className=" w-screen bg-[#409C8C] flex justify-center items-center bg-cover bg-center bg-no-repeat rounded-b-2xl z-50"
+      id="#about"
       style={{
         backgroundImage: `url(${backgroundImage})`,
       }}

@@ -34,7 +34,6 @@ export const FloatingNav = ({
   useMotionValueEvent(scrollYProgress, "change", (current) => {
     if (typeof current === "number") {
       const direction = current - scrollYProgress.getPrevious()!;
-
       if (direction < 0) {
         setVisible(true);
       } else {
@@ -58,12 +57,13 @@ export const FloatingNav = ({
           duration: 0.5,
         }}
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 flex w-full border border-transparent  dark:border-white/[0.2] dark:bg-black shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] px-10 py-5 items-center justify-between backdrop-blur-2xl",
+          "fixed top-0 left-0 right-0 z-50 flex w-full border border-transparent dark:border-white/[0.2] dark:bg-black shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] px-10 py-5 items-center justify-between backdrop-blur-2xl",
           className
         )}
       >
+        {/* The logo now also links to the #about section */}
         <Link
-          href="/"
+          href="/#about"
           className="flex justify-center items-center gap-1 hover:opacity-80 transition-opacity"
         >
           <Image src={Logo} alt="Star Icon" width={150} />
@@ -90,12 +90,29 @@ export const FloatingNav = ({
 };
 
 function Navbar() {
+  // Updated navigation items with anchor links
   const navItems = [
     {
-      name: "Home",
-      link: "/",
+      name: "About",
+      link: "/#about",
       icon: <House size={20} />,
     },
+    {
+      name: "Involve",
+      link: "/#involve",
+      icon: <House size={20} />,
+    },
+    {
+      name: "FAQS",
+      link: "/#faqs",
+      icon: <House size={20} />,
+    },
+    {
+      name: "Events",
+      link: "/events",
+      icon: <House size={20} />,
+    },
+
     {
       name: "Calendar",
       link: "/calendar",

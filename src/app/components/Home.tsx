@@ -102,7 +102,7 @@ function Home() {
       {/*floating dock*/}
       <motion.div
         className={`${
-          isFixed ? "fixed" : "absolute top-[1700px]"
+          isFixed ? "fixed" : "absolute top-[1850px]"
         } bottom-12 left-1/2 transform -translate-x-1/2 z-20`}
       >
         <FloatingDock items={socialItems} />

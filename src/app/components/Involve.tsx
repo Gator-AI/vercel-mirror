@@ -287,22 +287,22 @@ function Involve() {
   ];
 
   return (
-    <div className="min-h-screen mx-auto w-[90%] md:w-[80%] my-24 flex flex-col gap-16">
+    <div
+      className="min-h-screen mx-auto w-[90%] md:w-[80%] my-24 flex flex-col gap-16"
+      id="involve"
+    >
       {/* header */}
       <div className="w-full flex flex-col gap-4">
         <div className="flex flex-col">
-          <p className="font-neighbor font-bold text-base text-secondary">
-            Get Involved
-          </p>
+          <p className="font-bold text-base text-secondary">Get Involved</p>
           <p className="font-neighbor text-2xl md:text-5xl font-thin leading-none">
             Join a community of students <br></br>enthusiastic about the future
             of AI.
           </p>
         </div>
-        <p className="font-neighbor text-xs max-w-sm md:text-lg md:max-w-xl font-thin text-white/80 leading-snug">
+        <p className=" text-xs max-w-sm md:text-lg md:max-w-xl font-thin text-white/80 leading-snug">
           Our club has the Gator Educaiton program to headstart your AI/ML
-          journey. Learn more about how to get involved below. (Gator Applied
-          section coming soon...)
+          journey. Learn more about how to get involved below.
         </p>
       </div>
 
