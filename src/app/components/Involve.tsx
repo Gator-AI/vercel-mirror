@@ -16,6 +16,7 @@ import Danny from "@/images/guest-photos/danny.jpg";
 import Brianna from "@/images/guest-photos/brianna.jpg";
 import Shawn from "@/images/guest-photos/shawn.jpeg";
 import Vaibhav from "@/images/guest-photos/vaibhav.jpg";
+import Abi from "@/images/guest-photos/abi.jpg";
 
 const Skeleton = () => (
   <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-900 to-neutral-800"></div>
@@ -55,6 +56,11 @@ function Involve() {
       name: "Vaibhav Gupta",
       designation: "CEO of Boundary ML",
       src: Vaibhav,
+    },
+    {
+      name: "Abishanka Saha",
+      designation: "SWE on Generative AI Team at Morgan Stanley",
+      src: Abi,
     },
   ];
 
