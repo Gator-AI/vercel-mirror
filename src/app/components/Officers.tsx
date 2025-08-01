@@ -78,7 +78,7 @@ const data = [
   {
     category: "Social Media",
     title: "Kushagra Katiyar",
-    src: "https://placehold.co/100x300",
+    src: Kushagra.src,
     backContent: "Placeholder",
   },
 
