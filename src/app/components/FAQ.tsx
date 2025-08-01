@@ -61,8 +61,26 @@ export default function FAQPage() {
             <AccordionContent className="font-neighbor font-light text-lg">
               The best ways to stay updated are:
               <ul className="list-disc pl-6 mt-2">
-                <li>Join our Discord server</li>
-                <li>Visit our Instagram @uf_gatorai</li>
+                <li>
+                  Join our{" "}
+                  <a
+                    href="https://discord.com/invite/WGWrZqtDvm"
+                    className="text-secondary hover:underline"
+                    target="_blank"
+                  >
+                    Discord server
+                  </a>
+                </li>
+                <li>
+                  Visit our Instagram{" "}
+                  <a
+                    href="https://www.instagram.com/uf_gatorai/"
+                    className="text-secondary hover:underline"
+                    target="_blank"
+                  >
+                    @uf_gatorai
+                  </a>
+                </li>
                 <li>Check the events in the Calendar page (WIP)</li>
               </ul>
             </AccordionContent>

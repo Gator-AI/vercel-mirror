@@ -33,7 +33,7 @@ function Projects() {
           <h1 className="font-neighbor text-2xl md:text-5xl font-thin leading-none">
             Projects
           </h1>
-          <p className="mt-2 text-white/80">
+          <p className="mt-2 text-white/80 text-xl">
             Explore our club&apos;s latest projects and contributions.
           </p>
           <div className="mt-8 flex items-center gap-4">

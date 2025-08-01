@@ -34,7 +34,7 @@ function Projects() {
     <div className="my-24 min-h-screen w-screen flex items-center justify-center">
       <div className="w-[90%] max-w-5xl h-full flex flex-col items-start justify-start gap-8">
         <div className="flex flex-col items-start justify-start w-full">
-          <h1 className="font-neighbor text-2xl md:text-6xl font-thin leading-none">
+          <h1 className="font-neighbor text-2xl md:text-5xl font-thin leading-none">
             Lecture Recordings
           </h1>
           <p className="mt-4 text-white/80 text-xl">
