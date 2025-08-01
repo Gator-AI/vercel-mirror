@@ -93,21 +93,21 @@ function Navbar() {
   // Updated navigation items with anchor links
   const navItems = [
     {
-      name: "About",
-      link: "/#about",
+      name: "Projects",
+      link: "/projects",
       icon: <House size={20} />,
     },
     {
-      name: "FAQS",
-      link: "/#faqs",
+      name: "Lectures",
+      link: "/lectures",
       icon: <House size={20} />,
     },
+
     {
       name: "Events",
       link: "/events",
       icon: <House size={20} />,
     },
-
     {
       name: "Calendar",
       link: "/calendar",

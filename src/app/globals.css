@@ -4,42 +4,42 @@
 
 @font-face {
   font-family: "Neighbor";
-  src: url("/fonts/NeighborReg.otf") format("opentype");
+  src: url("../../public/fonts/NeighborReg.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Neighbor";
-  src: url("/fonts/NeighborSemiBold.otf") format("opentype");
+  src: url("../../public/fonts/NeighborSemiBold.otf") format("opentype");
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Neighbor";
-  src: url("/fonts/NeighborBold.otf") format("opentype");
+  src: url("../../public/fonts/NeighborBold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Neighbor";
-  src: url("/fonts/NeighborItalic.otf") format("opentype");
+  src: url("../../public/fonts/NeighborItalic.otf") format("opentype");
   font-weight: 400;
   font-style: italic;
 }
 
 @font-face {
   font-family: "Neighbor";
-  src: url("/fonts/NeighborSemiBoldItalic.otf") format("opentype");
+  src: url("../../public/fonts/NeighborSemiBoldItalic.otf") format("opentype");
   font-weight: 600;
   font-style: italic;
 }
 
 @font-face {
   font-family: "Neighbor";
-  src: url("/fonts/NeighborBoldItalic.otf") format("opentype");
+  src: url("../../public/fonts/NeighborBoldItalic.otf") format("opentype");
   font-weight: 700;
   font-style: italic;
 }
