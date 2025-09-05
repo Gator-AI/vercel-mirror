@@ -12,7 +12,7 @@ export default function FAQPage() {
     <div className="container px-4 pt-24 pb-12" id="faqs">
       <div className="w-[80%] mx-auto">
         <p className="text-secondary">FAQs</p>
-        <h1 className="text-5xl font-neighbor font-bold text-start mb-8">
+        <h1 className="text-4xl md:text-5xl font-neighbor font-bold text-start mb-8">
           Frequently Asked Questions
         </h1>
 
@@ -101,7 +101,7 @@ export default function FAQPage() {
 
         <div className="mt-20 text-center flex items-center justify-between gap-10">
           <div className="flex flex-col items-center gap-4">
-            <p className="text-2xl">Still have questions?</p>
+            <p className="text-sm md:text-2xl">Still have questions?</p>
             <a href="mailto:gatorai@university.edu">
               <ShimmerButton
                 borderRadius="10px"
@@ -114,7 +114,7 @@ export default function FAQPage() {
           </div>
 
           <div className="flex flex-col items-center gap-4">
-            <p className="text-2xl">Connect with us</p>
+            <p className="text-sm md:text-2xl">Connect with us</p>
             <div className="flex items-center justify-center gap-10">
               <a
                 href="https://discord.com/invite/WGWrZqtDvm"

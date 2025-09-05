@@ -123,18 +123,21 @@ const data = [
 function Officers() {
   const cards = data.map((card, index) => <FlipCard key={index} card={card} />);
   return (
-    <div className="min-h-screen mx-auto w-[80%]" id="officers">
+    <div
+      className="min-h-screen mx-auto w-[400px] md:max-w-full md:w-[80%]"
+      id="officers"
+    >
       <div className="size-full flex flex-col items-start justify-center gap-8">
-        <div className="flex flex-col">
+        <div className="flex flex-col p-5">
           <p className="font-neighbor font-bold text-base text-secondary">
             Board 25-26
           </p>
-          <h1 className="font-neighbor text-2xl  md:text-5xl font-thin leading-none">
+          <h1 className="font-neighbor text-2xl md:text-5xl font-thin leading-none">
             Meet the officers and mentors!
           </h1>
-          <p className="mt-2 text-white/80">
+          {/* <p className="mt-2 text-white/80">
             Flip the cards to see what they have to say.
-          </p>
+          </p> */}
         </div>
 
         <div className="relative w-full py-8 rounded-xl flex items-center justify-center">

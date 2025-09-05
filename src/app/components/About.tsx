@@ -32,20 +32,20 @@ function About() {
 
   return (
     <div
-      className=" w-screen bg-[#409C8C] flex justify-center items-center bg-cover bg-center bg-no-repeat rounded-b-2xl z-50"
+      className="w-full bg-[#409C8C] flex justify-center items-center bg-cover bg-center bg-no-repeat rounded-b-2xl z-50"
       id="#about"
       style={{
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
-      <div className="w-[80%] mx-auto my-32 flex flex-col lg:flex-row items-center justify-center gap-8">
+      <div className="w-full p-0 md:p-10 mx-auto my-32 flex flex-col lg:flex-row items-center justify-center gap-8">
         {/* image slider */}
-        <div className="w-full lg:w-1/2 flex items-center justify-center">
+        <div className="w-full p-5 md:p-0 md:w-1/2 flex items-center justify-center">
           <Carousel slides={slides} />
         </div>
 
         {/* content */}
-        <div className="w-full lg:w-1/2 relative">
+        <div className="w-full md:w-1/2 lg:w-1/2 relative">
           <div className="relative z-10 flex flex-col gap-8 p-6 ">
             <div className="border-white border-b-[5px] w-full flex justify-center items-center gap-2 pb-4">
               {/* <h1 className="font-neighbor font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight justify-center">
