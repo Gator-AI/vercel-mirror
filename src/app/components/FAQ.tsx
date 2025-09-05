@@ -9,7 +9,7 @@ import { DiscordLogoIcon, InstagramLogoIcon } from "@radix-ui/react-icons";
 
 export default function FAQPage() {
   return (
-    <div className="container px-4 pt-24 pb-12" id="faqs">
+    <div className="container pt-24 pb-12" id="faqs">
       <div className="w-[80%] mx-auto">
         <p className="text-secondary">FAQs</p>
         <h1 className="text-4xl md:text-5xl font-neighbor font-bold text-start mb-8">

@@ -119,13 +119,13 @@ function Home() {
         {isVisible && (
           <motion.div
             id="header-container"
-            className="fixed flex mt-32 flex-col items-center justify-center w-full gap-4 p-10"
+            className="fixed flex mt-32 flex-col items-center text-center justify-center w-full gap-4 p-10"
             // style={{ opacity: headerOpacity }}
           >
-            <h1 className="font-neighbor text-5xl md:text-6xl font-bold text-wrap md:whitespace-nowrap">
+            <h1 className="font-neighbor text-3xl md:text-6xl font-bold md:whitespace-nowrap">
               Welcome to <span className="text-secondary">GatorAI</span>
             </h1>
-            <p className="font-neighbor text-xl text-wrap md:text-lg font-light opacity-70">
+            <p className="font-neighbor text-md text-center md:text-lg font-light opacity-70">
               The University of Florida&apos;s Premier Artificial Intelligence
               Club
             </p>

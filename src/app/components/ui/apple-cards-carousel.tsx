@@ -183,7 +183,8 @@ export const FlipCard: React.FC<FlipCardProps> = ({ card }) => {
       <motion.div
         className="w-56 h-80 md:w-80 md:h-[28rem] relative"
         style={{ transformStyle: "preserve-3d" }}
-        animate={{ rotateY: flipped ? 180 : 0 }}
+        // animate={{ rotateY: flipped ? 180 : 0 }}
+        // flip is disabled for now need to fix for firefox
         transition={{ duration: 0.6 }}
         onClick={() => setFlipped(!flipped)}
       >

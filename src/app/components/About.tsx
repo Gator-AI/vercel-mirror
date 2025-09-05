@@ -46,7 +46,7 @@ function About() {
 
         {/* content */}
         <div className="w-full md:w-1/2 lg:w-1/2 relative">
-          <div className="relative z-10 flex flex-col gap-8 p-6 ">
+          <div className="relative z-10 flex flex-col gap-8 p-10">
             <div className="border-white border-b-[5px] w-full flex justify-center items-center gap-2 pb-4">
               {/* <h1 className="font-neighbor font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight justify-center">
                 UF

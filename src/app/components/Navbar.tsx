@@ -53,7 +53,7 @@ export const FloatingNav = ({
         animate={{ y: visible ? 0 : -100, opacity: visible ? 1 : 0 }}
         transition={{ duration: 0.5 }}
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 w-full border border-transparent dark:border-white/[0.2] px-6 md:px-10 py-5 flex items-center justify-between backdrop-blur-2xl",
+          "fixed top-0 left-0 right-0 z-50 w-full border border-transparent dark:border-white/[0.2] px-6 md:px-10 py-5 md:py-12 flex items-center justify-between backdrop-blur-2xl",
           className
         )}
       >
@@ -83,7 +83,7 @@ export const FloatingNav = ({
               <span className="block sm:hidden transition-colors group-hover:opacity-80">
                 {navItem.icon}
               </span>
-              <span className="text-xs md:text-sm transition-colors group-hover:text-secondary">
+              <span className="text-xs md:text-lg transition-colors group-hover:text-secondary">
                 {navItem.name}
               </span>
             </Link>

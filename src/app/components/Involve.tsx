@@ -17,6 +17,7 @@ import Brianna from "@/images/guest-photos/brianna.jpg";
 import Shawn from "@/images/guest-photos/shawn.jpeg";
 import Vaibhav from "@/images/guest-photos/vaibhav.jpg";
 import Abi from "@/images/guest-photos/abi.jpg";
+import LinearRegSS from "@/images/linear-regression-ss.png";
 
 const Skeleton = () => (
   <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-900 to-neutral-800"></div>
@@ -182,11 +183,16 @@ function Involve() {
               loop={true}
               autoPlay
               muted
-              className="rounded-md"
+              className="rounded-md hidden md:block"
             ></video>
           ) : (
             <Skeleton />
           )}
+          <Image
+            src={LinearRegSS}
+            alt="Jupyter Notebook Demo"
+            className="rounded-md md:hidden"
+          />
         </div>
       ),
       className: "md:col-span-2",
@@ -294,7 +300,7 @@ function Involve() {
 
   return (
     <div
-      className="min-h-scree p-10 md:p-0 mx-auto w-full md:w-[80%] my-24 flex flex-col gap-16"
+      className="min-h-scree p-5 md:p-0 mx-auto w-full md:w-[80%] my-24 flex flex-col gap-16"
       id="involve"
     >
       {/* header */}

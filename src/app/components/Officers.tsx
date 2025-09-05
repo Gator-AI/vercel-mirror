@@ -2,7 +2,7 @@ import React from "react";
 import { Carousel, FlipCard } from "./ui/apple-cards-carousel";
 // import Image from "next/image";
 
-import Rohan from "@/images/officer-photos/rohan.png";
+import Rohan from "@/images/officer-photos/rohan.jpg";
 import Analise from "@/images/officer-photos/analise.jpg";
 import Sara from "@/images/officer-photos/sara.jpg";
 import Andy from "@/images/officer-photos/andy.jpg";
