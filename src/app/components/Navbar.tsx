@@ -53,7 +53,7 @@ export const FloatingNav = ({
         animate={{ y: visible ? 0 : -100, opacity: visible ? 1 : 0 }}
         transition={{ duration: 0.5 }}
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 w-full border border-transparent dark:border-white/[0.2] px-6 md:px-10 py-5 md:py-12 flex items-center justify-between backdrop-blur-2xl",
+          "fixed top-0 left-0 right-0 z-50 w-full border border-transparent dark:border-white/[0.2] px-6 md:px-10 py-5 md:pt-12 flex items-center justify-between backdrop-blur-2xl",
           className
         )}
       >
@@ -97,7 +97,7 @@ export const FloatingNav = ({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
-              className="absolute top-full left-0 w-full bg-[#409C8C] backdrop-blur-2xl flex flex-col items-center gap-6 py-8 z-50 md:hidden shadow-lg"
+              className="absolute top-full left-0 w-full bg-[#00272b] backdrop-blur-2xl flex flex-col items-center gap-6 py-8 z-50 md:hidden shadow-lg"
             >
               {navItems.map((navItem, idx) => (
                 <Link
