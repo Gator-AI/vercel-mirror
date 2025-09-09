@@ -245,7 +245,7 @@ function Projects() {
               </div>
 
               <div className="flex w-full justify-between mt-auto">
-                <a href="/events/gbm1" target="_blank">
+                <a href="/events/gbm1-08-09-25" target="_blank">
                   <ShimmerButton
                     borderRadius="10px"
                     background="#00272b"
