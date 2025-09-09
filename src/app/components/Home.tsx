@@ -12,6 +12,7 @@ import {
   IconBrandGithub,
   IconBrandInstagram,
   IconBrandDiscord,
+  IconBrandLinktree,
 } from "@tabler/icons-react";
 import { useState, useEffect, Suspense } from "react";
 import Logo from "@/images/logo-white-round-2.png";
@@ -70,6 +71,11 @@ function Home() {
 
   // array for social media icons
   const socialItems = [
+    {
+      title: "LinkTree!",
+      icon: <IconBrandLinktree color="#00272b" />,
+      href: "https://linktr.ee/thegaitorclub",
+    },
     {
       title: "Discord",
       icon: <IconBrandDiscord color="#00272b" />,

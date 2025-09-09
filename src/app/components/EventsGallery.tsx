@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import depotParkSocial from "@/images/events-photos/depot-park-social.jpg";
 import gbm2 from "@/images/events-photos/gbm2.png";
-import gbm1 from "@/images/events-photos/gbm1.jpg";
+import gbm1 from "@/images/events-photos/GBM1-Fall-2025.jpg";
 import gbm2More from "@/images/events-photos/gbm2-more.jpg";
 import hyperGator from "@/images/events-photos/hypergator-tour.jpg";
 import bakeSale from "@/images/events-photos/bake-sale.png";
@@ -18,10 +18,10 @@ const items = [
     slug: "depot-park-social",
   },
   {
-    text: "General Body Meeting 1",
+    text: "General Body Meeting 1 - 08/09/2025",
     type: "large",
     image: gbm1.src,
-    slug: "gbm1",
+    slug: "gbm1-08-09-25",
   },
   {
     text: "HyperGator Tour",
@@ -35,12 +35,7 @@ const items = [
     image: gbm2.src,
     slug: "gbm2",
   },
-  {
-    text: "jujubes cheesecake",
-    type: "full",
-    image: "https://images.unsplash.com/photo.jpg",
-    slug: "cheesecake",
-  },
+
   {
     text: "GatorAI Bake Sale",
     type: "large",

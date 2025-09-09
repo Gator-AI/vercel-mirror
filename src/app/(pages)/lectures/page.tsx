@@ -32,7 +32,7 @@ const PROJECTS = [
 function Projects() {
   return (
     <div className="my-24 min-h-screen w-screen flex items-center justify-center">
-      <div className="w-[90%] max-w-5xl h-full flex flex-col items-start justify-start gap-8">
+      <div className="w-[90%] max-w-5xl lg:max-w-7xl h-full flex flex-col items-start justify-start gap-8">
         <div className="flex flex-col items-start justify-start w-full">
           <h1 className="font-neighbor text-2xl md:text-5xl font-thin leading-none">
             Lecture Recordings
