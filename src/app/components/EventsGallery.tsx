@@ -1,9 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
-import depotParkSocial from "@/images/events-photos/depot-park-social.jpg";
+import trailMixSocial from "@/images/events-photos/trail-mix-social.jpg";
 import gbm2 from "@/images/events-photos/gbm2.png";
 import gbm1 from "@/images/events-photos/GBM1-Fall-2025.jpg";
-import gbm2More from "@/images/events-photos/gbm2-more.jpg";
+// import gbm2More from "@/images/events-photos/gbm2-more.jpg";
+import mlMonday1 from "@/images/events-photos/ml-monday-1.jpg";
 import hyperGator from "@/images/events-photos/hypergator-tour.jpg";
 import bakeSale from "@/images/events-photos/bake-sale.png";
 import Link from "next/link";
@@ -12,10 +13,10 @@ import Image from "next/image";
 // Data for the gallery items (these will link to their respective pages with a short description of the activity)
 const items = [
   {
-    text: "Depot Park Social",
+    text: "Trail Mix Social",
     type: "default",
-    image: depotParkSocial.src,
-    slug: "depot-park-social",
+    image: trailMixSocial.src,
+    slug: "trail-mix-social",
   },
   {
     text: "General Body Meeting 1 - 08/09/2025",
@@ -43,10 +44,10 @@ const items = [
     slug: "bake-sale",
   },
   {
-    text: "GBM 2 Six Legged Pentathon",
+    text: "ML Monday 1 - 09/15/2025",
     type: "default",
-    image: gbm2More.src,
-    slug: "gbm2-pentathon",
+    image: mlMonday1.src,
+    slug: "ml-monday-1",
   },
 ];
 
