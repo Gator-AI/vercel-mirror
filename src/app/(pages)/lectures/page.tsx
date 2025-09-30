@@ -5,9 +5,27 @@ import Image from "next/image";
 import ShimmerButton from "@/components/ui/shimmer-button";
 // import { SearchBar } from "@/components/ui/search-bar";
 // import { Youtube } from "react-feather";
-import mlmonday1 from "@/images/ml-monday-1.png";
+import mlmonday1 from "@/images/ml-mondays-thumbnails/mlmonday-1.png";
+import mlmonday2 from "@/images/ml-mondays-thumbnails/mlmonday-2.png";
+import mlmonday3 from "@/images/ml-mondays-thumbnails/mlmonday-3.png";
 
 const VIDEOS = [
+  {
+    name: "AL/ML Lecture #3 : Logistic Regression",
+    description:
+      "An overview of Logistic Regression, Sigmoid Functions, Cross Entropy Loss, and more.",
+    date: "September 29, 2025",
+    link: "https://www.youtube.com/watch?v=y5wg1p91Dmo",
+    image: mlmonday3,
+  },
+  {
+    name: "AL/ML Lecture #2 : Linear Regression",
+    description:
+      "A look into Linear Regression, biases and variances, and loss functions.",
+    date: "September 22, 2025",
+    link: "https://www.youtube.com/watch?v=5vTdP2h_fi8",
+    image: mlmonday2,
+  },
   {
     name: "AL/ML Lecture #1 : What is AL/ML?",
     description:
@@ -41,7 +59,7 @@ function Projects() {
             Lecture Recordings
           </h1>
           <p className="font-neigbor mt-4 text-white/80 text-xl">
-            Explore our latest lectures on AI and machine learning.
+            Explore our latest lecture series on AI and machine learning.
           </p>
           <div className="mt-8 flex items-center justify-between w-full gap-4">
             {/* <SearchBar placeholder="Search recordings..." /> */}
