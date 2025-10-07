@@ -8,8 +8,17 @@ import ShimmerButton from "@/components/ui/shimmer-button";
 import mlmonday1 from "@/images/ml-mondays-thumbnails/mlmonday-1.png";
 import mlmonday2 from "@/images/ml-mondays-thumbnails/mlmonday-2.png";
 import mlmonday3 from "@/images/ml-mondays-thumbnails/mlmonday-3.png";
+import mlmonday4 from "@/images/ml-mondays-thumbnails/mlmonday-4.png";
 
 const VIDEOS = [
+  {
+    name: "AL/ML Lecture #4 : Optimization and Gradient Descent",
+    description:
+      "An in-depth look at optimization techniques, gradient descent, and learning rates.",
+    date: "October 6th, 2025",
+    link: "https://www.youtube.com/watch?v=TKhlZGvAqQI",
+    image: mlmonday4,
+  },
   {
     name: "AL/ML Lecture #3 : Logistic Regression",
     description:
