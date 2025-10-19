@@ -9,8 +9,17 @@ import mlmonday1 from "@/images/ml-mondays-thumbnails/mlmonday-1.png";
 import mlmonday2 from "@/images/ml-mondays-thumbnails/mlmonday-2.png";
 import mlmonday3 from "@/images/ml-mondays-thumbnails/mlmonday-3.png";
 import mlmonday4 from "@/images/ml-mondays-thumbnails/mlmonday-4.png";
+import mlmonday5 from "@/images/ml-mondays-thumbnails/mlmonday-5.png";
 
 const VIDEOS = [
+  {
+    name: "AL/ML Lecture #5 : Feed Forward Neural Networks",
+    description:
+      "Structure of Feed Forward Neural Networks, Activation Functions, and Backpropagation.",
+    date: "October 19th, 2025",
+    link: "https://www.youtube.com/watch?v=AjKgtfKGYtg",
+    image: mlmonday5,
+  },
   {
     name: "AL/ML Lecture #4 : Optimization and Gradient Descent",
     description:
