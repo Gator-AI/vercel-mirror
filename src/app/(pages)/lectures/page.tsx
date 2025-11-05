@@ -16,7 +16,7 @@ import mlmonday8 from "@/images/ml-mondays-thumbnails/mlmonday-8.png";
 
 const VIDEOS = [
   {
-    name: "AL/ML Lecture #8 : Convolutional Neural Networks",
+    name: "ML Mondays #8 : Convolutional Neural Networks",
     description:
       "Learn about Layers, Filters, and Sampling/Pooling.",
     date: "November 3rd, 2025",
@@ -24,7 +24,7 @@ const VIDEOS = [
     image: mlmonday8,
   },
   {
-    name: "AL/ML Lecture #7 : Training Deep Neural Networks",
+    name: "ML Mondays #7 : Training Deep Neural Networks",
     description:
       "Transfer Learning and Building a Neural Network with pytorch.",
     date: "October 27th, 2025",
@@ -32,7 +32,7 @@ const VIDEOS = [
     image: mlmonday7,
   },
   {
-    name: "AL/ML Lecture #6: Training Neural Networks",
+    name: "ML Mondays #6: Training Neural Networks",
     description:
       "Neurons, Gradient Descent, Hyperparameters, and more.",
     date: "October 20th, 2025",
@@ -40,7 +40,7 @@ const VIDEOS = [
     image: mlmonday6,
   },
   {
-    name: "AL/ML Lecture #5: Feed Forward Neural Networks",
+    name: "ML Mondays #5: Feed Forward Neural Networks",
     description:
       "Structure of Feed Forward Neural Networks, Activation Functions, and Backpropagation.",
     date: "October 13th, 2025",
@@ -48,7 +48,7 @@ const VIDEOS = [
     image: mlmonday5,
   },
   {
-    name: "AL/ML Lecture #4: Optimization and Gradient Descent",
+    name: "ML Mondays #4: Optimization and Gradient Descent",
     description:
       "An in-depth look at optimization techniques, gradient descent, and learning rates.",
     date: "October 6th, 2025",
@@ -56,7 +56,7 @@ const VIDEOS = [
     image: mlmonday4,
   },
   {
-    name: "AL/ML Lecture #3: Logistic Regression",
+    name: "ML Mondays #3: Logistic Regression",
     description:
       "An overview of Logistic Regression, Sigmoid Functions, Cross Entropy Loss, and more.",
     date: "September 29, 2025",
@@ -64,7 +64,7 @@ const VIDEOS = [
     image: mlmonday3,
   },
   {
-    name: "AL/ML Lecture #2: Linear Regression",
+    name: "ML Mondays #2: Linear Regression",
     description:
       "A look into Linear Regression, biases and variances, and loss functions.",
     date: "September 22, 2025",
@@ -72,7 +72,7 @@ const VIDEOS = [
     image: mlmonday2,
   },
   {
-    name: "AL/ML Lecture #1: What is AL/ML?",
+    name: "ML Mondays #1: What is AL/ML?",
     description:
       "An introductory lecture on Artificial Intelligence and Machine Learning concepts.",
     date: "September 15, 2025",
