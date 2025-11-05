@@ -16,7 +16,7 @@ import mlmonday8 from "@/images/ml-mondays-thumbnails/mlmonday-8.png";
 
 const VIDEOS = [
   {
-    name: "AL/ML Lecture #7 : Convolutional Neural Networks",
+    name: "AL/ML Lecture #8 : Convolutional Neural Networks",
     description:
       "Learn about Layers, Filters, and Sampling/Pooling.",
     date: "November 3rd, 2025",
