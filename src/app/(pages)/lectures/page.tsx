@@ -59,7 +59,7 @@ const VIDEOS = [
     name: "ML Mondays #3: Logistic Regression",
     description:
       "An overview of Logistic Regression, Sigmoid Functions, Cross Entropy Loss, and more.",
-    date: "September 29, 2025",
+    date: "September 29th, 2025",
     link: "https://www.youtube.com/watch?v=y5wg1p91Dmo",
     image: mlmonday3,
   },
@@ -67,7 +67,7 @@ const VIDEOS = [
     name: "ML Mondays #2: Linear Regression",
     description:
       "A look into Linear Regression, biases and variances, and loss functions.",
-    date: "September 22, 2025",
+    date: "September 22nd, 2025",
     link: "https://www.youtube.com/watch?v=5vTdP2h_fi8",
     image: mlmonday2,
   },
@@ -75,7 +75,7 @@ const VIDEOS = [
     name: "ML Mondays #1: What is AL/ML?",
     description:
       "An introductory lecture on Artificial Intelligence and Machine Learning concepts.",
-    date: "September 15, 2025",
+    date: "September 15th, 2025",
     link: "https://www.youtube.com/watch?v=dNu_f4ooCII&ab_channel=GatorAI",
     image: mlmonday1,
   },
