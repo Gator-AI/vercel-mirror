@@ -119,7 +119,7 @@ function Projects() {
               key={video.name}
               className="bg-white/10 border border-white/20 rounded-xl p-6 shadow-lg flex flex-col hover:scale-[1.01] transition-transform duration-200"
             >
-              <div className="w-full h-40 bg-white/20 rounded mb-2 flex items-center justify-center">
+              <div className="w-full h-50 bg-white/20 rounded mb-2 flex items-center justify-center">
                 <Image
                   src={video.image}
                   alt={video.name + " image"}
