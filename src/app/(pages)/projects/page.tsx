@@ -4,6 +4,16 @@ import React from "react";
 import Image from "next/image";
 import ShimmerButton from "@/components/ui/shimmer-button";
 import { GitHub } from "react-feather";
+import courseAdvisorImage from "@/images/projects/course-advisor.png";
+import contentAiImage from "@/images/projects/content-ai.png";
+import cryptoFraudImage from "@/images/projects/crypto-fraud.png";
+import keyframeImage from "@/images/projects/keyframe.png";
+import huntingPartyImage from "@/images/projects/huntingparty-ai.png";
+import safetripImage from "@/images/projects/safetrip-iq.png";
+import theoryOfMindImage from "@/images/projects/theory-of-mind.png";
+import studdyBuddyImage from "@/images/projects/study-buddy.png";
+import unsupervisedMarketRiskImage from "@/images/projects/unsupervised-market-risk.png";
+
 const PROJECTS = [
   {
     name: "CanvasGPT",
@@ -31,7 +41,7 @@ const PROJECTS = [
     ],
     difficulty: "Advanced",
     link: "https://github.com/ufgatorai",
-    image: "https://placehold.co/320x180",
+    image: contentAiImage,
   },
   {
     name: "Gator Course Advisor",
@@ -40,7 +50,7 @@ const PROJECTS = [
     link: "https://github.com/ufgatorai",
     techStack: ["Python", "Pandas", "SkLearn", "Surprise", "Streamlit/Flask"],
     difficulty: "Intermediate",
-    image: "https://placehold.co/320x180",
+    image: courseAdvisorImage,
   },
   {
     name: "Quant Lab",
@@ -73,7 +83,7 @@ const PROJECTS = [
       "ElevenLabs",
     ],
     difficulty: "Intermediate",
-    image: "https://placehold.co/320x180",
+    image: keyframeImage,
   },
   {
     name: "AI-Assisted Roblox Game Development Lab",
@@ -89,7 +99,7 @@ const PROJECTS = [
     link: "https://github.com/ufgatorai",
     techStack: ["Tensorflow", "MongoDB", "Websocket"],
     difficulty: "Beginner/Hard",
-    image: "https://placehold.co/320x180",
+    image: cryptoFraudImage,
   },
   {
     name: "Market Risk Identification",
@@ -105,7 +115,7 @@ const PROJECTS = [
       "APIs",
     ],
     difficulty: "Intermediate",
-    image: "https://placehold.co/320x180",
+    image: unsupervisedMarketRiskImage,
   },
   {
     name: "Study Buddy (SAT Prep)",
@@ -121,7 +131,7 @@ const PROJECTS = [
       "OpenAI",
     ],
     difficulty: "Intermediate",
-    image: "https://placehold.co/320x180",
+    image: studdyBuddyImage,
   },
   {
     name: "HuntingParty.ai",
@@ -140,7 +150,7 @@ const PROJECTS = [
       "APIs",
     ],
     difficulty: "Advanced",
-    image: "https://placehold.co/320x180",
+    image: huntingPartyImage,
   },
   {
     name: "Theory of Mind Simulator",
@@ -148,7 +158,7 @@ const PROJECTS = [
     link: "https://github.com/ufgatorai",
     techStack: ["Python", "Streamlit", "PyTorch", "TensorFlow", "OpenAI"],
     difficulty: "Advanced",
-    image: "https://placehold.co/320x180",
+    image: theoryOfMindImage,
   },
   {
     name: "SafeTrip IQ",
@@ -165,7 +175,7 @@ const PROJECTS = [
       "MLflow",
     ],
     difficulty: "Intermediate",
-    image: "https://placehold.co/320x180",
+    image: safetripImage,
   },
   {
     name: "Real-time Lane Departure Warning System",
@@ -209,7 +219,7 @@ function Projects() {
             >
               <div className="w-full h-40 bg-white/20 rounded mb-2 flex items-center justify-center">
                 <Image
-                  src={project.image.replace("/public", "")}
+                  src={typeof project.image === "string" ? project.image.replace("/public", "") : (project.image as { src: string }).src}
                   alt={project.name + " image"}
                   width={320}
                   height={160}
