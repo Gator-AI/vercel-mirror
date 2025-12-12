@@ -13,12 +13,29 @@ import mlmonday5 from "@/images/ml-mondays-thumbnails/mlmonday-5.png";
 import mlmonday6 from "@/images/ml-mondays-thumbnails/mlmonday-6.png";
 import mlmonday7 from "@/images/ml-mondays-thumbnails/mlmonday-7.png";
 import mlmonday8 from "@/images/ml-mondays-thumbnails/mlmonday-8.png";
+import mlmonday9 from "@/images/ml-mondays-thumbnails/mlmonday-9.png";
+import mlmonday10 from "@/images/ml-mondays-thumbnails/mlmonday-10.png";
 
 const VIDEOS = [
   {
-    name: "ML Mondays #8 : Convolutional Neural Networks",
+    name: "ML Mondays #10: AutoEncoders and GANs",
     description:
-      "Learn about Layers, Filters, and Sampling/Pooling.",
+      "Exploring AutoEncoders, Generative Adversarial Networks, and their applications.",
+    date: "November 17th, 2025",
+    link: "https://www.youtube.com/watch?v=pdJ9cpEqIMM",
+    image: mlmonday10,
+  },
+  {
+    name: "ML Mondays #9: Recurrent Neural Networks (RNNs)",
+    description:
+      "Understanding RNNs, LSTMs, and their applications in sequence data.",
+    date: "November 10th, 2025",
+    link: "https://www.youtube.com/watch?v=LyunT1PY6sw",
+    image: mlmonday9,
+  },
+  {
+    name: "ML Mondays #8 : Convolutional Neural Networks",
+    description: "Learn about Layers, Filters, and Sampling/Pooling.",
     date: "November 3rd, 2025",
     link: "https://www.youtube.com/watch?v=Nq8cv_v9Ieg",
     image: mlmonday8,
@@ -33,8 +50,7 @@ const VIDEOS = [
   },
   {
     name: "ML Mondays #6: Training Neural Networks",
-    description:
-      "Neurons, Gradient Descent, Hyperparameters, and more.",
+    description: "Neurons, Gradient Descent, Hyperparameters, and more.",
     date: "October 20th, 2025",
     link: "https://www.youtube.com/watch?v=vVBbLo6R-6k",
     image: mlmonday6,
