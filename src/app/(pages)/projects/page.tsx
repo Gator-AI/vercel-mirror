@@ -16,6 +16,23 @@ import unsupervisedMarketRiskImage from "@/images/projects/unsupervised-market-r
 
 const PROJECTS = [
   {
+    name: "SafeTrip IQ",
+    description: "AI powered travel safety advisor",
+    link: "https://github.com/ufgatorai",
+    techStack: [
+      "Python",
+      "Javascript",
+      "HF Transformers",
+      "XGBoost",
+      "FastAPI",
+      "Selenium",
+      "Docker",
+      "MLflow",
+    ],
+    difficulty: "Intermediate",
+    image: safetripImage,
+  },
+  {
     name: "CanvasGPT",
     description: "Create a safe, Course-Specific AI tutor in minutes",
     techStack: [
@@ -159,23 +176,6 @@ const PROJECTS = [
     techStack: ["Python", "Streamlit", "PyTorch", "TensorFlow", "OpenAI"],
     difficulty: "Advanced",
     image: theoryOfMindImage,
-  },
-  {
-    name: "SafeTrip IQ",
-    description: "AI powered travel safety advisor",
-    link: "https://github.com/ufgatorai",
-    techStack: [
-      "Python",
-      "Javascript",
-      "HF Transformers",
-      "XGBoost",
-      "FastAPI",
-      "Selenium",
-      "Docker",
-      "MLflow",
-    ],
-    difficulty: "Intermediate",
-    image: safetripImage,
   },
   {
     name: "Real-time Lane Departure Warning System",
