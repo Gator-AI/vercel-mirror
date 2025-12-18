@@ -8,8 +8,12 @@ import { useThree } from "@react-three/fiber";
 gsap.registerPlugin(ScrollTrigger);
 
 export function Laptop() {
-  const topModel = useGLTF("/assets/LaptopTop.glb");
-  const bottomModel = useGLTF("/assets/LaptopBottom.glb");
+  const baseUrl = process.env.NEXT_PUBLIC_BLOB_BASE_URL;
+  if (!baseUrl) {
+    throw new Error("NEXT_PUBLIC_BLOB_BASE_URL is not set");
+  }
+  const topModel = useGLTF(`${baseUrl}/assets/LaptopTop.glb`);
+  const bottomModel = useGLTF(`${baseUrl}/assets/LaptopBottom.glb`);
   const groupRef = useRef<THREE.Group>(null);
   const topRef = useRef<THREE.Mesh>(null);
   const { camera } = useThree();
