@@ -18,7 +18,7 @@ const VIDEOS = [
       "Exploring AutoEncoders, Generative Adversarial Networks, and their applications.",
     date: "November 17th, 2025",
     link: "https://www.youtube.com/watch?v=pdJ9cpEqIMM",
-    image: `${baseUrl}/images/ml-mondays-thumbnails/mlmonday-10.png`,
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-10.png`,
   },
   {
     name: "ML Mondays #9: Recurrent Neural Networks (RNNs)",
@@ -26,14 +26,14 @@ const VIDEOS = [
       "Understanding RNNs, LSTMs, and their applications in sequence data.",
     date: "November 10th, 2025",
     link: "https://www.youtube.com/watch?v=LyunT1PY6sw",
-    image: `${baseUrl}/images/ml-mondays-thumbnails/mlmonday-9.png`,
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-9.png`,
   },
   {
     name: "ML Mondays #8 : Convolutional Neural Networks",
     description: "Learn about Layers, Filters, and Sampling/Pooling.",
     date: "November 3rd, 2025",
     link: "https://www.youtube.com/watch?v=Nq8cv_v9Ieg",
-    image: `${baseUrl}/images/ml-mondays-thumbnails/mlmonday-8.png`,
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-8.png`,
   },
   {
     name: "ML Mondays #7 : Training Deep Neural Networks",
@@ -41,14 +41,14 @@ const VIDEOS = [
       "Transfer Learning and Building a Neural Network with pytorch.",
     date: "October 27th, 2025",
     link: "https://www.youtube.com/watch?v=smMlQojzl0M",
-    image: `${baseUrl}/images/ml-mondays-thumbnails/mlmonday-7.png`,
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-7.png`,
   },
   {
     name: "ML Mondays #6: Training Neural Networks",
     description: "Neurons, Gradient Descent, Hyperparameters, and more.",
     date: "October 20th, 2025",
     link: "https://www.youtube.com/watch?v=vVBbLo6R-6k",
-    image: `${baseUrl}/images/ml-mondays-thumbnails/mlmonday-6.png`,
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-6.png`,
   },
   {
     name: "ML Mondays #5: Feed Forward Neural Networks",
@@ -56,7 +56,7 @@ const VIDEOS = [
       "Structure of Feed Forward Neural Networks, Activation Functions, and Backpropagation.",
     date: "October 13th, 2025",
     link: "https://www.youtube.com/watch?v=AjKgtfKGYtg",
-    image: `${baseUrl}/images/ml-mondays-thumbnails/mlmonday-5.png`,
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-5.png`,
   },
   {
     name: "ML Mondays #4: Optimization and Gradient Descent",
@@ -64,7 +64,7 @@ const VIDEOS = [
       "An in-depth look at optimization techniques, gradient descent, and learning rates.",
     date: "October 6th, 2025",
     link: "https://www.youtube.com/watch?v=TKhlZGvAqQI",
-    image: `${baseUrl}/images/ml-mondays-thumbnails/mlmonday-4.png`,
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-4.png`,
   },
   {
     name: "ML Mondays #3: Logistic Regression",
@@ -72,7 +72,7 @@ const VIDEOS = [
       "An overview of Logistic Regression, Sigmoid Functions, Cross Entropy Loss, and more.",
     date: "September 29th, 2025",
     link: "https://www.youtube.com/watch?v=y5wg1p91Dmo",
-    image: `${baseUrl}/images/ml-mondays-thumbnails/mlmonday-3.png`,
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-3.png`,
   },
   {
     name: "ML Mondays #2: Linear Regression",
@@ -80,7 +80,7 @@ const VIDEOS = [
       "A look into Linear Regression, biases and variances, and loss functions.",
     date: "September 22nd, 2025",
     link: "https://www.youtube.com/watch?v=5vTdP2h_fi8",
-    image: `${baseUrl}/images/ml-mondays-thumbnails/mlmonday-2.png`,
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-2.png`,
   },
   {
     name: "ML Mondays #1: What is AL/ML?",
@@ -88,7 +88,7 @@ const VIDEOS = [
       "An introductory lecture on Artificial Intelligence and Machine Learning concepts.",
     date: "September 15th, 2025",
     link: "https://www.youtube.com/watch?v=dNu_f4ooCII&ab_channel=GatorAI",
-    image: `${baseUrl}/images/ml-mondays-thumbnails/mlmonday-1.png`,
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-1.png`,
   },
   // {
   //   name: "AI Workshop Series",
