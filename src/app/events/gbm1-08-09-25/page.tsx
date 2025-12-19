@@ -1,28 +1,23 @@
 "use client";
 import React from "react";
-import gbm1 from "@/images/events-photos/gbm1-photos/GBM1-Fall-2025.jpg";
-import gbm1_2 from "@/images/events-photos/gbm1-photos/GBM-1-Fall-2025-2.jpg";
-import gbm1_3 from "@/images/events-photos/gbm1-photos/GBM-1-Fall-2025-3.jpg";
-import gbm1_4 from "@/images/events-photos/gbm1-photos/GBM-1-Fall-2025-4.jpg";
-import gbm1_5 from "@/images/events-photos/gbm1-photos/GBM-1-Fall-2025-5.jpg";
-import gbm1_6 from "@/images/events-photos/gbm1-photos/GBM-1-Fall-2025-6.jpg";
-import gbm1_7 from "@/images/events-photos/gbm1-photos/GBM-1-Fall-2025-7.jpg";
-import gbm1_8 from "@/images/events-photos/gbm1-photos/GBM-1-Fall-2025-8.jpg";
-import gbm1_9 from "@/images/events-photos/gbm1-photos/GBM-1-Fall-2025-9.jpg";
-import gbm1_10 from "@/images/events-photos/gbm1-photos/GBM-1-Fall-2025-10.jpg";
 import Carousel from "@/components/ui/Carousel";
 
+const baseUrl = process.env.NEXT_PUBLIC_BLOB_BASE_URL;
+if (!baseUrl) {
+  throw new Error("NEXT_PUBLIC_BLOB_BASE_URL is not set");
+}
+
 const photos = [
-  gbm1.src,
-  gbm1_2.src,
-  gbm1_3.src,
-  gbm1_4.src,
-  gbm1_5.src,
-  gbm1_6.src,
-  gbm1_7.src,
-  gbm1_8.src,
-  gbm1_9.src,
-  gbm1_10.src,
+  `${baseUrl}/images/event-photos/gbm1-photos-fall-2025/GBM1-Fall-2025.jpg`,
+  `${baseUrl}/images/event-photos/gbm1-photos-fall-2025/GBM-1-Fall-2025-2.jpg`,
+  `${baseUrl}/images/event-photos/gbm1-photos-fall-2025/GBM-1-Fall-2025-3.jpg`,
+  `${baseUrl}/images/event-photos/gbm1-photos-fall-2025/GBM-1-Fall-2025-4.jpg`,
+  `${baseUrl}/images/event-photos/gbm1-photos-fall-2025/GBM-1-Fall-2025-5.jpg`,
+  `${baseUrl}/images/event-photos/gbm1-photos-fall-2025/GBM-1-Fall-2025-6.jpg`,
+  `${baseUrl}/images/event-photos/gbm1-photos-fall-2025/GBM-1-Fall-2025-7.jpg`,
+  `${baseUrl}/images/event-photos/gbm1-photos-fall-2025/GBM-1-Fall-2025-8.jpg`,
+  `${baseUrl}/images/event-photos/gbm1-photos-fall-2025/GBM-1-Fall-2025-9.jpg`,
+  `${baseUrl}/images/event-photos/gbm1-photos-fall-2025/GBM-1-Fall-2025-10.jpg`,
   // Add more images here as needed
 ];
 

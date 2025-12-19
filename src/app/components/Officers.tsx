@@ -2,120 +2,108 @@ import React from "react";
 import { Carousel, FlipCard } from "./ui/apple-cards-carousel";
 // import Image from "next/image";
 
-import Rohan from "@/images/officer-photos/rohan.jpg";
-import Analise from "@/images/officer-photos/analise.jpg";
-import Sara from "@/images/officer-photos/sara.jpg";
-import Andy from "@/images/officer-photos/andy.jpg";
-import Alvin from "@/images/officer-photos/alvin.jpg";
-import Jingtong from "@/images/officer-photos/jingtong.jpg";
-import Misha from "@/images/officer-photos/misha.jpg";
-import Kartik from "@/images/officer-photos/kartik.jpg";
-import Sivan from "@/images/officer-photos/sivan.jpg";
-import Sriniketh from "@/images/officer-photos/sriniketh.jpg";
-import Kushagra from "@/images/officer-photos/kushagra.jpg";
-import Taher from "@/images/officer-photos/taher.jpg";
-import Grace from "@/images/officer-photos/grace.jpg";
-import Realin from "@/images/officer-photos/realin.jpg";
-import Sarvagna from "@/images/officer-photos/sarvagna.jpg";
-import Stanley from "@/images/officer-photos/stanley.jpg";
+const baseUrl = process.env.NEXT_PUBLIC_BLOB_BASE_URL;
+if (!baseUrl) {
+  throw new Error("NEXT_PUBLIC_BLOB_BASE_URL is not set");
+}
 
 const data = [
   {
     category: "President",
     title: "Rohan Shah",
-    src: Rohan.src,
+    src: `${baseUrl}/images/officer-photos/rohan.jpg`,
     backContent: "Placeholder",
   },
   {
     category: "Vice President",
     title: "Analise Stuart",
-    src: Analise.src,
+    src: `${baseUrl}/images/officer-photos/analise.jpg`,
     backContent: "Placeholder",
   },
   {
     category: "Treasurer",
     title: "Sara Lin",
-    src: Sara.src,
+    src: `${baseUrl}/images/officer-photos/sara.jpg`,
     backContent:
       "Don't compare yourself with other people; compare yourself with who you were yesterday.",
   },
   {
     category: "Applied Lead",
     title: "Andy Vu",
-    src: Andy.src,
+    src: `${baseUrl}/images/officer-photos/andy.jpg`,
     backContent: "Placeholder",
   },
   {
     category: "Education Director",
     title: "Alvin Wong",
-    src: Alvin.src,
+    src: `${baseUrl}/images/officer-photos/alvin.jpg`,
     backContent: "Placeholder",
   },
   {
     category: "Secretary",
     title: "Jingtong Zeng",
-    src: Jingtong.src,
+    src: `${baseUrl}/images/officer-photos/jingtong.jpg`,
     backContent: "Placeholder",
   },
   {
     category: "ML Lecturer",
     title: "Kartik Kathuria",
-    src: Kartik.src,
+    src: `${baseUrl}/images/officer-photos/kartik.jpg`,
     backContent: "Placeholder",
   },
   {
     category: "ML Lecturer",
     title: "Sivan Pushpagiri",
-    src: Sivan.src,
+    src: `${baseUrl}/images/officer-photos/sivan.jpg`,
     backContent: "Placeholder",
   },
   {
     category: "ML Lecturer",
     title: "Sriniketh Subramanian",
-    src: Sriniketh.src,
+    src: `${baseUrl}/images/officer-photos/sriniketh.jpg`,
     backContent: "Placeholder",
   },
   {
     category: "Social Media",
     title: "Kushagra Katiyar",
-    src: Kushagra.src,
+    src: `${baseUrl}/images/officer-photos/kushagra.jpg`,
     backContent: "Placeholder",
   },
 
   {
     category: "Corp Relations",
     title: "Misha Shah",
-    src: Misha.src,
+    src: `${baseUrl}/images/officer-photos/misha.jpg`,
     backContent: "Don't put eggs in the microwave.",
   },
   {
     category: "Corp Relations",
     title: "Taher Akolawala",
-    src: Taher.src,
+    src: `${baseUrl}/images/officer-photos/taher.jpg`,
     backContent: "Placeholder",
   },
   {
     category: "Social Events",
     title: "Grace Cavaretta",
-    src: Grace.src,
+    src: `${baseUrl}/images/officer-photos/grace.jpg`,
     backContent: "Placeholder",
   },
   {
     category: "Social Events",
     title: "Realin Damuth",
-    src: Realin.src,
+    src: `${baseUrl}/images/officer-photos/realin.jpg`,
     backContent: "Placeholder",
   },
   {
     category: "Social Events",
     title: "Sarvagna Sangaraju",
-    src: Sarvagna.src,
+    src: `${baseUrl}/images/officer-photos/sarvagna.jpg`,
     backContent: "Placeholder",
   },
   {
     category: "Webmaster",
     title: "Stanley Ke",
-    src: Stanley.src,
+    src: `${baseUrl}/images/officer-photos/stanley.jpg`,
     backContent: "If you don't believe in yourself, nobody else will.",
   },
 ];

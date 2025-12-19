@@ -4,7 +4,6 @@ import AnimatedChangingCards from "@/components/ui/animated-changing-cards";
 import { IconArrowWaveLeftUp } from "@tabler/icons-react";
 import BrowserWindow from "@/components/ui/browser-window";
 import { GraduationCap, CalendarDays } from "lucide-react";
-import SebastianLectureImg from "@/images/sebastian-lecturing.png";
 import Image from "next/image";
 import ShimmerButton from "./ui/shimmer-button";
 import { Lens } from "@/components/ui/lens";
@@ -24,6 +23,10 @@ const Skeleton = () => (
 );
 
 function Involve() {
+  const baseUrl = process.env.NEXT_PUBLIC_BLOB_BASE_URL;
+  if (!baseUrl) {
+    throw new Error("NEXT_PUBLIC_BLOB_BASE_URL is not set");
+  }
   const [isHydrated, setIsHydrated] = useState(false);
   useEffect(() => {
     setIsHydrated(true);
@@ -41,27 +44,27 @@ function Involve() {
     {
       name: "Danny Avila",
       designation: "Founder of Libre Chat",
-      src: Danny,
+      src: `${baseUrl}/images/guest-photos/danny.jpg`,
     },
     {
       name: "Brianna Schuch",
       designation: "Generative AI applications in Finance",
-      src: Brianna,
+      src: `${baseUrl}/images/guest-photos/brianna.jpg`,
     },
     {
       name: "Shawn Wang",
       designation: "Devtools Startup Advisor",
-      src: Shawn,
+      src: `${baseUrl}/images/guest-photos/shawn.jpeg`,
     },
     {
       name: "Vaibhav Gupta",
       designation: "CEO of Boundary ML",
-      src: Vaibhav,
+      src: `${baseUrl}/images/guest-photos/vaibhav.jpg`,
     },
     {
       name: "Abishanka Saha",
       designation: "SWE on Generative AI Team at Morgan Stanley",
-      src: Abi,
+      src: `${baseUrl}/images/guest-photos/abi.jpg`,
     },
   ];
 
@@ -109,7 +112,9 @@ function Involve() {
           <div className="mx-auto w-[95%] relative">
             <Lens lensSize={150} hovering={hovering} setHovering={setHovering}>
               <Image
-                src={SebastianLectureImg}
+                src={`${baseUrl}/images/sebastian-lecturing.png`}
+                width={1000}
+                height={1000}
                 alt="Lecture"
                 className="w-full rounded-lg hover:cursor-none scale-x-[-1]"
               />
@@ -179,7 +184,7 @@ function Involve() {
         <div className="w-full h-full overflow-hidden flex items-center justify-center rounded-lg">
           {isHydrated ? (
             <video
-              src="/videos/jupyter-notebook-demo.mp4"
+              src={`${baseUrl}/videos/jupyter-notebook-demo.mp4`}
               loop={true}
               autoPlay
               muted
@@ -189,7 +194,9 @@ function Involve() {
             <Skeleton />
           )}
           <Image
-            src={LinearRegSS}
+            src={`${baseUrl}/images/linear-regression-ss.png`}
+            width={1000}
+            height={1000}
             alt="Jupyter Notebook Demo"
             className="rounded-md md:hidden"
           />
