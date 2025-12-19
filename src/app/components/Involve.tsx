@@ -11,13 +11,6 @@ import { AnimatedList } from "@/components/ui/animated-list";
 import { Notification } from "@/components/ui/notification";
 import { useEffect, useState, useRef } from "react";
 
-import Danny from "@/images/guest-photos/danny.jpg";
-import Brianna from "@/images/guest-photos/brianna.jpg";
-import Shawn from "@/images/guest-photos/shawn.jpeg";
-import Vaibhav from "@/images/guest-photos/vaibhav.jpg";
-import Abi from "@/images/guest-photos/abi.jpg";
-import LinearRegSS from "@/images/linear-regression-ss.png";
-
 const Skeleton = () => (
   <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-900 to-neutral-800"></div>
 );
