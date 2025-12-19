@@ -1,7 +1,4 @@
 import React from "react";
-import hypergator from "@/images/hypergator-tour.jpg";
-import workshop from "@/images/events-photos/ml-monday-1.jpg";
-import officers from "@/images/events-photos/gbm1-photos/GBM-1-Fall-2025-10.jpg";
 import Carousel from "@/components/ui/Carousel";
 import DesignBGMobile from "@/images/design-bg-mobile.svg";
 import DesignBGDesktop from "@/images/design-bg-desktop.svg";
@@ -12,7 +9,11 @@ import RoundLogo from "@/images/logo-white.png";
 import Image from "next/image";
 
 function About() {
-  const slides = [hypergator, workshop, officers].map((image) => image.src);
+  const baseUrl = process.env.NEXT_PUBLIC_BLOB_BASE_URL;
+  if (!baseUrl) {
+    throw new Error("NEXT_PUBLIC_BLOB_BASE_URL is not set");
+  }
+  const slides = [`${baseUrl}/images/hypergator-tour.jpg`, `${baseUrl}/images/ml-monday-1.jpg`, `${baseUrl}/images/event-photos/gbm1-photos-fall-2025/GBM-1-Fall-2025-10.jpg`];
 
   const [backgroundImage, setBackgroundImage] = useState(DesignBGMobile.src);
 

@@ -1,28 +1,22 @@
 "use client";
-import React from "react";
-import gbm2 from "@/images/events-photos/gbm2-photos/GBM-2-Fall-2025.jpg";
-import gbm2_2 from "@/images/events-photos/gbm2-photos/GBM-2-Fall-2025-2.jpg";
-import gbm2_3 from "@/images/events-photos/gbm2-photos/GBM-2-Fall-2025-3.jpg";
-import gbm2_4 from "@/images/events-photos/gbm2-photos/GBM-2-Fall-2025-4.jpg";
-import gbm2_5 from "@/images/events-photos/gbm2-photos/GBM-2-Fall-2025-5.jpg";
-import gbm2_6 from "@/images/events-photos/gbm2-photos/GBM-2-Fall-2025-6.jpg";
-import gbm2_7 from "@/images/events-photos/gbm2-photos/GBM-2-Fall-2025-7.jpg";
-import gbm2_8 from "@/images/events-photos/gbm2-photos/GBM-2-Fall-2025-8.jpg";
-import gbm2_9 from "@/images/events-photos/gbm2-photos/GBM-2-Fall-2025-9.jpg";
-import gbm2_10 from "@/images/events-photos/gbm2-photos/GBM-2-Fall-2025-10.jpg";
 import Carousel from "@/components/ui/Carousel";
 
+const baseUrl = process.env.NEXT_PUBLIC_BLOB_BASE_URL;
+if (!baseUrl) {
+  throw new Error("NEXT_PUBLIC_BLOB_BASE_URL is not set");
+}
+
 const photos = [
-  gbm2.src,
-  gbm2_2.src,
-  gbm2_3.src,
-  gbm2_4.src,
-  gbm2_5.src,
-  gbm2_6.src,
-  gbm2_7.src,
-  gbm2_8.src,
-  gbm2_9.src,
-  gbm2_10.src,
+  `${baseUrl}/images/event-photos/gbm2-photos-fall-2025/GBM-2-Fall-2025.jpg`,
+  `${baseUrl}/images/event-photos/gbm2-photos-fall-2025/GBM-2-Fall-2025-2.jpg`,
+  `${baseUrl}/images/event-photos/gbm2-photos-fall-2025/GBM-2-Fall-2025-3.jpg`,
+  `${baseUrl}/images/event-photos/gbm2-photos-fall-2025/GBM-2-Fall-2025-4.jpg`,
+  `${baseUrl}/images/event-photos/gbm2-photos-fall-2025/GBM-2-Fall-2025-5.jpg`,
+  `${baseUrl}/images/event-photos/gbm2-photos-fall-2025/GBM-2-Fall-2025-6.jpg`,
+  `${baseUrl}/images/event-photos/gbm2-photos-fall-2025/GBM-2-Fall-2025-7.jpg`,
+  `${baseUrl}/images/event-photos/gbm2-photos-fall-2025/GBM-2-Fall-2025-8.jpg`,
+  `${baseUrl}/images/event-photos/gbm2-photos-fall-2025/GBM-2-Fall-2025-9.jpg`,
+  `${baseUrl}/images/event-photos/gbm2-photos-fall-2025/GBM-2-Fall-2025-10.jpg`,
 ];
 
 export default function GBM2Page() {

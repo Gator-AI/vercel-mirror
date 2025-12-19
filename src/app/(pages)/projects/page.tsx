@@ -4,15 +4,11 @@ import React from "react";
 import Image from "next/image";
 import ShimmerButton from "@/components/ui/shimmer-button";
 import { GitHub } from "react-feather";
-import courseAdvisorImage from "@/images/projects/course-advisor.png";
-import contentAiImage from "@/images/projects/content-ai.png";
-import cryptoFraudImage from "@/images/projects/crypto-fraud.png";
-import keyframeImage from "@/images/projects/keyframe.png";
-import huntingPartyImage from "@/images/projects/huntingparty-ai.png";
-import safetripImage from "@/images/projects/safetrip-iq.png";
-import theoryOfMindImage from "@/images/projects/theory-of-mind.png";
-import studdyBuddyImage from "@/images/projects/study-buddy.png";
-import unsupervisedMarketRiskImage from "@/images/projects/unsupervised-market-risk.png";
+
+const baseUrl = process.env.NEXT_PUBLIC_BLOB_BASE_URL;
+if (!baseUrl) {
+  throw new Error("NEXT_PUBLIC_BLOB_BASE_URL is not set");
+}
 
 const PROJECTS = [
   {
@@ -30,7 +26,7 @@ const PROJECTS = [
       "MLflow",
     ],
     difficulty: "Intermediate",
-    image: safetripImage,
+    image: `${baseUrl}/images/projects/safetrip-iq.png`,
   },
   {
     name: "CanvasGPT",
@@ -58,7 +54,7 @@ const PROJECTS = [
     ],
     difficulty: "Advanced",
     link: "https://github.com/ufgatorai",
-    image: contentAiImage,
+    image: `${baseUrl}/images/projects/content-ai.png`,
   },
   {
     name: "Gator Course Advisor",
@@ -67,7 +63,7 @@ const PROJECTS = [
     link: "https://github.com/ufgatorai",
     techStack: ["Python", "Pandas", "SkLearn", "Surprise", "Streamlit/Flask"],
     difficulty: "Intermediate",
-    image: courseAdvisorImage,
+    image: `${baseUrl}/images/projects/course-advisor.png`,
   },
   {
     name: "Quant Lab",
@@ -100,7 +96,7 @@ const PROJECTS = [
       "ElevenLabs",
     ],
     difficulty: "Intermediate",
-    image: keyframeImage,
+    image: `${baseUrl}/images/projects/keyframe.png`,
   },
   {
     name: "AI-Assisted Roblox Game Development Lab",
@@ -116,7 +112,7 @@ const PROJECTS = [
     link: "https://github.com/ufgatorai",
     techStack: ["Tensorflow", "MongoDB", "Websocket"],
     difficulty: "Beginner/Hard",
-    image: cryptoFraudImage,
+    image: `${baseUrl}/images/projects/crypto-fraud.png`,
   },
   {
     name: "Market Risk Identification",
@@ -132,7 +128,7 @@ const PROJECTS = [
       "APIs",
     ],
     difficulty: "Intermediate",
-    image: unsupervisedMarketRiskImage,
+    image: `${baseUrl}/images/projects/unsupervised-market-risk.png`,
   },
   {
     name: "Study Buddy (SAT Prep)",
@@ -148,7 +144,7 @@ const PROJECTS = [
       "OpenAI",
     ],
     difficulty: "Intermediate",
-    image: studdyBuddyImage,
+    image: `${baseUrl}/images/projects/study-buddy.png`,
   },
   {
     name: "HuntingParty.ai",
@@ -167,7 +163,7 @@ const PROJECTS = [
       "APIs",
     ],
     difficulty: "Advanced",
-    image: huntingPartyImage,
+    image: `${baseUrl}/images/projects/huntingparty-ai.png`,
   },
   {
     name: "Theory of Mind Simulator",
@@ -175,7 +171,7 @@ const PROJECTS = [
     link: "https://github.com/ufgatorai",
     techStack: ["Python", "Streamlit", "PyTorch", "TensorFlow", "OpenAI"],
     difficulty: "Advanced",
-    image: theoryOfMindImage,
+    image: `${baseUrl}/images/projects/theory-of-mind.png`,
   },
   {
     name: "Real-time Lane Departure Warning System",

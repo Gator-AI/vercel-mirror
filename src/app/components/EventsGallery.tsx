@@ -1,51 +1,56 @@
 import React from "react";
 import { motion } from "framer-motion";
-import trailMixSocial from "@/images/events-photos/trail-mix-social.jpg";
-import gbm2 from "@/images/events-photos/gbm2-photos/GBM-2-Fall-2025.jpg";
-import gbm1 from "@/images/events-photos/gbm1-photos/GBM1-Fall-2025.jpg";
-import mlMonday1 from "@/images/events-photos/ml-monday-1.jpg";
-import hyperGator from "@/images/events-photos/hypergator-tour.jpg";
-import bakeSale from "@/images/events-photos/bake-sale.png";
+// import trailMixSocial from "@/images/events-photos/trail-mix-social.jpg";
+// import gbm2 from "@/images/events-photos/gbm2-photos/GBM-2-Fall-2025.jpg";
+// import gbm1 from "@/images/events-photos/gbm1-photos/GBM1-Fall-2025.jpg";
+// import mlMonday1 from "@/images/events-photos/ml-monday-1.jpg";
+// import hyperGator from "@/images/events-photos/hypergator-tour.jpg";
+// import bakeSale from "@/images/events-photos/bake-sale.png";
 import Link from "next/link";
 import Image from "next/image";
+
+const baseUrl = process.env.NEXT_PUBLIC_BLOB_BASE_URL;
+if (!baseUrl) {
+  throw new Error("NEXT_PUBLIC_BLOB_BASE_URL is not set");
+}
 
 // Data for the gallery items (these will link to their respective pages with a short description of the activity)
 const items = [
   {
     text: "Trail Mix Social",
     type: "default",
-    image: trailMixSocial.src,
+    image: "https://placehold.co/320x180",
     slug: "trail-mix-social",
   },
   {
     text: "General Body Meeting 1 - 08/09/2025",
     type: "large",
-    image: gbm1.src,
+    image: `${baseUrl}/images/event-photos/gbm1-photos-fall-2025/GBM1-Fall-2025.jpg`,
     slug: "gbm1-08-09-25",
   },
   {
     text: "HyperGator Tour",
     type: "default",
-    image: hyperGator.src,
+    image: "https://placehold.co/320x180",
     slug: "hypergator-tour",
   },
   {
     text: "General Body Meeting 2 - 10/22/2025",
     type: "large",
-    image: gbm2.src,
+    image: `${baseUrl}/images/event-photos/gbm2-photos-fall-2025/GBM-2-Fall-2025.jpg`,
     slug: "gbm2-10-22-25",
   },
 
   {
     text: "GatorAI Bake Sale",
     type: "large",
-    image: bakeSale.src,
+    image: "https://placehold.co/320x180",
     slug: "bake-sale",
   },
   {
     text: "ML Monday 1 - 09/15/2025",
     type: "default",
-    image: mlMonday1.src,
+    image: `${baseUrl}/images/ml-monday-1.jpg`,
     slug: "ml-monday-1",
   },
 ];
