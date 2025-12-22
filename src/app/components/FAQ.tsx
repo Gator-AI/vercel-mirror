@@ -4,8 +4,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import ShimmerButton from "./ui/shimmer-button";
-import { DiscordLogoIcon, InstagramLogoIcon } from "@radix-ui/react-icons";
 
 export default function FAQPage() {
   return (
@@ -98,49 +96,6 @@ export default function FAQPage() {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
-
-        <div className="mt-20 text-center flex items-center justify-between gap-10">
-          <div className="flex flex-col items-center gap-4">
-            <p className="text-sm md:text-2xl">Still have questions?</p>
-            <a href="mailto:ufgatorai@gmail.com">
-              <ShimmerButton
-                borderRadius="10px"
-                background="#00272b"
-                className="py-2 px-8 mx-auto text-base font-neighbor font-light w-fit shadow-md"
-              >
-                Email us
-              </ShimmerButton>
-            </a>
-          </div>
-
-          <div className="flex flex-col items-center gap-4">
-            <p className="text-sm md:text-2xl">Connect with us</p>
-            <div className="flex items-center justify-center gap-10">
-              <a
-                href="https://discord.com/invite/WGWrZqtDvm"
-                target="_blank"
-                className="group"
-              >
-                <DiscordLogoIcon
-                  width={50}
-                  height={50}
-                  className="group-hover:text-secondary transition-colors duration-300"
-                />
-              </a>
-              <a
-                href="https://www.instagram.com/uf_gatorai/"
-                target="_blank"
-                className="group"
-              >
-                <InstagramLogoIcon
-                  width={50}
-                  height={50}
-                  className="group-hover:text-secondary transition-colors duration-300"
-                />
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

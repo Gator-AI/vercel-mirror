@@ -1,4 +1,5 @@
 import Navbar from "@components/Navbar";
+import Footer from "@components/Footer";
 import "./globals.css";
 
 export const metadata = {
@@ -19,6 +20,7 @@ export default function RootLayout({
         <main className="flex-grow w-screen flex justify-center no-scrollbar">
           <div className="w-full flex flex-col items-center">{children}</div>
         </main>
+        <Footer />
       </body>
     </html>
   );
