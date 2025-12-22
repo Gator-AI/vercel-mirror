@@ -102,7 +102,7 @@ export default function FAQPage() {
         <div className="mt-20 text-center flex items-center justify-between gap-10">
           <div className="flex flex-col items-center gap-4">
             <p className="text-sm md:text-2xl">Still have questions?</p>
-            <a href="mailto:gatorai@university.edu">
+            <a href="mailto:ufgatorai@gmail.com">
               <ShimmerButton
                 borderRadius="10px"
                 background="#00272b"
