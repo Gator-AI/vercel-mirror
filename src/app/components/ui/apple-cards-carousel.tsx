@@ -14,6 +14,7 @@ import {
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import Image, { ImageProps } from "next/image";
+import LinkedInIcon from "@/images/linkedin_icon.svg";
 // import { useOutsideClick } from "../hooks/use-outside-click";
 
 interface CarouselProps {
@@ -159,6 +160,7 @@ interface CardProps {
   src: string; // URL for image
   content?: React.ReactNode;
   backContent?: React.ReactNode; // Optional content for the back of the card
+  linkedin?: string; // LinkedIn profile URL
 }
 
 interface FlipCardProps {
@@ -194,6 +196,26 @@ export const FlipCard: React.FC<FlipCardProps> = ({ card }) => {
           style={{ backfaceVisibility: "hidden" }}
         >
           <div className="absolute h-full top-0 inset-x-0 bg-gradient-to-b from-black/50 via-transparent to-transparent z-30 pointer-events-none" />
+          
+          {/* LinkedIn Icon */}
+          {card.linkedin && (
+            <a
+              href={card.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute top-3 right-3 z-50 bg-white/90 hover:bg-white rounded-full p-2 transition-all duration-200 hover:scale-110"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={LinkedInIcon.src || LinkedInIcon}
+                alt="LinkedIn"
+                width={20}
+                height={20}
+                className="w-5 h-5"
+              />
+            </a>
+          )}
+
           <div className="absolute inset-0 flex flex-col justify-end z-40 p-4">
             <div className="bg-primary/50 py-4 px-2 rounded-lg">
               <motion.p className="text-white text-sm md:text-base font-medium bg-amber-500 w-fit px-2 rounded-full">

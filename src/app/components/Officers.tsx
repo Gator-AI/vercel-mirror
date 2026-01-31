@@ -13,12 +13,14 @@ const data = [
     title: "Rohan Shah",
     src: `${baseUrl}/images/officer-photos/rohan.jpg`,
     backContent: "Placeholder",
+    linkedin: "https://www.linkedin.com/in/rohanshah004/"
   },
   {
     category: "Vice President",
     title: "Analise Stuart",
     src: `${baseUrl}/images/officer-photos/analise.jpg`,
     backContent: "Placeholder",
+    linkedin: "https://www.linkedin.com/in/analise-stuart-366425301/"
   },
   {
     category: "Treasurer",
@@ -26,85 +28,99 @@ const data = [
     src: `${baseUrl}/images/officer-photos/sara.jpg`,
     backContent:
       "Don't compare yourself with other people; compare yourself with who you were yesterday.",
+    linkedin: "https://www.linkedin.com/in/linsaraj/"
   },
   {
     category: "Applied Lead",
     title: "Andy Vu",
     src: `${baseUrl}/images/officer-photos/andy.jpg`,
     backContent: "Placeholder",
+    linkedin: "https://www.linkedin.com/in/adv-andrew-d-vu/"
   },
   {
     category: "Education Director",
     title: "Alvin Wong",
     src: `${baseUrl}/images/officer-photos/alvin.jpg`,
     backContent: "Placeholder",
+    linkedin: "https://www.linkedin.com/in/alvin-wong-uf/"
   },
   {
     category: "Secretary",
     title: "Jingtong Zeng",
     src: `${baseUrl}/images/officer-photos/jingtong.jpg`,
     backContent: "Placeholder",
+    linkedin: "https://www.linkedin.com/in/jingtong--zeng/"
   },
   {
     category: "ML Lecturer",
     title: "Kartik Kathuria",
     src: `${baseUrl}/images/officer-photos/kartik.jpg`,
     backContent: "Placeholder",
+    linkedin: "https://www.linkedin.com/in/kartik-kathuria/"
   },
   {
     category: "ML Lecturer",
     title: "Sivan Pushpagiri",
     src: `${baseUrl}/images/officer-photos/sivan.jpg`,
     backContent: "Placeholder",
+    linkedin: "https://www.linkedin.com/in/sivanreddypushpagiri/"
   },
   {
     category: "ML Lecturer",
     title: "Sriniketh Subramanian",
     src: `${baseUrl}/images/officer-photos/sriniketh.jpg`,
     backContent: "Placeholder",
+    linkedin: "https://www.linkedin.com/in/sriniketh-subramanian/"
   },
   {
-    category: "Social Media",
+    category: "Web Team & Social Media",
     title: "Kushagra Katiyar",
     src: `${baseUrl}/images/officer-photos/kushagra.jpg`,
     backContent: "Placeholder",
+    linkedin: "https://www.linkedin.com/in/kushagrakatiyar/"
   },
 
-  {
-    category: "Corp Relations",
-    title: "Misha Shah",
-    src: `${baseUrl}/images/officer-photos/misha.jpg`,
-    backContent: "Don't put eggs in the microwave.",
-  },
   {
     category: "Corp Relations",
     title: "Taher Akolawala",
     src: `${baseUrl}/images/officer-photos/taher.jpg`,
     backContent: "Placeholder",
+    linkedin: "https://www.linkedin.com/in/taher51/"
   },
   {
     category: "Social Events",
     title: "Grace Cavaretta",
     src: `${baseUrl}/images/officer-photos/grace.jpg`,
     backContent: "Placeholder",
+    linkedin: "https://www.linkedin.com/in/grace-cavarretta/"
   },
   {
     category: "Social Events",
     title: "Realin Damuth",
     src: `${baseUrl}/images/officer-photos/realin.jpg`,
     backContent: "Placeholder",
+    linkedin: "https://www.linkedin.com/in/realin-damuth/"
   },
   {
     category: "Social Events",
     title: "Sarvagna Sangaraju",
     src: `${baseUrl}/images/officer-photos/sarvagna.jpg`,
     backContent: "Placeholder",
+    linkedin : "https://www.linkedin.com/in/sarvi-sangaraju/"
   },
   {
     category: "Webmaster",
     title: "Stanley Ke",
     src: `${baseUrl}/images/officer-photos/stanley.jpg`,
     backContent: "If you don't believe in yourself, nobody else will.",
+    linkedin: "https://www.linkedin.com/in/stanley-ke/"
+  },
+  {
+    category: "Web Team",
+    title: "Jerry Xiao",
+    src: `${baseUrl}/images/officer-photos/jerry.jpg`,
+    backContent: "Placeholder",
+    linkedin: "https://www.linkedin.com/in/yufei-xiao-1a4971329/"
   },
 ];
 
