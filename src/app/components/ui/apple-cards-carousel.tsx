@@ -14,6 +14,8 @@ import {
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import Image, { ImageProps } from "next/image";
+import LinkedInIcon from "@/images/linkedin_icon.svg";
+import { LinkedInLogoIcon } from "@radix-ui/react-icons";
 // import { useOutsideClick } from "../hooks/use-outside-click";
 
 interface CarouselProps {
@@ -32,7 +34,7 @@ export const CarouselContext = createContext<{
   onCardClose: (index: number) => void;
   currentIndex: number;
 }>({
-  onCardClose: () => {},
+  onCardClose: () => { },
   currentIndex: 0,
 });
 
@@ -159,6 +161,7 @@ interface CardProps {
   src: string; // URL for image
   content?: React.ReactNode;
   backContent?: React.ReactNode; // Optional content for the back of the card
+  linkedin?: string; // LinkedIn profile URL
 }
 
 interface FlipCardProps {
@@ -194,12 +197,24 @@ export const FlipCard: React.FC<FlipCardProps> = ({ card }) => {
           style={{ backfaceVisibility: "hidden" }}
         >
           <div className="absolute h-full top-0 inset-x-0 bg-gradient-to-b from-black/50 via-transparent to-transparent z-30 pointer-events-none" />
+
           <div className="absolute inset-0 flex flex-col justify-end z-40 p-4">
-            <div className="bg-primary/50 py-4 px-2 rounded-lg">
-              <motion.p className="text-white text-sm md:text-base font-medium bg-amber-500 w-fit px-2 rounded-full">
+            <div className="relative bg-primary/50 py-4 px-2 rounded-lg">
+              {card.linkedin && (
+                <a
+                  href={card.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute bottom-2 right-2 z-50 inline-flex items-center justify-center w-9 h-9 bg-white rounded-full shadow-md transition-all duration-200 hover:scale-110"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <LinkedInLogoIcon className="w-5 h-5 text-[#0A66C2]" />
+                </a>
+              )}
+              <motion.p className="font-neighbor text-white text-sm md:text-base font-medium bg-amber-500 w-fit px-2 rounded-full">
                 {card.category}
               </motion.p>
-              <motion.p className="text-white text-xl md:text-2xl font-semibold max-w-fit mt-2">
+              <motion.p className="font-neighbor text-white text-xl md:text-2xl font-semibold max-w-fit mt-2">
                 {card.title}
               </motion.p>
             </div>
@@ -224,7 +239,7 @@ export const FlipCard: React.FC<FlipCardProps> = ({ card }) => {
             className="object-cover absolute inset-0 blur-lg"
             style={{ transform: "rotateY(180deg)" }}
           />
-          <p className="text-white text-center text-3xl z-10 max-w-[20rem] text-wrap">
+          <p className="font-neighbor text-white text-center text-3xl z-10 max-w-[20rem] text-wrap">
             {`“${card.backContent}”`}
           </p>
         </motion.div>
