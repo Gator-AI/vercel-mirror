@@ -114,7 +114,7 @@ const EventsGallery = () => {
             />
 
             <div className="relative z-10 p-4 bg-white text-gray-500 text-sm tracking-wide">
-              <p className="font-neighbor">{item.text}</p>
+              <p className="">{item.text}</p>
             </div>
 
             <Link

@@ -255,7 +255,7 @@ function Involve() {
       ),
       content: (
         <div className="flex flex-col justify-center items-center gap-4">
-          {/* <h1 className="text-2xl font-neighbor">
+          {/* <h1 className="text-2xl">
             Gator Education is a place to blah blah
           </h1> */}
           <BentoGrid className="max-w-6xl mx-auto md:auto-rows-[30rem]">
@@ -306,10 +306,10 @@ function Involve() {
       {/* header */}
       <div className="w-full flex flex-col gap-4">
         <div className="flex flex-col">
-          <p className="font-bold text-lg md:text-base text-secondary">
+          <p className="font-bold text-base text-secondary">
             Get Involved
           </p>
-          <p className="font-neighbor text-2xl md:text-5xl font-thin leading-none">
+          <p className="text-2xl md:text-5xl font-thin leading-none">
             Join a community of students <br></br>enthusiastic about the future
             of AI.
           </p>

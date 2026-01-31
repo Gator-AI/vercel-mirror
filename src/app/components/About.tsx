@@ -49,7 +49,7 @@ function About() {
         <div className="w-full md:w-1/2 lg:w-1/2 relative">
           <div className="relative z-10 flex flex-col gap-8 p-10">
             <div className="border-white border-b-[5px] w-full flex justify-center items-center gap-2 pb-4">
-              {/* <h1 className="font-neighbor font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight justify-center">
+              {/* <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight justify-center">
                 UF
               </h1> */}
               <Image
@@ -60,7 +60,7 @@ function About() {
               />
             </div>
 
-            <p className="text-base md:text-lg font-neighbor font-thin">
+            <p className="text-base md:text-lg font-thin">
               Welcome to GatorAI! We are the official club for artificial
               intelligence (AI) at UF. We&apos;re here for learners of all
               levels to explore the exciting world of artificial intelligence.
@@ -78,7 +78,7 @@ function About() {
               <ShimmerButton
                 borderRadius="10px"
                 background="#00272b"
-                className="py-2 px-8  text-base font-neighbor font-light w-fit shadow-md"
+                className="py-2 px-8  text-base font-light w-fit shadow-md"
               >
                 Join our Discord!
               </ShimmerButton>

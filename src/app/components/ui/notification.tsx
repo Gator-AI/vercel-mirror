@@ -33,10 +33,10 @@ export const Notification = ({
             backgroundColor: color,
           }}
         >
-          <span className="text-lg font-neighbor">{icon}</span>
+          <span className="text-lg">{icon}</span>
         </div>
         <div className="flex flex-col overflow-hidden">
-          <figcaption className="flex flex-row items-center whitespace-pre text-lg font-medium font-neighbor text-neutral-900 ">
+          <figcaption className="flex flex-row items-center whitespace-pre text-lg font-medium text-neutral-900 ">
             <span className="text-sm sm:text-lg text-neutral-900">{name}</span>
             <span className="mx-1">·</span>
             <span className="text-xs text-gray-500">{time}</span>

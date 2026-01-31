@@ -128,10 +128,10 @@ function Home() {
             className="fixed flex mt-32 flex-col items-center text-center justify-center w-full gap-4 p-10"
             // style={{ opacity: headerOpacity }}
           >
-            <h1 className="font-neighbor text-3xl md:text-6xl font-bold md:whitespace-nowrap">
+            <h1 className="text-3xl md:text-6xl font-bold md:whitespace-nowrap">
               Welcome to <span className="text-secondary">GatorAI</span>
             </h1>
-            <p className="font-neighbor text-md text-center md:text-lg font-light opacity-70">
+            <p className="text-md text-center md:text-lg font-light opacity-70">
               The University of Florida&apos;s Premier Artificial Intelligence
               Club
             </p>
@@ -144,10 +144,10 @@ function Home() {
           className="fixed flex md:hidden mt-48 flex-col items-center justify-center w-full gap-4"
           // style={{ opacity: headerOpacity }}
         >
-          <h1 className="font-neighbor text-6xl font-bold whitespace-nowrap">
+          <h1 className="text-6xl font-bold whitespace-nowrap">
             Welcome to <span className="text-secondary">GatorAI</span>
           </h1>
-          <p className="font-neighbor text-lg font-light opacity-70">
+          <p className="text-lg font-light opacity-70">
             The University of Florida&apos;s Premier Artificial Intelligence
             Club
           </p>

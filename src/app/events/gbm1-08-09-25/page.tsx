@@ -24,10 +24,10 @@ const photos = [
 export default function GBM1Page() {
   return (
     <div className="max-w-5xl mt-[100px] px-4 pb-20">
-      <h1 className="text-4xl font-bold mb-4 font-neighbor">
+      <h1 className="text-4xl font-bold mb-4">
         General Body Meeting 1
       </h1>
-      <p className="text-lg mb-8 font-neighbor">
+      <p className="text-lg mb-8">
         Our first GBM of the semester was a huge success! We had a turnout of
         <span className="text-secondary"> 270+ members </span>and gained{" "}
         <span className="text-secondary">1000+ </span>
@@ -36,10 +36,10 @@ export default function GBM1Page() {
         to get involved.
       </p>
       <section className="mb-10">
-        <h2 className="text-2xl font-neighbor font-semibold mb-2">
+        <h2 className="text-2xl font-semibold mb-2">
           Meeting Higlights
         </h2>
-        <ul className="list-disc ml-6 font-neighbor">
+        <ul className="list-disc ml-6">
           <li>
             We started with an AI Bingo icebreaker where members had to find
             others with specific AI-related skills or experiences. The top three
@@ -78,10 +78,10 @@ export default function GBM1Page() {
         </ul>
       </section>
       <section className="mb-10">
-        <h2 className="text-2xl font-neighbor font-semibold mb-2">
+        <h2 className="text-2xl font-semibold mb-2">
           Applied Projects & Technical Leads
         </h2>
-        <p className="font-neighbor mb-4">
+        <p className="mb-4">
           Members can join applied projects led by our technical leads, working
           on real-world problems and gaining practical experience in AI. To
           learn more about the projects and our technical leads, please take a
@@ -89,7 +89,7 @@ export default function GBM1Page() {
         </p>
       </section>
       <section className="mb-10">
-        <h2 className="text-2xl font-neighbor font-semibold mb-2">Slides</h2>
+        <h2 className="text-2xl font-semibold mb-2">Slides</h2>
         {/* Replace the link below with your actual slides URL or embed */}
         <a
           href="https://docs.google.com/presentation/d/19h8pz7uE9LyKzXvEDuP9ZyICdpQPcvoqr-70aCKVoQI/edit"
@@ -101,7 +101,7 @@ export default function GBM1Page() {
         </a>
       </section>
       <section className="mb-10">
-        <h2 className="text-2xl font-neighbor font-semibold mb-2 h-">
+        <h2 className="text-2xl font-semibold mb-2 h-">
           Photo Gallery
         </h2>
         <div className="w-full max-w-full h-96">

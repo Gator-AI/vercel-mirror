@@ -189,7 +189,7 @@ function Projects() {
     <div className="my-32 min-h-screen w-screen flex items-center justify-center">
       <div className="w-[90%] max-w-5xl lg:max-w-7xl h-full flex flex-col items-start justify-start gap-8">
         <div className="flex flex-col items-start justify-start">
-          <h1 className="font-neighbor text-2xl md:text-5xl font-thin leading-none">
+          <h1 className="text-2xl md:text-5xl font-thin leading-none">
             Projects
           </h1>
           <p className="mt-2 text-white/80 text-xl">
@@ -200,7 +200,7 @@ function Projects() {
               <ShimmerButton
                 borderRadius="10px"
                 background="#00272b"
-                className="py-2 px-8 text-base font-neighbor font-light w-fit shadow-md gap-2"
+                className="py-2 px-8 text-base font-light w-fit shadow-md gap-2"
               >
                 Visit the LinkTree to Apply Now!
               </ShimmerButton>
@@ -226,24 +226,24 @@ function Projects() {
               </div>
               <div className="flex flex-col items-start justify-between gap-1 h-full min-h-[180px]">
                 <div>
-                  <h2 className="font-neighbor font-bold text-xl md:text-2xl text-white mb-1">
+                  <h2 className="font-bold text-xl md:text-2xl text-white mb-1">
                     {project.name}
                   </h2>
-                  <p className="font-neighbor text-[#F59E0B] text-md leading-none">
+                  <p className="text-[#F59E0B] text-md leading-none">
                     {project.description}
                   </p>
                 </div>
                 {/* <div className="flex-grow" /> */}
                 {project.techStack?.length ? (
                   <div className="bg-[#00272b]/50 p-2 rounded-md flex flex-col gap-1">
-                    <p className=" w-fit font-neighbor text-md">
+                    <p className=" w-fit text-md">
                       Difficulty:{" "}
                       <span className="bg-[#F59E0B] rounded-full px-2 py-[2px] ">
                         {project.difficulty}
                       </span>
                     </p>
-                    <p className="font-neighbor">Tech Stack:</p>
-                    <p className="font-neighbor text-[#6FFFE4]">
+                    <p>Tech Stack:</p>
+                    <p className="text-[#6FFFE4]">
                       {project.techStack.join(", ")}
                     </p>
                   </div>
@@ -255,7 +255,7 @@ function Projects() {
                   <ShimmerButton
                     borderRadius="10px"
                     background="#00272b"
-                    className="py-2 px-8  text-base font-neighbor font-light w-fit shadow-md"
+                    className="py-2 px-8  text-base font-light w-fit shadow-md"
                   >
                     Learn More
                   </ShimmerButton>

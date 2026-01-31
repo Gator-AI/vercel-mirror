@@ -8,19 +8,19 @@ export default function Footer() {
 
     return (
         <footer className="w-full border-t border-white/10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 mt-auto">
-            <div className="container py-6 px-8 md:px-20">
+            <div className="container mx-auto py-6 px-8 md:px-20">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
                     <div className="flex flex-col items-center gap-1.5">
                         <a href="mailto:ufgatorai@gmail.com">
                             <ShimmerButton
                                 borderRadius="6px"
                                 background="#00272b"
-                                className="py-1.5 px-5 text-xs md:text-base font-neighbor font-light w-fit shadow-md"
+                                className="py-1.5 px-5 text-xs md:text-base font-light w-fit shadow-md"
                             >
                                 Email us
                             </ShimmerButton>
                         </a>
-                        <p className="text-xs md:text-base text-white font-neighbor font-light">
+                        <p className="text-xs md:text-base text-white font-light">
                             Still have questions?
                         </p>
                     </div>
@@ -33,7 +33,7 @@ export default function Footer() {
                             height={40}
                             className="mb-1"
                         />
-                        <p className="text-[10px] md:text-base text-white/70 font-neighbor font-light">
+                        <p className="text-[10px] md:text-base text-white/70 font-light">
                             © {currentYear} GatorAI
                         </p>
                     </div>
@@ -67,7 +67,7 @@ export default function Footer() {
                                 />
                             </a>
                         </div>
-                        <p className="text-xs md:text-base text-white font-neighbor font-light">
+                        <p className="text-xs md:text-base text-white font-light">
                             Connect with us
                         </p>
                     </div>
