@@ -14,7 +14,6 @@ import {
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import Image, { ImageProps } from "next/image";
-import LinkedInIcon from "@/images/linkedin_icon.svg";
 import { LinkedInLogoIcon } from "@radix-ui/react-icons";
 // import { useOutsideClick } from "../hooks/use-outside-click";
 
