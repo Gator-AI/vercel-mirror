@@ -19,7 +19,7 @@ export default function FAQPage() {
             <AccordionTrigger className="text-2xl">
               What do we do at GatorAI?
             </AccordionTrigger>
-            <AccordionContent className="font-light text-lg">
+            <AccordionContent className="font-light text-lg max-w-3xl">
               GatorAI is a club of students passionate about Artificial
               Intelligence (AI) and Machine Learning (ML). We hosts workshops
               every week, connect you with guest speakers in the industry, and
@@ -31,7 +31,7 @@ export default function FAQPage() {
             <AccordionTrigger className="text-2xl">
               When and where do you meet?
             </AccordionTrigger>
-            <AccordionContent className="font-light text-lg">
+            <AccordionContent className="font-light text-lg max-w-3xl">
               We hold Machine Learning workshops every Monday (changes may be
               announced in Discord) in the Informatics Institute from 6PM - 7PM.
               Throughout the semester we will have larger GBMs that are a fun
@@ -43,7 +43,7 @@ export default function FAQPage() {
             <AccordionTrigger className="text-2xl">
               Do I need prior experience with AI to join?
             </AccordionTrigger>
-            <AccordionContent className="font-light text-lg">
+            <AccordionContent className="font-light text-lg max-w-3xl">
               Not at all! We welcome members of all skill levels. We offer
               beginner-friendly workshops and resources to help you get started
               from zero to hero. More experienced members can participate in
@@ -88,7 +88,7 @@ export default function FAQPage() {
             <AccordionTrigger className="text-2xl">
               Can I get involved in leadership?
             </AccordionTrigger>
-            <AccordionContent className="font-light text-lg">
+            <AccordionContent className="font-light text-lg max-w-3xl">
               We hold elections for board positions at the end of each spring
               semester, applications will be announced on Discord. Throughout
               the year, we also have opportunities to lead project teams,
