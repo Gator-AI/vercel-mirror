@@ -13,7 +13,11 @@ function About() {
   if (!baseUrl) {
     throw new Error("NEXT_PUBLIC_BLOB_BASE_URL is not set");
   }
-  const slides = [`${baseUrl}/images/hypergator-tour.jpg`, `${baseUrl}/images/ml-monday-1.jpg`, `${baseUrl}/images/event-photos/gbm1-photos-fall-2025/GBM-1-Fall-2025-10.jpg`];
+  const slides = [
+    `${baseUrl}/images/hypergator-tour.jpg`, 
+    `${baseUrl}/images/ml-monday-1.jpg`, 
+    `${baseUrl}/images/event-photos/gbm1-photos-fall-2025/GBM-1-Fall-2025-10.jpg`, 
+  ];
 
   const [backgroundImage, setBackgroundImage] = useState(DesignBGMobile.src);
 
