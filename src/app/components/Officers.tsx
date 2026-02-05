@@ -87,6 +87,23 @@ const data = [
     backContent: "Placeholder",
     linkedin: "https://www.linkedin.com/in/taher51/"
   },
+
+  {
+    category: "Corp Relations",
+    title: "Divya Verma",
+    src: `${baseUrl}/images/officer-photos/divya.jpg`,
+    backContent: "Placeholder",
+    linkedin: "https://www.linkedin.com/in/divya-verma48/"
+  },
+
+  {
+    category: "Corp Relations",
+    title: "Jackson Jones",
+    src: `${baseUrl}/images/officer-photos/jackson.jpg`,
+    backContent: "Placeholder",
+    linkedin: "https://www.linkedin.com/in/jackson-e-jones/"
+  },
+
   {
     category: "Social Events",
     title: "Grace Cavaretta",
@@ -121,6 +138,10 @@ const data = [
     src: `${baseUrl}/images/officer-photos/jerry.jpg`,
     backContent: "Placeholder",
     linkedin: "https://www.linkedin.com/in/yufei-xiao-1a4971329/"
+  },
+
+  {
+
   },
 ];
 
