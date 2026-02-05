@@ -139,10 +139,6 @@ const data = [
     backContent: "Placeholder",
     linkedin: "https://www.linkedin.com/in/yufei-xiao-1a4971329/"
   },
-
-  {
-
-  },
 ];
 
 function Officers() {
