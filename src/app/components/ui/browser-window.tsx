@@ -31,7 +31,7 @@ export default function BrowserWindow({ tabs }: BrowserWindowProps) {
         {tabs.map((tab) => (
           <button
             key={tab.id}
-            className={`w-40 md:w-48 flex items-center justify-start px-4 py-2 font-neighbor font-thin text-sm  ${
+            className={`w-40 md:w-48 flex items-center justify-start px-4 py-2 font-thin text-sm  ${
               activeTab === tab.id
                 ? "bg-neutral-700 rounded-tl-lg rounded-tr-lg -mb-px text-white"
                 : "text-white/35 hover:text-white/80"

@@ -210,10 +210,10 @@ export const FlipCard: React.FC<FlipCardProps> = ({ card }) => {
                   <LinkedInLogoIcon className="w-5 h-5 text-[#0A66C2]" />
                 </a>
               )}
-              <motion.p className="font-neighbor text-white text-sm md:text-base font-medium bg-amber-500 w-fit px-2 rounded-full">
+              <motion.p className="text-white text-sm md:text-base font-medium bg-amber-500 w-fit px-2 rounded-full">
                 {card.category}
               </motion.p>
-              <motion.p className="font-neighbor text-white text-xl md:text-2xl font-semibold max-w-fit mt-2">
+              <motion.p className="text-white text-xl md:text-2xl font-semibold max-w-fit mt-2">
                 {card.title}
               </motion.p>
             </div>
@@ -238,7 +238,7 @@ export const FlipCard: React.FC<FlipCardProps> = ({ card }) => {
             className="object-cover absolute inset-0 blur-lg"
             style={{ transform: "rotateY(180deg)" }}
           />
-          <p className="font-neighbor text-white text-center text-3xl z-10 max-w-[20rem] text-wrap">
+          <p className="text-white text-center text-3xl z-10 max-w-[20rem] text-wrap">
             {`“${card.backContent}”`}
           </p>
         </motion.div>

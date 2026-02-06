@@ -78,7 +78,7 @@ export const FloatingNav = ({
             <Link
               key={`nav-item-${idx}`}
               href={navItem.link}
-              className="group flex items-center gap-0 md:gap-2 relative font-neighbor font-light text-neutral-50 transition-colors"
+              className="group flex items-center gap-0 md:gap-2 relative font-light text-neutral-50 transition-colors"
             >
               <span className="block sm:hidden transition-colors group-hover:opacity-80">
                 {navItem.icon}
@@ -103,7 +103,7 @@ export const FloatingNav = ({
                 <Link
                   key={`mobile-nav-item-${idx}`}
                   href={navItem.link}
-                  className="font-neighbor font-light text-neutral-50 text-lg py-2 px-6 w-full text-center hover:bg-white/10 transition-colors"
+                  className="font-light text-neutral-50 text-lg py-2 px-6 w-full text-center hover:bg-white/10 transition-colors"
                   onClick={() => setMenuOpen(false)}
                 >
                   {navItem.name}

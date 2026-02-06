@@ -111,7 +111,7 @@ function Projects() {
     <div className="my-32 min-h-screen w-screen flex items-center justify-center">
       <div className="w-[90%] max-w-5xl lg:max-w-7xl h-full flex flex-col items-start justify-start gap-8">
         <div className="flex flex-col items-start justify-start w-full">
-          <h1 className="font-neighbor text-2xl md:text-5xl font-thin leading-none">
+          <h1 className="text-2xl md:text-5xl font-thin leading-none">
             Lecture Recordings
           </h1>
           <p className="font-neigbor mt-4 text-white/80 text-xl">
@@ -141,13 +141,13 @@ function Projects() {
                   priority={false}
                 />
               </div>
-              <h2 className="font-neighbor text-xl md:text-2xl text-white mb-2">
+              <h2 className="text-xl md:text-2xl text-white mb-2">
                 {video.name}
               </h2>
-              <p className="font-neighbor text-sm text-white/80 mb-2">
+              <p className="text-sm text-white/80 mb-2">
                 {video.description}
               </p>
-              <p className="font-neighbor text-base font-bold text-white/80 mb-4">
+              <p className="text-base font-bold text-white/80 mb-4">
                 {video.date}
               </p>
               <div className="flex w-full gap-4 mt-auto">
@@ -155,7 +155,7 @@ function Projects() {
                   <ShimmerButton
                     borderRadius="10px"
                     background="#00272b"
-                    className="py-2 px-8  text-base font-neighbor font-light w-fit shadow-md"
+                    className="py-2 px-8  text-base font-light w-fit shadow-md"
                   >
                     View on YouTube
                   </ShimmerButton>

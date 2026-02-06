@@ -97,20 +97,21 @@ function Home() {
     <main className="w-full overflow-hidden">
       {/*particles background and glow on the bottom*/}
 
-      <div className="absolute flex items-center justify-center w-[1920px] h-[350vh] z-20">
+      <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center w-[1920px] h-[350vh] z-20">
         <ParticlesComponent />
-        <Image
-          src={light}
-          alt="Description"
-          className="absolute bottom-0 w-full"
+        <img
+          src={light.src}
+          alt=""
+          width={1468}
+          height={900}
+          className="absolute bottom-0 h-auto object-cover object-bottom"
         />
       </div>
 
       {/*floating dock*/}
       <motion.div
-        className={`${
-          isFixed ? "fixed" : "absolute top-[1850px]"
-        } bottom-12 left-1/2 transform -translate-x-1/2 z-20`}
+        className={`${isFixed ? "fixed" : "absolute top-[1850px]"
+          } bottom-12 left-1/2 transform -translate-x-1/2 z-20`}
       >
         <FloatingDock items={socialItems} />
       </motion.div>
@@ -126,12 +127,12 @@ function Home() {
           <motion.div
             id="header-container"
             className="fixed flex mt-32 flex-col items-center text-center justify-center w-full gap-4 p-10"
-            // style={{ opacity: headerOpacity }}
+          // style={{ opacity: headerOpacity }}
           >
-            <h1 className="font-neighbor text-3xl md:text-6xl font-bold md:whitespace-nowrap">
+            <h1 className="text-3xl md:text-6xl font-bold md:whitespace-nowrap">
               Welcome to <span className="text-secondary">GatorAI</span>
             </h1>
-            <p className="font-neighbor text-md text-center md:text-lg font-light opacity-70">
+            <p className="text-md text-center md:text-lg font-light opacity-70">
               The University of Florida&apos;s Premier Artificial Intelligence
               Club
             </p>
@@ -144,10 +145,10 @@ function Home() {
           className="fixed flex md:hidden mt-48 flex-col items-center justify-center w-full gap-4"
           // style={{ opacity: headerOpacity }}
         >
-          <h1 className="font-neighbor text-6xl font-bold whitespace-nowrap">
+          <h1 className="text-6xl font-bold whitespace-nowrap">
             Welcome to <span className="text-secondary">GatorAI</span>
           </h1>
-          <p className="font-neighbor text-lg font-light opacity-70">
+          <p className="text-lg font-light opacity-70">
             The University of Florida&apos;s Premier Artificial Intelligence
             Club
           </p>
@@ -156,9 +157,8 @@ function Home() {
         {/*mouse indicator*/}
 
         <motion.div
-          className={`${
-            isFixed ? "fixed" : "absolute top-[1450px]"
-          } z-20 bottom-1/2 left-[10%] transform -translate-x-1/2 flex justify-center`}
+          className={`${isFixed ? "fixed" : "absolute top-[1450px]"
+            } z-20 bottom-1/2 left-[10%] transform -translate-x-1/2 flex justify-center`}
         >
           <div className="w-6 h-14 border-2 border-neutral-50 rounded-full flex justify-center items-start">
             <motion.div
@@ -170,16 +170,14 @@ function Home() {
 
         {/* Scene Container */}
         <motion.div
-          className={`${
-            isFixed ? "fixed" : "absolute top-[1200px]"
-          } lg:w-[70%] md:w-[90%] sm:w-[100%] h-full pointer-events-none hidden md:flex items-center justify-center `}
+          className={`${isFixed ? "fixed" : "absolute top-[1200px]"
+            } lg:w-[70%] md:w-[90%] sm:w-[100%] h-full pointer-events-none hidden md:flex items-center justify-center `}
         >
           <Scene />
         </motion.div>
         <motion.div
-          className={`${
-            isFixed ? "fixed" : "absolute top-[400px]"
-          } w-full h-full flex items-center justify-center md:hidden`}
+          className={`${isFixed ? "fixed" : "absolute top-[400px]"
+            } w-full h-full flex items-center justify-center md:hidden`}
         >
           <Image src={Logo} alt="Description" className="pt-40" width={150} />
         </motion.div>

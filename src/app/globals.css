@@ -63,7 +63,7 @@ html {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: "Poppins";
+  font-family: "neighbor";
   overflow-x: hidden;
 }
 

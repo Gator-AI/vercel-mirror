@@ -56,7 +56,7 @@ export function SearchBar({
           ref={inputRef}
           type="search"
           placeholder={placeholder}
-          className="w-full pl-9 pr-10 bg-white text-black font-neighbor"
+          className="w-full pl-9 pr-10 bg-white text-black"
           value={value}
           onChange={handleChange}
         />
