@@ -9,13 +9,12 @@ import FAQPage from "@/components/FAQ";
 export default function Index() {
 
   return (
-    <div className="overflow-x-hidden">
+    <>
       <Home />
       <About />
       <Involve />
       <Officers />
       <FAQPage />
-
-    </div>
+    </>
   );
 }

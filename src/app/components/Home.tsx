@@ -94,10 +94,10 @@ function Home() {
   ];
 
   return (
-    <main className="w-full overflow-hidden">
+    <main className="w-full overflow-x-hidden overflow-y-visible">
       {/*particles background and glow on the bottom*/}
 
-      <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center w-[1920px] h-[350vh] z-20">
+      <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center w-full max-w-[1920px] h-[350vh] z-20">
         <ParticlesComponent />
         <img
           src={light.src}
