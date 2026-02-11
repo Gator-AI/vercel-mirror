@@ -43,7 +43,7 @@ function About() {
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
-      <div className="w-full p-0 md:p-10 mx-auto my-32 flex flex-col lg:flex-row items-center justify-center gap-8">
+      <div className="w-full max-w-7xl p-0 md:p-10 mx-auto my-32 flex flex-col lg:flex-row items-center justify-center gap-8">
         {/* image slider */}
         <div className="w-full p-5 md:p-0 md:w-1/2 flex items-center justify-center">
           <Carousel slides={slides} />

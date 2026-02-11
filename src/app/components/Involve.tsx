@@ -31,7 +31,7 @@ function Involve() {
   // check if animatedlist is within view if so then animate
   const elementRef = useRef(null);
 
-  const [listHovering, setListHovering] = useState(false);
+  const [listHovering, setListHovering] = useState(true);
 
   const testimonials = [
     {
@@ -120,19 +120,12 @@ function Involve() {
     },
     {
       title: (
-        <div
-          onMouseEnter={() => setListHovering(true)}
-          onMouseLeave={() => setListHovering(false)}
-        >
+        <div>
           <p>Machine Learning Mondays</p>
         </div>
       ),
       description: (
-        <div
-          className="flex w-full backdrop-blur-xl"
-          onMouseEnter={() => setListHovering(true)}
-          onMouseLeave={() => setListHovering(false)}
-        >
+        <div className="flex w-full backdrop-blur-xl">
           <p>
             Join us for our weekly workshop series that covers a wide range of
             topics in AI and ML.<br></br> Check our calendar for upcoming
@@ -155,8 +148,6 @@ function Involve() {
         <div
           className="w-full h-full overflow-hidden flex items-center justify-center rounded-lg bg-dot-white/[0.2] p-2 lg:p-0"
           ref={elementRef}
-          onMouseEnter={() => setListHovering(true)}
-          onMouseLeave={() => setListHovering(false)}
         >
           {/* <Image src={AiWorkshopImg} alt="Ai workshop" className="w-full" /> */}
           <AnimatedList listHovering={listHovering} className="lg:w-3/4">
@@ -258,7 +249,7 @@ function Involve() {
           {/* <h1 className="text-2xl">
             Gator Education is a place to blah blah
           </h1> */}
-          <BentoGrid className="max-w-6xl mx-auto md:auto-rows-[30rem]">
+          <BentoGrid className="w-full max-w-7xl mx-auto md:auto-rows-[30rem]">
             {itemsEdu.map((item, i) => (
               <BentoGridItem
                 key={i}
@@ -300,7 +291,7 @@ function Involve() {
 
   return (
     <div
-      className="min-h-scree p-5 md:p-0 mx-auto w-full md:w-[80%] my-24 flex flex-col gap-16"
+      className="w-full max-w-7xl mx-auto min-h-screen px-4 md:px-10 py-24 flex flex-col gap-16"
       id="involve"
     >
       {/* header */}

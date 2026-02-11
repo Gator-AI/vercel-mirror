@@ -12,25 +12,34 @@ export interface AnimatedListProps {
 
 export const AnimatedList = React.memo(
   ({ className, children, delay = 500, listHovering }: AnimatedListProps) => {
-    const [index, setIndex] = useState(0);
     const childrenArray = useMemo(
       () => React.Children.toArray(children),
       [children]
     );
+    const maxIndex = childrenArray.length - 1;
+    const [index, setIndex] = useState(() => (listHovering ? maxIndex : 0));
 
+    // When listHovering becomes true, show all items immediately
     useEffect(() => {
-      if (listHovering && index < childrenArray.length - 1) {
+      if (listHovering) {
+        setIndex(maxIndex);
+      }
+    }, [listHovering, maxIndex]);
+
+    // When not hovering, reveal items one by one (optional staggered behavior)
+    useEffect(() => {
+      if (!listHovering && index < maxIndex) {
         const timeout = setTimeout(() => {
           setIndex((prevIndex) => prevIndex + 1);
         }, delay);
 
         return () => clearTimeout(timeout);
       }
-    }, [listHovering, index, delay, childrenArray.length]);
+    }, [listHovering, index, delay, maxIndex]);
 
     const itemsToShow = useMemo(() => {
-      const result = childrenArray.slice(0, index + 1).reverse();
-      return result;
+      const end = Math.min(index + 1, childrenArray.length);
+      return childrenArray.slice(0, end).reverse();
     }, [index, childrenArray]);
 
     return (

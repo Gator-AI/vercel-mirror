@@ -97,20 +97,20 @@ function Home() {
     <main className="w-full overflow-x-hidden overflow-y-visible">
       {/*particles background and glow on the bottom*/}
 
-      <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center w-full max-w-[1920px] h-[350vh] z-20">
+      <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center w-full max-w-[1920px] h-[250vh] 2xl:h-[200vh] z-20">
         <ParticlesComponent />
         <img
           src={light.src}
           alt=""
           width={1468}
           height={900}
-          className="absolute bottom-0 h-auto object-cover object-bottom"
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-screen min-w-full max-w-none h-auto object-cover object-bottom"
         />
       </div>
 
       {/*floating dock*/}
       <motion.div
-        className={`${isFixed ? "fixed" : "absolute top-[1850px]"
+        className={`${isFixed ? "fixed" : "absolute top-[1850px] 2xl:top-[2400px]"
           } bottom-12 left-1/2 transform -translate-x-1/2 z-20`}
       >
         <FloatingDock items={socialItems} />
@@ -119,7 +119,7 @@ function Home() {
       {/*main content*/}
       <div
         id="animation-container"
-        className="h-[350vh] w-full flex justify-center"
+        className="h-[250vh] 2xl:h-[200vh] w-full flex justify-center"
         ref={scrollRef}
       >
         {/*header*/}

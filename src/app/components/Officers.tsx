@@ -145,7 +145,7 @@ function Officers() {
   const cards = data.map((card, index) => <FlipCard key={index} card={card} />);
   return (
     <div
-      className="mx-auto w-[400px] md:max-w-full md:w-[80%]"
+      className="w-full max-w-7xl mx-auto px-4 md:px-10"
       id="officers"
     >
       <div className="size-full flex flex-col items-start justify-center gap-8">

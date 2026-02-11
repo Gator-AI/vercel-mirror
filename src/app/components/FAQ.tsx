@@ -7,8 +7,8 @@ import {
 
 export default function FAQPage() {
   return (
-    <div className="container pt-24 pb-24" id="faqs">
-      <div className="w-[80%] mx-auto">
+    <div className="w-full max-w-7xl mx-auto pt-24 pb-24 px-4 md:px-10" id="faqs">
+      <div className="w-full">
         <p className="font-bold text-base text-secondary">FAQs</p>
         <h1 className="text-4xl md:text-5xl font-bold text-start mb-8">
           Frequently Asked Questions
