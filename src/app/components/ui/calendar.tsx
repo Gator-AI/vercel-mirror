@@ -4,125 +4,89 @@ import React, { useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight, Plus } from "react-feather";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import {
+  type CalendarEvent,
+  type EventType,
+  dateKey,
+  isSameDay,
+  getDayStatus,
+  formatDateForDisplay,
+  getMonthYear,
+  getDaysInMonth,
+  getWeekdayOffset,
+  getEventDate,
+  eventsToEventsByDate,
+  formatEventTimeRange,
+  toISODate,
+} from "@/lib/calendar-utils";
+
+export type { CalendarEvent, EventType };
+export { getEventDate, eventsToEventsByDate } from "@/lib/calendar-utils";
 
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-export type EventType = "Workshop" | "Lecture" | "Study Group";
-
-export interface CalendarEvent {
-  id: string;
-  title: string;
-  type: EventType;
-  start: string;
-  end: string;
-  location?: string;
-  instructor?: string;
-  live?: boolean;
-}
-
 const EVENT_TYPE_STYLES: Record<EventType, string> = {
   Workshop: "bg-secondary/30 text-secondary border-secondary/50",
-  Lecture: "bg-white/20 text-foreground border-white/30",
-  "Study Group": "bg-secondary/20 text-secondary border-secondary/40",
+  GBM: "bg-secondary/30 text-secondary border-secondary/50",
+  Social: "bg-secondary/30 text-secondary border-secondary/50",
 };
 
-function formatDateForDisplay(d: Date): string {
-  return d.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
+/** Mock events with startAt/endAt so each event has its own date. Replace with DB fetch. */
+function buildMockEvents(): CalendarEvent[] {
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = now.getMonth();
+  const today = new Date(y, m, now.getDate());
+
+  return [
+    { id: "1", title: "Backpropagation Deep-Dive", type: "Workshop", startAt: toISODate(today, 10, 0), endAt: toISODate(today, 13, 0), comment: "Room 402B / Zoom · Reza T", live: true },
+    { id: "2", title: "General Body Meeting", type: "GBM", startAt: toISODate(today, 14, 30), endAt: toISODate(today, 16, 0), comment: "Ujan Maji" },
+    { id: "3", title: "Trail Mix Social", type: "Social", startAt: toISODate(today, 18, 0), endAt: toISODate(today, 19, 0), comment: "Vishal L" },
+    { id: "4", title: "ML Monday", type: "Workshop", startAt: toISODate(new Date(y, m, Math.min(5, 28)), 18, 0), endAt: toISODate(new Date(y, m, Math.min(5, 28)), 19, 0) },
+    { id: "5", title: "General Body Meeting", type: "GBM", startAt: toISODate(new Date(y, m, Math.min(7, 28)), 14, 30), endAt: toISODate(new Date(y, m, Math.min(7, 28)), 16, 0) },
+    { id: "6", title: "Trail Mix Social", type: "Social", startAt: toISODate(new Date(y, m, Math.min(7, 28)), 18, 0), endAt: toISODate(new Date(y, m, Math.min(7, 28)), 19, 0) },
+    { id: "7", title: "Workshop A", type: "Workshop", startAt: toISODate(new Date(y, m, Math.min(9, 28)), 10, 0), endAt: toISODate(new Date(y, m, Math.min(9, 28)), 11, 0) },
+    { id: "8", title: "GBM", type: "GBM", startAt: toISODate(new Date(y, m, Math.min(9, 28)), 14, 0), endAt: toISODate(new Date(y, m, Math.min(9, 28)), 15, 0) },
+    { id: "9", title: "Social", type: "Social", startAt: toISODate(new Date(y, m, Math.min(9, 28)), 18, 0), endAt: toISODate(new Date(y, m, Math.min(9, 28)), 19, 0) },
+    { id: "10", title: "Workshop B", type: "Workshop", startAt: toISODate(new Date(y, m, Math.min(12, 28)), 10, 0), endAt: toISODate(new Date(y, m, Math.min(12, 28)), 11, 0) },
+    { id: "11", title: "Workshop C", type: "Workshop", startAt: toISODate(new Date(y, m, Math.min(12, 28)), 12, 0), endAt: toISODate(new Date(y, m, Math.min(12, 28)), 13, 0) },
+    { id: "12", title: "GBM", type: "GBM", startAt: toISODate(new Date(y, m, Math.min(12, 28)), 14, 0), endAt: toISODate(new Date(y, m, Math.min(12, 28)), 15, 0) },
+    { id: "13", title: "Social", type: "Social", startAt: toISODate(new Date(y, m, Math.min(12, 28)), 18, 0), endAt: toISODate(new Date(y, m, Math.min(12, 28)), 19, 0) },
+    { id: "14", title: "Event 1", type: "Workshop", startAt: toISODate(new Date(y, m, Math.min(15, 28)), 9, 0), endAt: toISODate(new Date(y, m, Math.min(15, 28)), 10, 0) },
+    { id: "15", title: "Event 2", type: "GBM", startAt: toISODate(new Date(y, m, Math.min(15, 28)), 11, 0), endAt: toISODate(new Date(y, m, Math.min(15, 28)), 12, 0) },
+    { id: "16", title: "Event 3", type: "Social", startAt: toISODate(new Date(y, m, Math.min(15, 28)), 13, 0), endAt: toISODate(new Date(y, m, Math.min(15, 28)), 14, 0) },
+    { id: "17", title: "Event 4", type: "Workshop", startAt: toISODate(new Date(y, m, Math.min(15, 28)), 15, 0), endAt: toISODate(new Date(y, m, Math.min(15, 28)), 16, 0) },
+    { id: "18", title: "Event 5", type: "GBM", startAt: toISODate(new Date(y, m, Math.min(15, 28)), 17, 0), endAt: toISODate(new Date(y, m, Math.min(15, 28)), 18, 0) },
+    { id: "19", title: "Event 6", type: "Social", startAt: toISODate(new Date(y, m, Math.min(15, 28)), 19, 0), endAt: toISODate(new Date(y, m, Math.min(15, 28)), 20, 0) },
+    { id: "20", title: "General Body Meeting", type: "GBM", startAt: toISODate(new Date(y, m, Math.min(19, 28)), 14, 30), endAt: toISODate(new Date(y, m, Math.min(19, 28)), 16, 0) },
+    { id: "21", title: "Trail Mix Social", type: "Social", startAt: toISODate(new Date(y, m, Math.min(19, 28)), 18, 0), endAt: toISODate(new Date(y, m, Math.min(19, 28)), 19, 0) },
+    { id: "past-dummy", title: "Past Workshop (dummy)", type: "Workshop", startAt: toISODate(new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000), 10, 0), endAt: toISODate(new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000), 11, 0) },
+  ];
 }
 
-function getMonthYear(d: Date): string {
-  return d.toLocaleDateString("en-US", { month: "long", year: "numeric" });
-}
-
-function getDaysInMonth(year: number, month: number): Date[] {
-  const first = new Date(year, month, 1);
-  const last = new Date(year, month + 1, 0);
-  const days: Date[] = [];
-  for (let d = 1; d <= last.getDate(); d++) {
-    days.push(new Date(year, month, d));
-  }
-  return days;
-}
-
-function getWeekdayOffset(year: number, month: number): number {
-  const first = new Date(year, month, 1);
-  let day = first.getDay() - 1;
-  if (day < 0) day = 6;
-  return day;
-}
-
-function isSameDay(a: Date, b: Date): boolean {
-  return (
-    a.getFullYear() === b.getFullYear() &&
-    a.getMonth() === b.getMonth() &&
-    a.getDate() === b.getDate()
-  );
-}
-
-function dateKey(d: Date): string {
-  return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
-}
-
-const MOCK_EVENTS: CalendarEvent[] = [
-  {
-    id: "1",
-    title: "Backpropagation Deep-Dive",
-    type: "Workshop",
-    start: "10:00 AM",
-    end: "1:00 PM",
-    location: "Room 402B / Zoom",
-    instructor: "Reza T",
-    live: true,
-  },
-  {
-    id: "2",
-    title: "Optimization Algorithms",
-    type: "Lecture",
-    start: "2:30 PM",
-    end: "4:00 PM",
-    instructor: "Ujan Maji",
-  },
-  {
-    id: "3",
-    title: "Calculus for ML Review",
-    type: "Study Group",
-    start: "6:00 PM",
-    end: "7:00 PM",
-    instructor: "Vishal L",
-  },
-];
-
-function buildEventsByDate(): Record<string, CalendarEvent[]> {
-  const map: Record<string, CalendarEvent[]> = {};
-  const today = new Date();
-  map[dateKey(today)] = MOCK_EVENTS;
-  const oct12 = new Date(2023, 9, 12);
-  map[dateKey(oct12)] = MOCK_EVENTS;
-  const d2 = new Date(today.getFullYear(), today.getMonth(), Math.min(11, 28));
-  map[dateKey(d2)] = [MOCK_EVENTS[0]];
-  const d3 = new Date(today.getFullYear(), today.getMonth(), Math.min(19, 28));
-  map[dateKey(d3)] = [MOCK_EVENTS[1], MOCK_EVENTS[2]];
-  return map;
-}
-
-const DEFAULT_EVENTS_BY_DATE = buildEventsByDate();
+const DEFAULT_MOCK_EVENTS = buildMockEvents();
 
 export interface CalendarProps {
   className?: string;
+  /** Flat list of events (e.g. from DB). Each event must have startAt/endAt for its date. */
+  events?: CalendarEvent[];
+  /** Pre-grouped events by date key. If both events and eventsByDate are provided, events wins. */
   eventsByDate?: Record<string, CalendarEvent[]>;
 }
 
 export function Calendar({
   className,
-  eventsByDate = DEFAULT_EVENTS_BY_DATE,
+  events,
+  eventsByDate,
 }: CalendarProps) {
   const today = useMemo(() => new Date(), []);
   const [viewDate, setViewDate] = useState(() => new Date(today.getFullYear(), today.getMonth(), 1));
   const [selectedDate, setSelectedDate] = useState<Date>(today);
+
+  const eventsByDateResolved = useMemo(
+    () => (events != null ? eventsToEventsByDate(events) : eventsByDate ?? eventsToEventsByDate(DEFAULT_MOCK_EVENTS)),
+    [events, eventsByDate]
+  );
 
   const year = viewDate.getFullYear();
   const month = viewDate.getMonth();
@@ -138,13 +102,7 @@ export function Calendar({
   };
 
   const selectedKey = dateKey(selectedDate);
-  const eventsForSelected = eventsByDate[selectedKey] ?? [];
-
-  const daysWithEvents = useMemo(() => {
-    const set = new Set<string>();
-    Object.keys(eventsByDate).forEach((k) => set.add(k));
-    return set;
-  }, [eventsByDate]);
+  const eventsForSelected = eventsByDateResolved[selectedKey] ?? [];
 
   return (
     <div
@@ -227,8 +185,16 @@ export function Calendar({
               ))}
               {days.map((d) => {
                 const key = dateKey(d);
-                const hasEvents = daysWithEvents.has(key);
+                const dayEvents = eventsByDateResolved[key] ?? [];
+                const hasEvents = dayEvents.length > 0;
+                const dayStatus = getDayStatus(d, new Date());
                 const selected = isSameDay(d, selectedDate);
+                const dotColor =
+                  dayStatus === "today"
+                    ? "bg-amber-400/90"
+                    : dayStatus === "future"
+                      ? "bg-secondary/90"
+                      : "bg-white/40";
                 return (
                   <button
                     key={key}
@@ -243,10 +209,15 @@ export function Calendar({
                   >
                     <span className="text-sm md:text-base">{d.getDate()}</span>
                     {hasEvents && (
-                      <div className="flex gap-0.5 mt-1">
-                        <span className="w-1.5 h-1.5 rounded-full bg-secondary/90" />
-                        {eventsByDate[key]?.length > 1 && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-amber-400/90" />
+                      <div className="flex flex-wrap items-center justify-center gap-0.5 mt-1">
+                        {Array.from({ length: Math.min(dayEvents.length, 4) }, (_, i) => (
+                          <span
+                            key={i}
+                            className={cn("w-1.5 h-1.5 rounded-full flex-shrink-0", dotColor)}
+                          />
+                        ))}
+                        {dayEvents.length > 4 && (
+                          <Plus className="w-2.5 h-2.5 text-foreground/60 flex-shrink-0" strokeWidth={3} />
                         )}
                       </div>
                     )}
@@ -300,13 +271,10 @@ function EventCard({ event }: { event: CalendarEvent }) {
         {event.title}
       </h3>
       <p className="text-sm text-foreground/70">
-        {event.start} – {event.end}
+        {formatEventTimeRange(event)}
       </p>
-      {event.location && (
-        <p className="text-xs text-foreground/60">{event.location}</p>
-      )}
-      {event.instructor && (
-        <p className="text-xs text-foreground/60">{event.instructor}</p>
+      {event.comment && (
+        <p className="text-xs text-foreground/60">{event.comment}</p>
       )}
       <div className="flex justify-end mt-1">
         <Button
