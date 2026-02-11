@@ -50,8 +50,11 @@ export function EditEventModal({
     e.preventDefault();
     setError("");
     setLoading(true);
-    const start_at = `${date}T${startTime}:00`;
-    const end_at = `${date}T${endTime}:00`;
+    // Build dates in user's local timezone so server stores correct UTC
+    const startDate = new Date(`${date}T${startTime}:00`);
+    const endDate = new Date(`${date}T${endTime}:00`);
+    const start_at = startDate.toISOString();
+    const end_at = endDate.toISOString();
     const result = await updateEvent(event.id, {
       title,
       type,
