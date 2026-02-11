@@ -22,7 +22,9 @@ export function SearchBar({
   ...props
 }: SearchBarProps) {
   const [value, setValue] = React.useState("");
-  const inputRef = React.useRef<HTMLInputElement>(null);
+  const inputRef = React.useRef<HTMLInputElement | null>(
+    null
+  ) as React.MutableRefObject<HTMLInputElement | null>;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
