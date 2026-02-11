@@ -1,7 +1,10 @@
 import React from "react";
 import { Calendar } from "@/components/ui/calendar";
+import { getEvents } from "@/lib/events";
 
-export default function CalendarPage() {
+export default async function CalendarPage() {
+  const events = await getEvents();
+
   return (
     <div className="w-full max-w-7xl mx-auto px-4 md:px-10 my-32">
       <div className="mb-8">
@@ -13,7 +16,7 @@ export default function CalendarPage() {
           for that day.
         </p>
       </div>
-      <Calendar />
+      <Calendar events={events} />
     </div>
   );
 }

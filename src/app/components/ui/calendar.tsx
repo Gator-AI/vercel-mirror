@@ -17,7 +17,6 @@ import {
   getEventDate,
   eventsToEventsByDate,
   formatEventTimeRange,
-  toISODate,
 } from "@/lib/calendar-utils";
 
 export type { CalendarEvent, EventType };
@@ -30,41 +29,6 @@ const EVENT_TYPE_STYLES: Record<EventType, string> = {
   GBM: "bg-secondary/30 text-secondary border-secondary/50",
   Social: "bg-secondary/30 text-secondary border-secondary/50",
 };
-
-/** Mock events with startAt/endAt so each event has its own date. Replace with DB fetch. */
-function buildMockEvents(): CalendarEvent[] {
-  const now = new Date();
-  const y = now.getFullYear();
-  const m = now.getMonth();
-  const today = new Date(y, m, now.getDate());
-
-  return [
-    { id: "1", title: "Backpropagation Deep-Dive", type: "Workshop", startAt: toISODate(today, 10, 0), endAt: toISODate(today, 13, 0), comment: "Room 402B / Zoom · Reza T", live: true },
-    { id: "2", title: "General Body Meeting", type: "GBM", startAt: toISODate(today, 14, 30), endAt: toISODate(today, 16, 0), comment: "Ujan Maji" },
-    { id: "3", title: "Trail Mix Social", type: "Social", startAt: toISODate(today, 18, 0), endAt: toISODate(today, 19, 0), comment: "Vishal L" },
-    { id: "4", title: "ML Monday", type: "Workshop", startAt: toISODate(new Date(y, m, Math.min(5, 28)), 18, 0), endAt: toISODate(new Date(y, m, Math.min(5, 28)), 19, 0) },
-    { id: "5", title: "General Body Meeting", type: "GBM", startAt: toISODate(new Date(y, m, Math.min(7, 28)), 14, 30), endAt: toISODate(new Date(y, m, Math.min(7, 28)), 16, 0) },
-    { id: "6", title: "Trail Mix Social", type: "Social", startAt: toISODate(new Date(y, m, Math.min(7, 28)), 18, 0), endAt: toISODate(new Date(y, m, Math.min(7, 28)), 19, 0) },
-    { id: "7", title: "Workshop A", type: "Workshop", startAt: toISODate(new Date(y, m, Math.min(9, 28)), 10, 0), endAt: toISODate(new Date(y, m, Math.min(9, 28)), 11, 0) },
-    { id: "8", title: "GBM", type: "GBM", startAt: toISODate(new Date(y, m, Math.min(9, 28)), 14, 0), endAt: toISODate(new Date(y, m, Math.min(9, 28)), 15, 0) },
-    { id: "9", title: "Social", type: "Social", startAt: toISODate(new Date(y, m, Math.min(9, 28)), 18, 0), endAt: toISODate(new Date(y, m, Math.min(9, 28)), 19, 0) },
-    { id: "10", title: "Workshop B", type: "Workshop", startAt: toISODate(new Date(y, m, Math.min(12, 28)), 10, 0), endAt: toISODate(new Date(y, m, Math.min(12, 28)), 11, 0) },
-    { id: "11", title: "Workshop C", type: "Workshop", startAt: toISODate(new Date(y, m, Math.min(12, 28)), 12, 0), endAt: toISODate(new Date(y, m, Math.min(12, 28)), 13, 0) },
-    { id: "12", title: "GBM", type: "GBM", startAt: toISODate(new Date(y, m, Math.min(12, 28)), 14, 0), endAt: toISODate(new Date(y, m, Math.min(12, 28)), 15, 0) },
-    { id: "13", title: "Social", type: "Social", startAt: toISODate(new Date(y, m, Math.min(12, 28)), 18, 0), endAt: toISODate(new Date(y, m, Math.min(12, 28)), 19, 0) },
-    { id: "14", title: "Event 1", type: "Workshop", startAt: toISODate(new Date(y, m, Math.min(15, 28)), 9, 0), endAt: toISODate(new Date(y, m, Math.min(15, 28)), 10, 0) },
-    { id: "15", title: "Event 2", type: "GBM", startAt: toISODate(new Date(y, m, Math.min(15, 28)), 11, 0), endAt: toISODate(new Date(y, m, Math.min(15, 28)), 12, 0) },
-    { id: "16", title: "Event 3", type: "Social", startAt: toISODate(new Date(y, m, Math.min(15, 28)), 13, 0), endAt: toISODate(new Date(y, m, Math.min(15, 28)), 14, 0) },
-    { id: "17", title: "Event 4", type: "Workshop", startAt: toISODate(new Date(y, m, Math.min(15, 28)), 15, 0), endAt: toISODate(new Date(y, m, Math.min(15, 28)), 16, 0) },
-    { id: "18", title: "Event 5", type: "GBM", startAt: toISODate(new Date(y, m, Math.min(15, 28)), 17, 0), endAt: toISODate(new Date(y, m, Math.min(15, 28)), 18, 0) },
-    { id: "19", title: "Event 6", type: "Social", startAt: toISODate(new Date(y, m, Math.min(15, 28)), 19, 0), endAt: toISODate(new Date(y, m, Math.min(15, 28)), 20, 0) },
-    { id: "20", title: "General Body Meeting", type: "GBM", startAt: toISODate(new Date(y, m, Math.min(19, 28)), 14, 30), endAt: toISODate(new Date(y, m, Math.min(19, 28)), 16, 0) },
-    { id: "21", title: "Trail Mix Social", type: "Social", startAt: toISODate(new Date(y, m, Math.min(19, 28)), 18, 0), endAt: toISODate(new Date(y, m, Math.min(19, 28)), 19, 0) },
-    { id: "past-dummy", title: "Past Workshop (dummy)", type: "Workshop", startAt: toISODate(new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000), 10, 0), endAt: toISODate(new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000), 11, 0) },
-  ];
-}
-
-const DEFAULT_MOCK_EVENTS = buildMockEvents();
 
 export interface CalendarProps {
   className?: string;
@@ -84,7 +48,7 @@ export function Calendar({
   const [selectedDate, setSelectedDate] = useState<Date>(today);
 
   const eventsByDateResolved = useMemo(
-    () => (events != null ? eventsToEventsByDate(events) : eventsByDate ?? eventsToEventsByDate(DEFAULT_MOCK_EVENTS)),
+    () => (events != null ? eventsToEventsByDate(events) : eventsByDate ?? {}),
     [events, eventsByDate]
   );
 

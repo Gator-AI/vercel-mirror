@@ -17,6 +17,7 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@react-three/drei": "^9.120.4",
     "@react-three/fiber": "^8.18.0",
+    "@supabase/supabase-js": "^2.95.3",
     "@tabler/icons-react": "^3.31.0",
     "@tsparticles/all": "^3.7.1",
     "@tsparticles/react": "^3.0.0",
