@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
  * API route to list files in Vercel Blob
  * GET /api/blob?folder=images
  */
+export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
     try {
