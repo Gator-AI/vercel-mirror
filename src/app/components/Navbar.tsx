@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Menu, X } from "react-feather";
 import {
   motion,
@@ -24,25 +24,25 @@ export const FloatingNav = ({
   }[];
   className?: string;
 }) => {
-  const { scrollYProgress } = useScroll();
+  const { scrollY } = useScroll();
   const [visible, setVisible] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+  const lastScrollY = useRef(0);
 
-  useEffect(() => {
-    setVisible(true);
-  }, []);
-
-  useMotionValueEvent(scrollYProgress, "change", (current) => {
-    if (typeof current === "number") {
-      const direction = current - scrollYProgress.getPrevious()!;
-      // Always show navbar when at the top
-      if (current === 0) {
-        setVisible(true);
-      } else if (direction < 0) {
-        setVisible(true);
-      } else {
-        setVisible(false);
-      }
+  useMotionValueEvent(scrollY, "change", (y) => {
+    const yNum = typeof y === "number" ? y : 0;
+    const prev = lastScrollY.current;
+    lastScrollY.current = yNum;
+    // At top: always show
+    if (yNum <= 0) {
+      setVisible(true);
+      return;
+    }
+    // Scrolling down: hide. Scrolling up: show.
+    if (yNum > prev) {
+      setVisible(false);
+    } else {
+      setVisible(true);
     }
   });
 

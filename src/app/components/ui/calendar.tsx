@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import { ChevronLeft, ChevronRight, Plus } from "react-feather";
+import { ChevronLeft, ChevronRight, Edit2, Plus } from "react-feather";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { AddEventModal } from "@/components/AddEventModal";
+import { EditEventModal } from "@/components/EditEventModal";
 import {
   type CalendarEvent,
   type EventType,
@@ -36,16 +38,32 @@ export interface CalendarProps {
   events?: CalendarEvent[];
   /** Pre-grouped events by date key. If both events and eventsByDate are provided, events wins. */
   eventsByDate?: Record<string, CalendarEvent[]>;
+  /** When true, show "Add event for this day" in sidebar and modal to create events (persists to DB). */
+  editable?: boolean;
+  /** Controlled open state for add-event modal (use with onAddModalOpenChange so header can open modal). */
+  addModalOpen?: boolean;
+  /** Called when add-event modal open state changes. */
+  onAddModalOpenChange?: (open: boolean) => void;
 }
 
 export function Calendar({
   className,
   events,
   eventsByDate,
+  editable = false,
+  addModalOpen,
+  onAddModalOpenChange,
 }: CalendarProps) {
   const today = useMemo(() => new Date(), []);
   const [viewDate, setViewDate] = useState(() => new Date(today.getFullYear(), today.getMonth(), 1));
   const [selectedDate, setSelectedDate] = useState<Date>(today);
+  const [internalAddModalOpen, setInternalAddModalOpen] = useState(false);
+  const [eventToEdit, setEventToEdit] = useState<CalendarEvent | null>(null);
+  const isAddModalControlled = onAddModalOpenChange != null;
+  const showAddModal = isAddModalControlled ? addModalOpen ?? false : internalAddModalOpen;
+  const setShowAddModal = isAddModalControlled
+    ? (open: boolean) => onAddModalOpenChange(open)
+    : setInternalAddModalOpen;
 
   const eventsByDateResolved = useMemo(
     () => (events != null ? eventsToEventsByDate(events) : eventsByDate ?? {}),
@@ -87,16 +105,46 @@ export function Calendar({
               {formatDateForDisplay(selectedDate)}
             </p>
           </div>
-          <div className="flex flex-col gap-4 overflow-auto flex-1">
+          {editable && (
+            <div className="mb-4 flex-shrink-0">
+              <Button
+                type="button"
+                variant="secondaryOutline"
+                className="w-full text-sm font-medium"
+                onClick={() => setShowAddModal(true)}
+              >
+                <Plus size={16} className="mr-2 inline-block shrink-0" />
+                Add event for this day
+              </Button>
+            </div>
+          )}
+          <div className="flex flex-col gap-4 overflow-auto flex-1 min-h-0">
             {eventsForSelected.length === 0 ? (
               <p className="text-sm text-foreground/60">No events this day.</p>
             ) : (
               eventsForSelected.map((ev) => (
-                <EventCard key={ev.id} event={ev} />
+                <EventCard
+                  key={ev.id}
+                  event={ev}
+                  editable={editable}
+                  onEdit={() => setEventToEdit(ev)}
+                />
               ))
             )}
           </div>
         </aside>
+        {editable && showAddModal && (
+          <AddEventModal
+            selectedDate={selectedDate}
+            onClose={() => setShowAddModal(false)}
+          />
+        )}
+        {editable && eventToEdit && (
+          <EditEventModal
+            event={eventToEdit}
+            onClose={() => setEventToEdit(null)}
+          />
+        )}
 
         {/* Right: Month + grid */}
         <main className="flex-1 flex flex-col p-6 md:p-8 bg-background/50">
@@ -205,7 +253,15 @@ export function Calendar({
   );
 }
 
-function EventCard({ event }: { event: CalendarEvent }) {
+function EventCard({
+  event,
+  editable,
+  onEdit,
+}: {
+  event: CalendarEvent;
+  editable?: boolean;
+  onEdit?: () => void;
+}) {
   const typeStyle = EVENT_TYPE_STYLES[event.type];
   return (
     <div
@@ -240,16 +296,20 @@ function EventCard({ event }: { event: CalendarEvent }) {
       {event.comment && (
         <p className="text-xs text-foreground/60">{event.comment}</p>
       )}
-      <div className="flex justify-end mt-1">
-        <Button
-          variant="ghost"
-          size="icon"
-          className="h-8 w-8 rounded-full text-foreground/70 hover:bg-white/10 hover:text-foreground"
-          aria-label="Add to calendar"
-        >
-          <Plus size={16} />
-        </Button>
-      </div>
+      {editable && onEdit && (
+        <div className="flex justify-end mt-1">
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="h-8 w-8 rounded-full text-foreground/70 hover:bg-white/10 hover:text-foreground"
+            aria-label="Edit event"
+            onClick={onEdit}
+          >
+            <Edit2 size={16} />
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

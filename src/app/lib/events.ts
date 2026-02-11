@@ -36,7 +36,7 @@ function dbRowToCalendarEvent(row: DbEvent): CalendarEvent {
  * Fetch all events from Supabase (server-side). Use in Server Components or route handlers.
  */
 export async function getEvents(): Promise<CalendarEvent[]> {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   const { data, error } = await supabase
     .from("events")
     .select("id, title, type, start_at, end_at, comment")
