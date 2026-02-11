@@ -1,14 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import ShimmerButton from "@/components/ui/shimmer-button";
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const next = searchParams.get("next") ?? "/calendar/edit";
@@ -102,5 +101,13 @@ export default function LoginPage() {
         </p>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="w-full max-w-md mx-auto px-4 pt-40 pb-16 flex justify-center text-foreground/70">Loading…</div>}>
+      <LoginForm />
+    </Suspense>
   );
 }

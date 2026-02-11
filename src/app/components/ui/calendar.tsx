@@ -16,13 +16,12 @@ import {
   getMonthYear,
   getDaysInMonth,
   getWeekdayOffset,
-  getEventDate,
   eventsToEventsByDate,
   formatEventTimeRange,
 } from "@/lib/calendar-utils";
 
 export type { CalendarEvent, EventType };
-export { getEventDate, eventsToEventsByDate } from "@/lib/calendar-utils";
+export { eventsToEventsByDate } from "@/lib/calendar-utils";
 
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
