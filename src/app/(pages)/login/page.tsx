@@ -6,6 +6,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import ShimmerButton from "@/components/ui/shimmer-button";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -32,15 +33,20 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="w-full max-w-md mx-auto px-4 py-16">
-      <div className="rounded-2xl border border-white/10 bg-background/95 p-8 shadow-xl">
-        <h1 className="text-2xl font-bold text-foreground mb-1">Board sign in</h1>
+    <div className="w-full max-w-md mx-auto px-4 pt-40 pb-16">
+      <div
+        className="rounded-2xl border p-8 shadow-xl backdrop-blur bg-[var(--modal-bg)]"
+        style={{ borderColor: "var(--modal-border)", borderWidth: "1px" }}
+      >
+        <h1 className="text-2xl font-bold tracking-tight text-foreground mb-1">
+          Board sign in
+        </h1>
         <p className="text-sm text-foreground/70 mb-6">
           Sign in with your board member account to access protected pages.
         </p>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
-            <label htmlFor="email" className="text-xs font-medium text-foreground/80 block mb-1.5">
+            <label htmlFor="email" className="text-xs font-semibold tracking-widest text-secondary/90 uppercase block mb-1.5">
               Email
             </label>
             <Input
@@ -51,11 +57,11 @@ export default function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
               autoComplete="email"
-              className="bg-background border-white/20"
+              className="h-10 rounded-xl border border-[var(--modal-border)] bg-background/80 text-foreground placeholder:text-foreground/50 focus-visible:ring-2 focus-visible:ring-secondary/50"
             />
           </div>
           <div>
-            <label htmlFor="password" className="text-xs font-medium text-foreground/80 block mb-1.5">
+            <label htmlFor="password" className="text-xs font-semibold tracking-widest text-secondary/90 uppercase block mb-1.5">
               Password
             </label>
             <Input
@@ -65,7 +71,7 @@ export default function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
               autoComplete="current-password"
-              className="bg-background border-white/20"
+              className="h-10 rounded-xl border border-[var(--modal-border)] bg-background/80 text-foreground placeholder:text-foreground/50 focus-visible:ring-2 focus-visible:ring-secondary/50"
             />
           </div>
           {error && (
@@ -73,9 +79,21 @@ export default function LoginPage() {
               {error}
             </p>
           )}
-          <Button type="submit" disabled={loading} className="w-full">
+          {/* <Button
+            type="submit"
+            variant="secondaryOutline"
+            disabled={loading}
+            className="w-full text-sm font-medium"
+          >
             {loading ? "Signing in…" : "Sign in"}
-          </Button>
+          </Button> */}
+          <ShimmerButton
+            borderRadius="15px"
+            background="#00272b"
+            className="w-full text-sm font-medium"
+          >
+            {loading ? "Signing in…" : "Sign in"}
+          </ShimmerButton>
         </form>
         <p className="text-xs text-foreground/50 mt-6 text-center">
           <Link href="/" className="underline hover:text-foreground/70">

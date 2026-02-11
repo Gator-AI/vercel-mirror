@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Menu, X } from "react-feather";
 import {
   motion,
@@ -10,12 +10,16 @@ import {
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
+import { Button } from "@/components/ui/button";
 import Logo from "@/images/logo-white.png";
 // import { House } from "lucide-react";
 
 export const FloatingNav = ({
   navItems,
   className,
+  user,
 }: {
   navItems: {
     name: string;
@@ -23,7 +27,16 @@ export const FloatingNav = ({
     icon?: JSX.Element;
   }[];
   className?: string;
+  user: { id: string } | null;
 }) => {
+  const router = useRouter();
+
+  async function handleSignOut() {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.push("/");
+    router.refresh();
+  }
   const { scrollY } = useScroll();
   const [visible, setVisible] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -88,6 +101,15 @@ export const FloatingNav = ({
               </span>
             </Link>
           ))}
+          {user ? (
+            <Button variant="outline" size="sm" onClick={handleSignOut} className="rounded-lg border-white/20 text-neutral-50 hover:bg-white/10 hover:text-white">
+              Sign out
+            </Button>
+          ) : (
+            <Button asChild variant="outline" size="sm" className="rounded-lg border-white/20 text-neutral-50 hover:bg-white/10 hover:text-white">
+              <Link href="/login">Sign in</Link>
+            </Button>
+          )}
         </nav>
         {/* Mobile nav menu */}
         <AnimatePresence>
@@ -109,6 +131,17 @@ export const FloatingNav = ({
                   {navItem.name}
                 </Link>
               ))}
+              {user ? (
+                <Button variant="outline" size="sm" onClick={() => { handleSignOut(); setMenuOpen(false); }} className="rounded-lg border-white/20 text-neutral-50 hover:bg-white/10 hover:text-white mt-2">
+                  Sign out
+                </Button>
+              ) : (
+                <Button asChild variant="outline" size="sm" className="w-full rounded-lg border-white/20 text-neutral-50 hover:bg-white/10 hover:text-white mt-2">
+                  <Link href="/login" onClick={() => setMenuOpen(false)}>
+                    Sign in
+                  </Link>
+                </Button>
+              )}
             </motion.nav>
           )}
         </AnimatePresence>
@@ -118,32 +151,25 @@ export const FloatingNav = ({
 };
 
 function Navbar() {
-  // Updated navigation items with anchor links
-  const navItems = [
-    {
-      name: "Projects",
-      link: "/projects",
-      // icon: <House size={20} />,
-    },
-    {
-      name: "Lectures",
-      link: "/lectures",
-      // icon: <House size={20} />,
-    },
+  const [user, setUser] = useState<{ id: string } | null>(null);
 
-    {
-      name: "Events",
-      link: "/events",
-      // icon: <House size={20} />,
-    },
-    {
-      name: "Calendar",
-      link: "/calendar",
-      // icon: <House size={20} />,
-    },
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data: { user: u } }) => setUser(u ?? null));
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const navItems = [
+    { name: "Projects", link: "/projects" },
+    { name: "Lectures", link: "/lectures" },
+    { name: "Events", link: "/events" },
+    { name: "Calendar", link: "/calendar" },
   ];
 
-  return <FloatingNav navItems={navItems} />;
+  return <FloatingNav navItems={navItems} user={user} />;
 }
 
 export default Navbar;
