@@ -28,7 +28,9 @@ export function SearchBar({
   ...props
 }: SearchBarProps) {
   const [internalValue, setInternalValue] = React.useState("");
-  const localInputRef = React.useRef<HTMLInputElement>(null);
+  const localInputRef = React.useRef<HTMLInputElement | null>(
+    null
+  ) as React.MutableRefObject<HTMLInputElement | null>;
   const isControlled = value !== undefined;
   const resolvedValue = isControlled ? value : internalValue;
 
