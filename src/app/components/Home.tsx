@@ -99,8 +99,8 @@ function Home() {
 
       <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center w-full max-w-[1920px] h-[250vh] 2xl:h-[200vh] z-20">
         <ParticlesComponent />
-        <img
-          src={light.src}
+        <Image
+          src={light}
           alt=""
           width={1468}
           height={900}

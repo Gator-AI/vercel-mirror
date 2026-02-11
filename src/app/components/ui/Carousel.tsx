@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "react-feather";
 import Image from "next/image";
 
@@ -13,16 +13,20 @@ export default function Carousel({
 }) {
   const [curr, setCurr] = useState(0);
 
-  const prev = () =>
-    setCurr((curr) => (curr === 0 ? slides.length - 1 : curr - 1));
-  const next = () =>
-    setCurr((curr) => (curr === slides.length - 1 ? 0 : curr + 1));
+  const prev = useCallback(
+    () => setCurr((c) => (c === 0 ? slides.length - 1 : c - 1)),
+    [slides.length]
+  );
+  const next = useCallback(
+    () => setCurr((c) => (c === slides.length - 1 ? 0 : c + 1)),
+    [slides.length]
+  );
 
   useEffect(() => {
     if (!autoSlide) return;
     const slideInterval = setInterval(next, autoSlideInterval);
     return () => clearInterval(slideInterval);
-  }, []);
+  }, [autoSlide, autoSlideInterval, next]);
 
   return (
     <div className="relative w-full h-[450px] overflow-hidden rounded-[10px] shadow-md">

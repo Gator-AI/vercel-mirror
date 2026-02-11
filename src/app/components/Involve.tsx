@@ -31,7 +31,7 @@ function Involve() {
   // check if animatedlist is within view if so then animate
   const elementRef = useRef(null);
 
-  const [listHovering, setListHovering] = useState(true);
+  const listHovering = true;
 
   const testimonials = [
     {
