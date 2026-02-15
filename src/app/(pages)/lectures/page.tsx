@@ -20,6 +20,7 @@ const VIDEOS = [
     semester: "Spring 2026",
     link: "https://www.youtube.com/watch?v=-X6LbOXprq0",
     image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-1.png`,
+    slides: "https://drive.google.com/drive/u/0/folders/1i9AagzoFL03bIAlKNrvbg_VodXCS2yYi",
   },
   {
     name: "ML Mondays #1: Review of AI/ML Fundamentals",
@@ -29,6 +30,7 @@ const VIDEOS = [
     semester: "Spring 2026",
     link: "https://www.youtube.com/watch?v=AoIomknRDw8",
     image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-1.png`,
+    slides: "https://drive.google.com/drive/u/0/folders/1i9AagzoFL03bIAlKNrvbg_VodXCS2yYi",
   },
   {
     name: "ML Mondays #10: AutoEncoders and GANs",
@@ -38,6 +40,7 @@ const VIDEOS = [
     semester: "Fall 2025",
     link: "https://www.youtube.com/watch?v=pdJ9cpEqIMM",
     image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-10.png`,
+    slides: "https://drive.google.com/drive/u/0/folders/1i9AagzoFL03bIAlKNrvbg_VodXCS2yYi",
   },
   {
     name: "ML Mondays #9: Recurrent Neural Networks (RNNs)",
@@ -47,6 +50,7 @@ const VIDEOS = [
     semester: "Fall 2025",
     link: "https://www.youtube.com/watch?v=LyunT1PY6sw",
     image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-9.png`,
+    slides: "https://docs.google.com/presentation/d/1pUfkCOW6H_kECZ_BWLEMEvPx4B9lyvko4PFxcIwTFoA/edit?slide=id.g39d1e076d74_0_0#slide=id.g39d1e076d74_0_0",
   },
   {
     name: "ML Mondays #8 : Convolutional Neural Networks",
@@ -55,6 +59,7 @@ const VIDEOS = [
     semester: "Fall 2025",
     link: "https://www.youtube.com/watch?v=Nq8cv_v9Ieg",
     image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-8.png`,
+    slides: "https://docs.google.com/presentation/d/1D3miD4ggBg2mhGH-C0MVG11ictVscLvpOB-w8cmTjY4/edit?slide=id.g39d1e076d74_0_0#slide=id.g39d1e076d74_0_0",
   },
   {
     name: "ML Mondays #7 : Training Deep Neural Networks",
@@ -64,6 +69,7 @@ const VIDEOS = [
     semester: "Fall 2025",
     link: "https://www.youtube.com/watch?v=smMlQojzl0M",
     image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-7.png`,
+    slides: "https://docs.google.com/presentation/d/1cR8be-9ZrjYOqGjDcqa7487IfCDM9G7ISjq2DvXJ4wM/edit?slide=id.g39d1e076d74_0_0#slide=id.g39d1e076d74_0_0",
   },
   {
     name: "ML Mondays #6: Training Neural Networks",
@@ -72,6 +78,7 @@ const VIDEOS = [
     semester: "Fall 2025",
     link: "https://www.youtube.com/watch?v=vVBbLo6R-6k",
     image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-6.png`,
+    slides: "https://docs.google.com/presentation/d/1Sz6Or65PVuPJi6mSJVh2MV6b03qqW8tqvVLsnndiNFU/edit?slide=id.g35ce0b53674_0_41#slide=id.g35ce0b53674_0_41",
   },
   {
     name: "ML Mondays #5: Feed Forward Neural Networks",
@@ -81,6 +88,7 @@ const VIDEOS = [
     semester: "Fall 2025",
     link: "https://www.youtube.com/watch?v=AjKgtfKGYtg",
     image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-5.png`,
+    slides: "https://docs.google.com/presentation/d/1_6ULLmEloxldhepF2lxYGX9WBNxIEbUlKpTKwzTt-SQ/edit?slide=id.g38bfed9e04e_0_155#slide=id.g38bfed9e04e_0_155",
   },
   {
     name: "ML Mondays #4: Optimization and Gradient Descent",
@@ -90,6 +98,7 @@ const VIDEOS = [
     semester: "Fall 2025",
     link: "https://www.youtube.com/watch?v=TKhlZGvAqQI",
     image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-4.png`,
+    slides: "https://docs.google.com/presentation/d/1Y-0Fh6YRs87ZtOpoDo1rdZnKLTvLTDBnQAgwytFEA-4/edit?slide=id.g35ce0b53674_0_41#slide=id.g35ce0b53674_0_41",
   },
   {
     name: "ML Mondays #3: Logistic Regression",
@@ -99,6 +108,7 @@ const VIDEOS = [
     semester: "Fall 2025",
     link: "https://www.youtube.com/watch?v=y5wg1p91Dmo",
     image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-3.png`,
+    slides: "https://docs.google.com/presentation/d/13VAEC0gEQWlqykmUZ8ixISsw9_R1cfgNbg1TO_fXU5E/edit?slide=id.g35ce0b53674_0_41#slide=id.g35ce0b53674_0_41",
   },
   {
     name: "ML Mondays #2: Linear Regression",
@@ -108,6 +118,7 @@ const VIDEOS = [
     semester: "Fall 2025",
     link: "https://www.youtube.com/watch?v=5vTdP2h_fi8",
     image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-2.png`,
+    slides: "https://docs.google.com/presentation/d/1PaedCw-tIi4M1ahtZVF8o-bagTMjtlHGn8-XvDU5fQE/edit?slide=id.g35ce0b53674_0_41#slide=id.g35ce0b53674_0_41",
   },
   {
     name: "ML Mondays #1: What is AL/ML?",
@@ -117,6 +128,7 @@ const VIDEOS = [
     semester: "Fall 2025",
     link: "https://www.youtube.com/watch?v=dNu_f4ooCII&ab_channel=GatorAI",
     image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-1.png`,
+    slides: "https://docs.google.com/presentation/d/1Goa6cMKzHptZYt8OhNIeWWGbb3PVmNrOtXsZwzO1ykg/edit?slide=id.g35ce0b53674_0_41#slide=id.g35ce0b53674_0_41",
   }
   // {
   //   name: "AI Workshop Series",
@@ -253,6 +265,15 @@ function Projects() {
                       className="py-2 px-8  text-base font-light w-fit shadow-md"
                     >
                       View on YouTube
+                    </ShimmerButton>
+                  </a>
+                  <a href={video.slides} target="_blank">
+                    <ShimmerButton
+                      borderRadius="10px"
+                      background="#00272b"
+                      className="py-2 px-8  text-base font-light w-fit shadow-md"
+                    >
+                      Go to slides
                     </ShimmerButton>
                   </a>
                 </div>
