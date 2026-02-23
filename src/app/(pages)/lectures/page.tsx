@@ -23,11 +23,12 @@ interface Lecture {
   slides: string;
 }
 
+// Keep latest semester at index 1
 const SEMESTERS = ["All semesters", "Spring 2026", "Fall 2025"];
 
 function Projects() {
   const [query, setQuery] = React.useState("");
-  const [semester, setSemester] = React.useState("All semesters");
+  const [semester, setSemester] = React.useState(SEMESTERS[1]);
   const [videos, setVideos] = React.useState<Lecture[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
