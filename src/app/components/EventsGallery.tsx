@@ -9,6 +9,19 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
+const getFileName = (url: string, fallback: string) => {
+  try {
+    const parsedUrl = new URL(url);
+    const lastSegment = parsedUrl.pathname.split("/").pop();
+    if (lastSegment && lastSegment.includes(".")) {
+      return decodeURIComponent(lastSegment);
+    }
+  } catch {
+  }
+
+  return `${fallback}.jpg`;
+};
+
 const baseUrl = process.env.NEXT_PUBLIC_BLOB_BASE_URL;
 if (!baseUrl) {
   throw new Error("NEXT_PUBLIC_BLOB_BASE_URL is not set");
@@ -78,6 +91,41 @@ const overlayVariants = {
   hover: { opacity: 0 },
 };
 
+const triggerImageDownload = async (
+  event: React.MouseEvent<HTMLButtonElement>,
+  imageUrl: string,
+  fileName: string
+) => {
+  event.preventDefault();
+  event.stopPropagation();
+
+  try {
+    const response = await fetch(imageUrl);
+    if (!response.ok) {
+      throw new Error("Failed to fetch image");
+    }
+
+    const blob = await response.blob();
+    const objectUrl = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = objectUrl;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(objectUrl);
+    return;
+  } catch {
+  }
+
+  const fallbackLink = document.createElement("a");
+  fallbackLink.href = imageUrl;
+  fallbackLink.download = fileName;
+  document.body.appendChild(fallbackLink);
+  fallbackLink.click();
+  fallbackLink.remove();
+};
+
 const EventsGallery = () => {
   return (
     <div className="min-h-screen w-full flex flex-col items-center">
@@ -116,6 +164,35 @@ const EventsGallery = () => {
             <div className="relative z-10 p-4 bg-white text-gray-500 text-sm tracking-wide">
               <p className="">{item.text}</p>
             </div>
+
+            <button
+              type="button"
+              onClick={(event) =>
+                triggerImageDownload(
+                  event,
+                  item.image,
+                  getFileName(item.image, item.slug)
+                )
+              }
+              className="absolute top-3 right-3 z-30 rounded-md bg-black/60 p-2 text-white hover:bg-black/75"
+              aria-label={`Download ${item.text} image`}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-4 w-4"
+                aria-hidden="true"
+              >
+                <path d="M12 3v12" />
+                <path d="m7 10 5 5 5-5" />
+                <path d="M5 21h14" />
+              </svg>
+            </button>
 
             <Link
               href={`/events/${item.slug}`}
