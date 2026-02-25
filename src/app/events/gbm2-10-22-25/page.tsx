@@ -1,5 +1,8 @@
 "use client";
+import { useState } from "react";
 import Carousel from "@/components/ui/Carousel";
+import { Button } from "@/components/ui/button";
+import { downloadImagesAsZip } from "@/lib/download-zip";
 
 const baseUrl = process.env.NEXT_PUBLIC_BLOB_BASE_URL;
 if (!baseUrl) {
@@ -20,6 +23,17 @@ const photos = [
 ];
 
 export default function GBM2Page() {
+  const [isDownloadingZip, setIsDownloadingZip] = useState(false);
+
+  const handleDownloadAllPhotos = async () => {
+    setIsDownloadingZip(true);
+    try {
+      await downloadImagesAsZip(photos, "gbm-2-photo-gallery.zip");
+    } finally {
+      setIsDownloadingZip(false);
+    }
+  };
+
   return (
     <div className="max-w-5xl mt-[100px] px-4 pb-20">
       <h1 className="text-4xl font-bold mb-4">
@@ -76,9 +90,18 @@ export default function GBM2Page() {
         </a>
       </section>
       <section className="mb-10">
-        <h2 className="text-2xl font-semibold mb-2">
-          Photo Gallery
-        </h2>
+        <div className="mb-2 flex items-center justify-between gap-3">
+          <h2 className="text-2xl font-semibold">Photo Gallery</h2>
+          <Button
+            type="button"
+            size="sm"
+            variant="secondaryOutline"
+            onClick={handleDownloadAllPhotos}
+            disabled={isDownloadingZip}
+          >
+            {isDownloadingZip ? "Preparing Zip..." : "Download All Photos"}
+          </Button>
+        </div>
         <div className="w-full max-w-full h-96">
           <Carousel slides={photos} autoSlide autoSlideInterval={6000} />
         </div>

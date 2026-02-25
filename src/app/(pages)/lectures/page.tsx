@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import ShimmerButton from "@/components/ui/shimmer-button";
 import { SearchBar } from "@/components/ui/search-bar";
-import { createClient } from "@/lib/supabase/client";
 // import { Youtube } from "react-feather";
 
 const baseUrl = process.env.NEXT_PUBLIC_BLOB_BASE_URL;
@@ -12,82 +11,140 @@ if (!baseUrl) {
   throw new Error("NEXT_PUBLIC_BLOB_BASE_URL is not set");
 }
 
-interface Lecture {
-  id?: string;
-  name: string;
-  description: string;
-  date: string;
-  semester: string;
-  link: string;
-  image: string;
-  slides: string;
-}
+const VIDEOS = [
+    {
+    name: "ML Mondays #2: Python Dependency Management",
+    description:
+      "A lecture on how to maintain python dependencies and libraries.",
+    date: "February 9th, 2026",
+    semester: "Spring 2026",
+    link: "https://www.youtube.com/watch?v=-X6LbOXprq0",
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-1.png`,
+  },
+  {
+    name: "ML Mondays #1: Review of AI/ML Fundamentals",
+    description:
+      "An introductory lecture on Artificial Intelligence and Machine Learning concepts.",
+    date: "February 2nd, 2026",
+    semester: "Spring 2026",
+    link: "https://www.youtube.com/watch?v=AoIomknRDw8",
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-1.png`,
+  },
+  {
+    name: "ML Mondays #10: AutoEncoders and GANs",
+    description:
+      "Exploring AutoEncoders, Generative Adversarial Networks, and their applications.",
+    date: "November 17th, 2025",
+    semester: "Fall 2025",
+    link: "https://www.youtube.com/watch?v=pdJ9cpEqIMM",
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-10.png`,
+  },
+  {
+    name: "ML Mondays #9: Recurrent Neural Networks (RNNs)",
+    description:
+      "Understanding RNNs, LSTMs, and their applications in sequence data.",
+    date: "November 10th, 2025",
+    semester: "Fall 2025",
+    link: "https://www.youtube.com/watch?v=LyunT1PY6sw",
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-9.png`,
+  },
+  {
+    name: "ML Mondays #8 : Convolutional Neural Networks",
+    description: "Learn about Layers, Filters, and Sampling/Pooling.",
+    date: "November 3rd, 2025",
+    semester: "Fall 2025",
+    link: "https://www.youtube.com/watch?v=Nq8cv_v9Ieg",
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-8.png`,
+  },
+  {
+    name: "ML Mondays #7 : Training Deep Neural Networks",
+    description:
+      "Transfer Learning and Building a Neural Network with pytorch.",
+    date: "October 27th, 2025",
+    semester: "Fall 2025",
+    link: "https://www.youtube.com/watch?v=smMlQojzl0M",
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-7.png`,
+  },
+  {
+    name: "ML Mondays #6: Training Neural Networks",
+    description: "Neurons, Gradient Descent, Hyperparameters, and more.",
+    date: "October 20th, 2025",
+    semester: "Fall 2025",
+    link: "https://www.youtube.com/watch?v=vVBbLo6R-6k",
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-6.png`,
+  },
+  {
+    name: "ML Mondays #5: Feed Forward Neural Networks",
+    description:
+      "Structure of Feed Forward Neural Networks, Activation Functions, and Backpropagation.",
+    date: "October 13th, 2025",
+    semester: "Fall 2025",
+    link: "https://www.youtube.com/watch?v=AjKgtfKGYtg",
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-5.png`,
+  },
+  {
+    name: "ML Mondays #4: Optimization and Gradient Descent",
+    description:
+      "An in-depth look at optimization techniques, gradient descent, and learning rates.",
+    date: "October 6th, 2025",
+    semester: "Fall 2025",
+    link: "https://www.youtube.com/watch?v=TKhlZGvAqQI",
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-4.png`,
+  },
+  {
+    name: "ML Mondays #3: Logistic Regression",
+    description:
+      "An overview of Logistic Regression, Sigmoid Functions, Cross Entropy Loss, and more.",
+    date: "September 29th, 2025",
+    semester: "Fall 2025",
+    link: "https://www.youtube.com/watch?v=y5wg1p91Dmo",
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-3.png`,
+  },
+  {
+    name: "ML Mondays #2: Linear Regression",
+    description:
+      "A look into Linear Regression, biases and variances, and loss functions.",
+    date: "September 22nd, 2025",
+    semester: "Fall 2025",
+    link: "https://www.youtube.com/watch?v=5vTdP2h_fi8",
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-2.png`,
+  },
+  {
+    name: "ML Mondays #1: What is AL/ML?",
+    description:
+      "An introductory lecture on Artificial Intelligence and Machine Learning concepts.",
+    date: "September 15th, 2025",
+    semester: "Fall 2025",
+    link: "https://www.youtube.com/watch?v=dNu_f4ooCII&ab_channel=GatorAI",
+    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-1.png`,
+  }
+  // {
+  //   name: "AI Workshop Series",
+  //   description: "Interactive workshops teaching AI fundamentals.",
+  //   link: "https://github.com/GatorAI/ai-workshops",
+  //   date: "March 10, 2024",
+  //   image: "https://placehold.co/1100x430",
+  // },
+  // {
+  //   name: "Event Calendar",
+  //   description: "A calendar app to track club events and deadlines.",
+  //   link: "https://github.com/GatorAI/event-calendar",
+  //   date: "March 10, 2024",
+  //   image: "https://placehold.co/1100x430",
+  // },
+];
 
-// Keep latest semester at index 1
 const SEMESTERS = ["All semesters", "Spring 2026", "Fall 2025"];
 
 function Projects() {
   const [query, setQuery] = React.useState("");
-  const [semester, setSemester] = React.useState(SEMESTERS[1]);
-  const [videos, setVideos] = React.useState<Lecture[]>([]);
-  const [loading, setLoading] = React.useState(true);
-  const [error, setError] = React.useState<string | null>(null);
+  const [semester, setSemester] = React.useState("All semesters");
   const searchInputRef = React.useRef<HTMLInputElement>(null);
   const semesterOptions = SEMESTERS;
 
-  // Fetch lectures from Supabase
-  useEffect(() => {
-    async function fetchLectures() {
-      try {
-        setLoading(true);
-        const supabase = createClient();
-        const { data, error: fetchError } = await supabase
-          .from("lectures")
-          .select("*")
-          .order("date", { ascending: false });
-
-        if (fetchError) {
-          throw new Error(fetchError.message);
-        }
-
-        const lecturesData = (data || []) as Lecture[];
-        
-        // Parse text dates like "February 2nd, 2026" and sort by date from latest to oldest
-        const parseTextDate = (dateStr: string): Date => {
-          const monthNames: { [key: string]: number } = {
-            january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
-            july: 6, august: 7, september: 8, october: 9, november: 10, december: 11
-          };
-          
-          const parts = dateStr.toLowerCase().split(/\s+/);
-          const month = monthNames[parts[0]] ?? 0;
-          const day = parseInt(parts[1]) || 1; // Remove ordinal suffixes
-          const year = parseInt(parts[2]) || 2026;
-          
-          return new Date(year, month, day);
-        };
-        
-        const sortedLectures = lecturesData.sort((a, b) => {
-          const dateA = parseTextDate(a.date).getTime();
-          const dateB = parseTextDate(b.date).getTime();
-          return dateB - dateA; // Latest first
-        });
-        
-        setVideos(sortedLectures);
-      } catch (err) {
-        console.error("Error fetching lectures:", err);
-        setError(err instanceof Error ? err.message : "Failed to load lectures");
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchLectures();
-  }, []);
-
   const filteredVideos = React.useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
-    return videos.filter((video) => {
+    return VIDEOS.filter((video) => {
       if (semester !== "All semesters" && video.semester !== semester) {
         return false;
       }
@@ -107,7 +164,7 @@ function Projects() {
 
       return haystack.includes(normalizedQuery);
     });
-  }, [query, semester, videos]);
+  }, [query, semester]);
 
   return (
     <div className="my-32 min-h-screen w-screen flex items-center justify-center">
@@ -147,22 +204,7 @@ function Projects() {
             </div> */}
           </div>
         </div>
-        {loading ? (
-          <div className="w-full rounded-xl border border-white/10 bg-white/5 p-10 text-center text-white/80">
-            <p>Loading lectures...</p>
-          </div>
-        ) : error ? (
-          <div className="w-full rounded-xl border border-white/10 bg-white/5 p-10 text-center text-white/80">
-            <p>Error loading lectures: {error}</p>
-            <button
-              type="button"
-              onClick={() => window.location.reload()}
-              className="mt-3 text-sm text-white underline decoration-white/40 underline-offset-4 hover:text-white/90"
-            >
-              Try again
-            </button>
-          </div>
-        ) : filteredVideos.length === 0 ? (
+        {filteredVideos.length === 0 ? (
           <div className="w-full rounded-xl border border-white/10 bg-white/5 p-10 text-center text-white/80">
             <p>No recordings match your search.</p>
             <button
@@ -185,7 +227,7 @@ function Projects() {
               >
                 <div className="w-full h-50 bg-white/20 rounded mb-2 flex items-center justify-center">
                   <Image
-                    src={`${baseUrl}${video.image}`}
+                    src={video.image}
                     alt={video.name + " image"}
                     width={320}
                     height={160}
@@ -211,15 +253,6 @@ function Projects() {
                       className="py-2 px-8  text-base font-light w-fit shadow-md"
                     >
                       View on YouTube
-                    </ShimmerButton>
-                  </a>
-                  <a href={video.slides} target="_blank">
-                    <ShimmerButton
-                      borderRadius="10px"
-                      background="#00272b"
-                      className="py-2 px-8  text-base font-light w-fit shadow-md"
-                    >
-                      Go to slides
                     </ShimmerButton>
                   </a>
                 </div>
