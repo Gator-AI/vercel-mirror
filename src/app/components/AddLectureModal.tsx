@@ -29,7 +29,8 @@ function extractYouTubeVideoId(url: string): string | null {
 }
 
 function generateYouTubeThumbnail(videoId: string): string {
-  return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  // hqdefault.jpg exists for all videos; maxresdefault.jpg often returns 404
+  return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 }
 
 type AddLectureModalProps = {
