@@ -8,7 +8,6 @@ import { SearchBar } from "@/components/ui/search-bar";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
 import { AddLectureModal } from "@/components/AddLectureModal";
-// import { Youtube } from "react-feather";
 
 interface Lecture {
   id?: string;
@@ -21,7 +20,6 @@ interface Lecture {
   slides: string;
 }
 
-// Keep latest semester at index 1
 const SEMESTERS = ["All semesters", "Spring 2026", "Fall 2025"];
 
 function Projects() {
@@ -56,7 +54,6 @@ function Projects() {
 
       const lecturesData = (data || []) as Lecture[];
 
-      // Parse text dates like "February 2nd, 2026" and sort by date from latest to oldest
       const parseTextDate = (dateStr: string): Date => {
         const monthNames: { [key: string]: number } = {
           january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
@@ -65,8 +62,8 @@ function Projects() {
 
         const parts = dateStr.toLowerCase().split(/\s+/);
         const month = monthNames[parts[0]] ?? 0;
-        const day = parseInt(parts[1]) || 1; // Remove ordinal suffixes
-        const year = parseInt(parts[2]) || 2026;
+        const day = parseInt(parts[1], 10) || 1;
+        const year = parseInt(parts[2], 10) || 2026;
 
         return new Date(year, month, day);
       };
@@ -74,7 +71,7 @@ function Projects() {
       const sortedLectures = lecturesData.sort((a, b) => {
         const dateA = parseTextDate(a.date).getTime();
         const dateB = parseTextDate(b.date).getTime();
-        return dateB - dateA; // Latest first
+        return dateB - dateA;
       });
 
       setVideos(sortedLectures);
@@ -90,7 +87,7 @@ function Projects() {
     fetchLectures();
   }, [fetchLectures]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     let isMounted = true;
 
     async function fetchBoardStatus() {
@@ -168,6 +165,26 @@ function Projects() {
     });
   }, [query, semester, videos]);
 
+  if (loading) {
+    return (
+      <div className="my-32 min-h-screen w-screen flex items-center justify-center">
+        <div className="w-[90%] max-w-5xl lg:max-w-7xl h-full flex flex-col items-center justify-center gap-8">
+          <p className="text-white/80">Loading lectures...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="my-32 min-h-screen w-screen flex items-center justify-center">
+        <div className="w-[90%] max-w-5xl lg:max-w-7xl h-full flex flex-col items-center justify-center gap-8">
+          <p className="text-red-300">{error}</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="my-32 min-h-screen w-screen flex items-center justify-center">
@@ -223,27 +240,9 @@ function Projects() {
                 ))}
               </select>
             </label>
-            {/* <div className="bg-red-500 px-2 py-1 rounded-md hover:scale-105 flex items-center justify-center">
-              <Youtube />
-            </div> */}
           </div>
         </div>
-        {loading ? (
-          <div className="w-full rounded-xl border border-white/10 bg-white/5 p-10 text-center text-white/80">
-            <p>Loading lectures...</p>
-          </div>
-        ) : error ? (
-          <div className="w-full rounded-xl border border-white/10 bg-white/5 p-10 text-center text-white/80">
-            <p>Error loading lectures: {error}</p>
-            <button
-              type="button"
-              onClick={() => window.location.reload()}
-              className="mt-3 text-sm text-white underline decoration-white/40 underline-offset-4 hover:text-white/90"
-            >
-              Try again
-            </button>
-          </div>
-        ) : filteredVideos.length === 0 ? (
+        {filteredVideos.length === 0 ? (
           <div className="w-full rounded-xl border border-white/10 bg-white/5 p-10 text-center text-white/80">
             <p>No recordings match your search.</p>
             <button
@@ -261,7 +260,7 @@ function Projects() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
             {filteredVideos.map((video) => (
               <div
-                key={video.name}
+                key={video.id ?? video.name}
                 className="bg-white/10 border border-white/20 rounded-xl p-6 shadow-lg flex flex-col hover:scale-[1.01] transition-transform duration-200"
               >
                 <div className="w-full aspect-video overflow-hidden rounded-lg bg-white/20 mb-4">
@@ -289,7 +288,7 @@ function Projects() {
                   {video.date}
                 </p>
                 <div className="flex w-full gap-4 mt-auto">
-                  <a href={video.link} target="_blank">
+                  <a href={video.link} target="_blank" rel="noopener noreferrer">
                     <ShimmerButton
                       borderRadius="10px"
                       background="#00272b"
@@ -298,7 +297,7 @@ function Projects() {
                       View on YouTube
                     </ShimmerButton>
                   </a>
-                  <a href={video.slides} target="_blank">
+                  <a href={video.slides} target="_blank" rel="noopener noreferrer">
                     <ShimmerButton
                       borderRadius="10px"
                       background="#00272b"
