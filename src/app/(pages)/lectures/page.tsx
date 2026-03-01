@@ -1,150 +1,149 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
+import { Plus } from "react-feather";
 import ShimmerButton from "@/components/ui/shimmer-button";
 import { SearchBar } from "@/components/ui/search-bar";
-// import { Youtube } from "react-feather";
+import { Button } from "@/components/ui/button";
+import { createClient } from "@/lib/supabase/client";
+import { AddLectureModal } from "@/components/AddLectureModal";
 
-const baseUrl = process.env.NEXT_PUBLIC_BLOB_BASE_URL;
-if (!baseUrl) {
-  throw new Error("NEXT_PUBLIC_BLOB_BASE_URL is not set");
+interface Lecture {
+  id?: string;
+  name: string;
+  description: string;
+  date: string;
+  semester: string;
+  link: string;
+  image: string;
+  slides: string;
 }
-
-const VIDEOS = [
-    {
-    name: "ML Mondays #2: Python Dependency Management",
-    description:
-      "A lecture on how to maintain python dependencies and libraries.",
-    date: "February 9th, 2026",
-    semester: "Spring 2026",
-    link: "https://www.youtube.com/watch?v=-X6LbOXprq0",
-    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-1.png`,
-  },
-  {
-    name: "ML Mondays #1: Review of AI/ML Fundamentals",
-    description:
-      "An introductory lecture on Artificial Intelligence and Machine Learning concepts.",
-    date: "February 2nd, 2026",
-    semester: "Spring 2026",
-    link: "https://www.youtube.com/watch?v=AoIomknRDw8",
-    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-1.png`,
-  },
-  {
-    name: "ML Mondays #10: AutoEncoders and GANs",
-    description:
-      "Exploring AutoEncoders, Generative Adversarial Networks, and their applications.",
-    date: "November 17th, 2025",
-    semester: "Fall 2025",
-    link: "https://www.youtube.com/watch?v=pdJ9cpEqIMM",
-    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-10.png`,
-  },
-  {
-    name: "ML Mondays #9: Recurrent Neural Networks (RNNs)",
-    description:
-      "Understanding RNNs, LSTMs, and their applications in sequence data.",
-    date: "November 10th, 2025",
-    semester: "Fall 2025",
-    link: "https://www.youtube.com/watch?v=LyunT1PY6sw",
-    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-9.png`,
-  },
-  {
-    name: "ML Mondays #8 : Convolutional Neural Networks",
-    description: "Learn about Layers, Filters, and Sampling/Pooling.",
-    date: "November 3rd, 2025",
-    semester: "Fall 2025",
-    link: "https://www.youtube.com/watch?v=Nq8cv_v9Ieg",
-    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-8.png`,
-  },
-  {
-    name: "ML Mondays #7 : Training Deep Neural Networks",
-    description:
-      "Transfer Learning and Building a Neural Network with pytorch.",
-    date: "October 27th, 2025",
-    semester: "Fall 2025",
-    link: "https://www.youtube.com/watch?v=smMlQojzl0M",
-    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-7.png`,
-  },
-  {
-    name: "ML Mondays #6: Training Neural Networks",
-    description: "Neurons, Gradient Descent, Hyperparameters, and more.",
-    date: "October 20th, 2025",
-    semester: "Fall 2025",
-    link: "https://www.youtube.com/watch?v=vVBbLo6R-6k",
-    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-6.png`,
-  },
-  {
-    name: "ML Mondays #5: Feed Forward Neural Networks",
-    description:
-      "Structure of Feed Forward Neural Networks, Activation Functions, and Backpropagation.",
-    date: "October 13th, 2025",
-    semester: "Fall 2025",
-    link: "https://www.youtube.com/watch?v=AjKgtfKGYtg",
-    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-5.png`,
-  },
-  {
-    name: "ML Mondays #4: Optimization and Gradient Descent",
-    description:
-      "An in-depth look at optimization techniques, gradient descent, and learning rates.",
-    date: "October 6th, 2025",
-    semester: "Fall 2025",
-    link: "https://www.youtube.com/watch?v=TKhlZGvAqQI",
-    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-4.png`,
-  },
-  {
-    name: "ML Mondays #3: Logistic Regression",
-    description:
-      "An overview of Logistic Regression, Sigmoid Functions, Cross Entropy Loss, and more.",
-    date: "September 29th, 2025",
-    semester: "Fall 2025",
-    link: "https://www.youtube.com/watch?v=y5wg1p91Dmo",
-    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-3.png`,
-  },
-  {
-    name: "ML Mondays #2: Linear Regression",
-    description:
-      "A look into Linear Regression, biases and variances, and loss functions.",
-    date: "September 22nd, 2025",
-    semester: "Fall 2025",
-    link: "https://www.youtube.com/watch?v=5vTdP2h_fi8",
-    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-2.png`,
-  },
-  {
-    name: "ML Mondays #1: What is AL/ML?",
-    description:
-      "An introductory lecture on Artificial Intelligence and Machine Learning concepts.",
-    date: "September 15th, 2025",
-    semester: "Fall 2025",
-    link: "https://www.youtube.com/watch?v=dNu_f4ooCII&ab_channel=GatorAI",
-    image: `${baseUrl}/images/ml-monday-thumbnails-fall-2025/mlmonday-1.png`,
-  }
-  // {
-  //   name: "AI Workshop Series",
-  //   description: "Interactive workshops teaching AI fundamentals.",
-  //   link: "https://github.com/GatorAI/ai-workshops",
-  //   date: "March 10, 2024",
-  //   image: "https://placehold.co/1100x430",
-  // },
-  // {
-  //   name: "Event Calendar",
-  //   description: "A calendar app to track club events and deadlines.",
-  //   link: "https://github.com/GatorAI/event-calendar",
-  //   date: "March 10, 2024",
-  //   image: "https://placehold.co/1100x430",
-  // },
-];
 
 const SEMESTERS = ["All semesters", "Spring 2026", "Fall 2025"];
 
 function Projects() {
   const [query, setQuery] = React.useState("");
-  const [semester, setSemester] = React.useState("All semesters");
+  const [semester, setSemester] = React.useState(SEMESTERS[1]);
+  const [videos, setVideos] = React.useState<Lecture[]>([]);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState<string | null>(null);
   const searchInputRef = React.useRef<HTMLInputElement>(null);
   const semesterOptions = SEMESTERS;
+  const [authStatus, setAuthStatus] = React.useState({
+    isBoardMember: false,
+    isAuthenticated: false,
+  });
+  const [checkingBoardStatus, setCheckingBoardStatus] = React.useState(true);
+  const [addModalOpen, setAddModalOpen] = React.useState(false);
+  const [accessError, setAccessError] = React.useState("");
+
+  const fetchLectures = React.useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const supabase = createClient();
+      const { data, error: fetchError } = await supabase
+        .from("lectures")
+        .select("*")
+        .order("date", { ascending: false });
+
+      if (fetchError) {
+        throw new Error(fetchError.message);
+      }
+
+      const lecturesData = (data || []) as Lecture[];
+
+      const parseTextDate = (dateStr: string): Date => {
+        const monthNames: { [key: string]: number } = {
+          january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
+          july: 6, august: 7, september: 8, october: 9, november: 10, december: 11,
+        };
+
+        const parts = dateStr.toLowerCase().split(/\s+/);
+        const month = monthNames[parts[0]] ?? 0;
+        const day = parseInt(parts[1], 10) || 1;
+        const year = parseInt(parts[2], 10) || 2026;
+
+        return new Date(year, month, day);
+      };
+
+      const sortedLectures = lecturesData.sort((a, b) => {
+        const dateA = parseTextDate(a.date).getTime();
+        const dateB = parseTextDate(b.date).getTime();
+        return dateB - dateA;
+      });
+
+      setVideos(sortedLectures);
+    } catch (err) {
+      console.error("Error fetching lectures:", err);
+      setError(err instanceof Error ? err.message : "Failed to load lectures");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchLectures();
+  }, [fetchLectures]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function fetchBoardStatus() {
+      try {
+        const response = await fetch("/api/auth/board-status", {
+          credentials: "include",
+        });
+        if (!response.ok) {
+          throw new Error("Failed to fetch board status");
+        }
+        const data = await response.json();
+        if (isMounted) {
+          setAuthStatus({
+            isBoardMember: Boolean(data?.isBoardMember),
+            isAuthenticated: Boolean(data?.isAuthenticated),
+          });
+        }
+      } catch (fetchError) {
+        console.error("Error checking board status:", fetchError);
+        if (isMounted) {
+          setAuthStatus({ isBoardMember: false, isAuthenticated: false });
+        }
+      } finally {
+        if (isMounted) {
+          setCheckingBoardStatus(false);
+        }
+      }
+    }
+
+    fetchBoardStatus();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleAddLectureClick = React.useCallback(() => {
+    if (checkingBoardStatus) return;
+
+    if (!authStatus.isAuthenticated) {
+      window.location.href = "/login?next=/lectures";
+      return;
+    }
+
+    if (!authStatus.isBoardMember) {
+      setAccessError("Only board members can add lectures.");
+      return;
+    }
+
+    setAccessError("");
+    setAddModalOpen(true);
+  }, [authStatus, checkingBoardStatus]);
 
   const filteredVideos = React.useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
-    return VIDEOS.filter((video) => {
+    return videos.filter((video) => {
       if (semester !== "All semesters" && video.semester !== semester) {
         return false;
       }
@@ -164,18 +163,60 @@ function Projects() {
 
       return haystack.includes(normalizedQuery);
     });
-  }, [query, semester]);
+  }, [query, semester, videos]);
+
+  if (loading) {
+    return (
+      <div className="my-32 min-h-screen w-screen flex items-center justify-center">
+        <div className="w-[90%] max-w-5xl lg:max-w-7xl h-full flex flex-col items-center justify-center gap-8">
+          <p className="text-white/80">Loading lectures...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="my-32 min-h-screen w-screen flex items-center justify-center">
+        <div className="w-[90%] max-w-5xl lg:max-w-7xl h-full flex flex-col items-center justify-center gap-8">
+          <p className="text-red-300">{error}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="my-32 min-h-screen w-screen flex items-center justify-center">
+    <>
+      <div className="my-32 min-h-screen w-screen flex items-center justify-center">
       <div className="w-[90%] max-w-5xl lg:max-w-7xl h-full flex flex-col items-start justify-start gap-8">
         <div className="flex flex-col items-start justify-start w-full">
-          <h1 className="text-2xl md:text-5xl font-thin leading-none">
-            Lecture Recordings
-          </h1>
-          <p className="font-neigbor mt-4 text-white/80 text-xl">
-            Explore our latest lecture series on AI and machine learning.
-          </p>
+          <div className="mb-4 flex items-start justify-between gap-4 w-full flex-wrap">
+            <div>
+              <h1 className="text-2xl md:text-5xl font-thin leading-none">
+                Lecture Recordings
+              </h1>
+              <p className="font-neigbor mt-4 text-white/80 text-xl">
+                Explore our latest lecture series on AI and machine learning.
+              </p>
+            </div>
+            <div className="flex flex-col items-end gap-2">
+              <Button
+                type="button"
+                variant="secondaryOutline"
+                className="shrink-0 text-sm font-medium"
+                onClick={handleAddLectureClick}
+                disabled={checkingBoardStatus}
+              >
+                <Plus size={16} className="mr-2 inline-block" />
+                Add lecture
+              </Button>
+              {accessError && (
+                <p className="text-xs text-red-300 text-right max-w-[220px]">
+                  {accessError}
+                </p>
+              )}
+            </div>
+          </div>
           <div className="mt-8 flex flex-col items-stretch w-full gap-4 md:flex-row md:items-center">
             <SearchBar
               placeholder="Search recordings..."
@@ -199,9 +240,6 @@ function Projects() {
                 ))}
               </select>
             </label>
-            {/* <div className="bg-red-500 px-2 py-1 rounded-md hover:scale-105 flex items-center justify-center">
-              <Youtube />
-            </div> */}
           </div>
         </div>
         {filteredVideos.length === 0 ? (
@@ -222,18 +260,22 @@ function Projects() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
             {filteredVideos.map((video) => (
               <div
-                key={video.name}
+                key={video.id ?? video.name}
                 className="bg-white/10 border border-white/20 rounded-xl p-6 shadow-lg flex flex-col hover:scale-[1.01] transition-transform duration-200"
               >
-                <div className="w-full h-50 bg-white/20 rounded mb-2 flex items-center justify-center">
+                <div className="w-full aspect-video overflow-hidden rounded-lg bg-white/20 mb-4">
                   <Image
-                    src={video.image}
+                    src={
+                      video.image.includes("maxresdefault")
+                        ? video.image.replace("maxresdefault.jpg", "hqdefault.jpg")
+                        : video.image
+                    }
                     alt={video.name + " image"}
-                    width={320}
-                    height={160}
+                    width={640}
+                    height={360}
                     className="object-cover w-full h-full"
-                    style={{ maxHeight: "100%", maxWidth: "100%" }}
                     priority={false}
+                    unoptimized
                   />
                 </div>
                 <h2 className="text-xl md:text-2xl text-white mb-2">
@@ -246,7 +288,7 @@ function Projects() {
                   {video.date}
                 </p>
                 <div className="flex w-full gap-4 mt-auto">
-                  <a href={video.link} target="_blank">
+                  <a href={video.link} target="_blank" rel="noopener noreferrer">
                     <ShimmerButton
                       borderRadius="10px"
                       background="#00272b"
@@ -255,13 +297,29 @@ function Projects() {
                       View on YouTube
                     </ShimmerButton>
                   </a>
+                  <a href={video.slides} target="_blank" rel="noopener noreferrer">
+                    <ShimmerButton
+                      borderRadius="10px"
+                      background="#00272b"
+                      className="py-2 px-8  text-base font-light w-fit shadow-md"
+                    >
+                      Go to slides
+                    </ShimmerButton>
+                  </a>
                 </div>
               </div>
             ))}
           </div>
         )}
+        </div>
       </div>
-    </div>
+      {addModalOpen && authStatus.isBoardMember && (
+        <AddLectureModal
+          onClose={() => setAddModalOpen(false)}
+          onAdded={fetchLectures}
+        />
+      )}
+    </>
   );
 }
 
