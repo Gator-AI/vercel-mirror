@@ -2,15 +2,13 @@
 
 import React, { useEffect } from "react";
 import Image from "next/image";
+import { Plus } from "react-feather";
 import ShimmerButton from "@/components/ui/shimmer-button";
 import { SearchBar } from "@/components/ui/search-bar";
+import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
+import { AddLectureModal } from "@/components/AddLectureModal";
 // import { Youtube } from "react-feather";
-
-const baseUrl = process.env.NEXT_PUBLIC_BLOB_BASE_URL;
-if (!baseUrl) {
-  throw new Error("NEXT_PUBLIC_BLOB_BASE_URL is not set");
-}
 
 interface Lecture {
   id?: string;
@@ -34,56 +32,117 @@ function Projects() {
   const [error, setError] = React.useState<string | null>(null);
   const searchInputRef = React.useRef<HTMLInputElement>(null);
   const semesterOptions = SEMESTERS;
+  const [authStatus, setAuthStatus] = React.useState({
+    isBoardMember: false,
+    isAuthenticated: false,
+  });
+  const [checkingBoardStatus, setCheckingBoardStatus] = React.useState(true);
+  const [addModalOpen, setAddModalOpen] = React.useState(false);
+  const [accessError, setAccessError] = React.useState("");
 
-  // Fetch lectures from Supabase
-  useEffect(() => {
-    async function fetchLectures() {
-      try {
-        setLoading(true);
-        const supabase = createClient();
-        const { data, error: fetchError } = await supabase
-          .from("lectures")
-          .select("*")
-          .order("date", { ascending: false });
+  const fetchLectures = React.useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const supabase = createClient();
+      const { data, error: fetchError } = await supabase
+        .from("lectures")
+        .select("*")
+        .order("date", { ascending: false });
 
-        if (fetchError) {
-          throw new Error(fetchError.message);
-        }
+      if (fetchError) {
+        throw new Error(fetchError.message);
+      }
 
-        const lecturesData = (data || []) as Lecture[];
-        
-        // Parse text dates like "February 2nd, 2026" and sort by date from latest to oldest
-        const parseTextDate = (dateStr: string): Date => {
-          const monthNames: { [key: string]: number } = {
-            january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
-            july: 6, august: 7, september: 8, october: 9, november: 10, december: 11
-          };
-          
-          const parts = dateStr.toLowerCase().split(/\s+/);
-          const month = monthNames[parts[0]] ?? 0;
-          const day = parseInt(parts[1]) || 1; // Remove ordinal suffixes
-          const year = parseInt(parts[2]) || 2026;
-          
-          return new Date(year, month, day);
+      const lecturesData = (data || []) as Lecture[];
+
+      // Parse text dates like "February 2nd, 2026" and sort by date from latest to oldest
+      const parseTextDate = (dateStr: string): Date => {
+        const monthNames: { [key: string]: number } = {
+          january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
+          july: 6, august: 7, september: 8, october: 9, november: 10, december: 11,
         };
-        
-        const sortedLectures = lecturesData.sort((a, b) => {
-          const dateA = parseTextDate(a.date).getTime();
-          const dateB = parseTextDate(b.date).getTime();
-          return dateB - dateA; // Latest first
+
+        const parts = dateStr.toLowerCase().split(/\s+/);
+        const month = monthNames[parts[0]] ?? 0;
+        const day = parseInt(parts[1]) || 1; // Remove ordinal suffixes
+        const year = parseInt(parts[2]) || 2026;
+
+        return new Date(year, month, day);
+      };
+
+      const sortedLectures = lecturesData.sort((a, b) => {
+        const dateA = parseTextDate(a.date).getTime();
+        const dateB = parseTextDate(b.date).getTime();
+        return dateB - dateA; // Latest first
+      });
+
+      setVideos(sortedLectures);
+    } catch (err) {
+      console.error("Error fetching lectures:", err);
+      setError(err instanceof Error ? err.message : "Failed to load lectures");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchLectures();
+  }, [fetchLectures]);
+
+  React.useEffect(() => {
+    let isMounted = true;
+
+    async function fetchBoardStatus() {
+      try {
+        const response = await fetch("/api/auth/board-status", {
+          credentials: "include",
         });
-        
-        setVideos(sortedLectures);
-      } catch (err) {
-        console.error("Error fetching lectures:", err);
-        setError(err instanceof Error ? err.message : "Failed to load lectures");
+        if (!response.ok) {
+          throw new Error("Failed to fetch board status");
+        }
+        const data = await response.json();
+        if (isMounted) {
+          setAuthStatus({
+            isBoardMember: Boolean(data?.isBoardMember),
+            isAuthenticated: Boolean(data?.isAuthenticated),
+          });
+        }
+      } catch (fetchError) {
+        console.error("Error checking board status:", fetchError);
+        if (isMounted) {
+          setAuthStatus({ isBoardMember: false, isAuthenticated: false });
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setCheckingBoardStatus(false);
+        }
       }
     }
 
-    fetchLectures();
+    fetchBoardStatus();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
+
+  const handleAddLectureClick = React.useCallback(() => {
+    if (checkingBoardStatus) return;
+
+    if (!authStatus.isAuthenticated) {
+      window.location.href = "/login?next=/lectures";
+      return;
+    }
+
+    if (!authStatus.isBoardMember) {
+      setAccessError("Only board members can add lectures.");
+      return;
+    }
+
+    setAccessError("");
+    setAddModalOpen(true);
+  }, [authStatus, checkingBoardStatus]);
 
   const filteredVideos = React.useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -110,15 +169,37 @@ function Projects() {
   }, [query, semester, videos]);
 
   return (
-    <div className="my-32 min-h-screen w-screen flex items-center justify-center">
+    <>
+      <div className="my-32 min-h-screen w-screen flex items-center justify-center">
       <div className="w-[90%] max-w-5xl lg:max-w-7xl h-full flex flex-col items-start justify-start gap-8">
         <div className="flex flex-col items-start justify-start w-full">
-          <h1 className="text-2xl md:text-5xl font-thin leading-none">
-            Lecture Recordings
-          </h1>
-          <p className="font-neigbor mt-4 text-white/80 text-xl">
-            Explore our latest lecture series on AI and machine learning.
-          </p>
+          <div className="mb-4 flex items-start justify-between gap-4 w-full flex-wrap">
+            <div>
+              <h1 className="text-2xl md:text-5xl font-thin leading-none">
+                Lecture Recordings
+              </h1>
+              <p className="font-neigbor mt-4 text-white/80 text-xl">
+                Explore our latest lecture series on AI and machine learning.
+              </p>
+            </div>
+            <div className="flex flex-col items-end gap-2">
+              <Button
+                type="button"
+                variant="secondaryOutline"
+                className="shrink-0 text-sm font-medium"
+                onClick={handleAddLectureClick}
+                disabled={checkingBoardStatus}
+              >
+                <Plus size={16} className="mr-2 inline-block" />
+                Add lecture
+              </Button>
+              {accessError && (
+                <p className="text-xs text-red-300 text-right max-w-[220px]">
+                  {accessError}
+                </p>
+              )}
+            </div>
+          </div>
           <div className="mt-8 flex flex-col items-stretch w-full gap-4 md:flex-row md:items-center">
             <SearchBar
               placeholder="Search recordings..."
@@ -183,15 +264,19 @@ function Projects() {
                 key={video.name}
                 className="bg-white/10 border border-white/20 rounded-xl p-6 shadow-lg flex flex-col hover:scale-[1.01] transition-transform duration-200"
               >
-                <div className="w-full h-50 bg-white/20 rounded mb-2 flex items-center justify-center">
+                <div className="w-full aspect-video overflow-hidden rounded-lg bg-white/20 mb-4">
                   <Image
-                    src={`${baseUrl}${video.image}`}
+                    src={
+                      video.image.includes("maxresdefault")
+                        ? video.image.replace("maxresdefault.jpg", "hqdefault.jpg")
+                        : video.image
+                    }
                     alt={video.name + " image"}
-                    width={320}
-                    height={160}
+                    width={640}
+                    height={360}
                     className="object-cover w-full h-full"
-                    style={{ maxHeight: "100%", maxWidth: "100%" }}
                     priority={false}
+                    unoptimized
                   />
                 </div>
                 <h2 className="text-xl md:text-2xl text-white mb-2">
@@ -227,8 +312,15 @@ function Projects() {
             ))}
           </div>
         )}
+        </div>
       </div>
-    </div>
+      {addModalOpen && authStatus.isBoardMember && (
+        <AddLectureModal
+          onClose={() => setAddModalOpen(false)}
+          onAdded={fetchLectures}
+        />
+      )}
+    </>
   );
 }
 
