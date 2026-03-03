@@ -25,14 +25,14 @@ const data = [
   {
     category: "Secretary",
     title: "Grace Cavaretta",
-    src: `${baseUrl}/images/officer-photos/grace.jpg`,
+    src: `${baseUrl}/images/officer-photos/grace-2.jpg`,
     backContent: "Placeholder",
     linkedin: "https://www.linkedin.com/in/grace-cavarretta/"
   },
   {
     category: "Treasurer",
     title: "Sara Lin",
-    src: `${baseUrl}/images/officer-photos/sara.jpg`,
+    src: `${baseUrl}/images/officer-photos/sara-2.jpg`,
     backContent:
       "Don't compare yourself with other people; compare yourself with who you were yesterday.",
     linkedin: "https://www.linkedin.com/in/linsaraj/"
