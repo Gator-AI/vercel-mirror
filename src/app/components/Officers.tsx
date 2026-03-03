@@ -23,6 +23,13 @@ const data = [
     linkedin: "https://www.linkedin.com/in/analise-stuart-366425301/"
   },
   {
+    category: "Secretary",
+    title: "Grace Cavaretta",
+    src: `${baseUrl}/images/officer-photos/grace.jpg`,
+    backContent: "Placeholder",
+    linkedin: "https://www.linkedin.com/in/grace-cavarretta/"
+  },
+  {
     category: "Treasurer",
     title: "Sara Lin",
     src: `${baseUrl}/images/officer-photos/sara.jpg`,
@@ -43,13 +50,6 @@ const data = [
     src: `${baseUrl}/images/officer-photos/alvin.jpg`,
     backContent: "Placeholder",
     linkedin: "https://www.linkedin.com/in/alvin-wong-uf/"
-  },
-  {
-    category: "Secretary",
-    title: "Jingtong Zeng",
-    src: `${baseUrl}/images/officer-photos/jingtong.jpg`,
-    backContent: "Placeholder",
-    linkedin: "https://www.linkedin.com/in/jingtong--zeng/"
   },
   {
     category: "ML Lecturer",
@@ -102,14 +102,6 @@ const data = [
     src: `${baseUrl}/images/officer-photos/jackson.jpg`,
     backContent: "Placeholder",
     linkedin: "https://www.linkedin.com/in/jackson-e-jones/"
-  },
-
-  {
-    category: "Social Events",
-    title: "Grace Cavaretta",
-    src: `${baseUrl}/images/officer-photos/grace.jpg`,
-    backContent: "Placeholder",
-    linkedin: "https://www.linkedin.com/in/grace-cavarretta/"
   },
   {
     category: "Social Events",
