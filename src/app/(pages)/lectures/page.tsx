@@ -8,6 +8,8 @@ import { SearchBar } from "@/components/ui/search-bar";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
 import { AddLectureModal } from "@/components/AddLectureModal";
+import { DeleteLectureModal } from "@/components/DeleteLectureModal";
+import { deleteLecture } from "@/lib/lecture-actions";
 
 interface Lecture {
   id?: string;
@@ -37,6 +39,9 @@ function Projects() {
   const [checkingBoardStatus, setCheckingBoardStatus] = React.useState(true);
   const [addModalOpen, setAddModalOpen] = React.useState(false);
   const [accessError, setAccessError] = React.useState("");
+  const [deleteError, setDeleteError] = React.useState("");
+  const [deletingLectureKey, setDeletingLectureKey] = React.useState<string | null>(null);
+  const [lectureToDelete, setLectureToDelete] = React.useState<Lecture | null>(null);
 
   const fetchLectures = React.useCallback(async () => {
     try {
@@ -165,6 +170,53 @@ function Projects() {
     });
   }, [query, semester, videos]);
 
+  const handleDeleteLectureRequest = React.useCallback(
+    (lecture: Lecture) => {
+
+      if (!authStatus.isBoardMember) {
+        setDeleteError("Only board members can delete lectures.");
+        return;
+      }
+
+      setLectureToDelete(lecture);
+    },
+    [authStatus.isBoardMember]
+  );
+
+  const confirmDeleteLecture = React.useCallback(async () => {
+    if (!lectureToDelete) return;
+    const lectureKey =
+      lectureToDelete.id ??
+      `${lectureToDelete.name}-${lectureToDelete.date}-${lectureToDelete.link}`;
+
+      setDeleteError("");
+      setDeletingLectureKey(lectureKey);
+
+      try {
+        const result = await deleteLecture({
+          id: lectureToDelete.id,
+          name: lectureToDelete.name,
+          date: lectureToDelete.date,
+          semester: lectureToDelete.semester,
+          link: lectureToDelete.link,
+        });
+        if (!result.ok) {
+          setDeleteError(result.error);
+          return;
+        }
+
+        await fetchLectures();
+        setLectureToDelete(null);
+      } catch (deleteErr) {
+        console.error("Failed to delete lecture:", deleteErr);
+        setDeleteError("Failed to delete lecture. Please try again.");
+      } finally {
+        setDeletingLectureKey(null);
+      }
+    },
+    [fetchLectures, lectureToDelete]
+  );
+
   if (loading) {
     return (
       <div className="my-32 min-h-screen w-screen flex items-center justify-center">
@@ -189,6 +241,11 @@ function Projects() {
     <>
       <div className="my-32 min-h-screen w-screen flex items-center justify-center">
       <div className="w-[90%] max-w-5xl lg:max-w-7xl h-full flex flex-col items-start justify-start gap-8">
+        {deleteError && (
+          <div className="w-full rounded-xl border border-red-500/30 bg-red-500/5 p-4 text-sm text-red-200">
+            {deleteError}
+          </div>
+        )}
         <div className="flex flex-col items-start justify-start w-full">
           <div className="mb-4 flex items-start justify-between gap-4 w-full flex-wrap">
             <div>
@@ -287,7 +344,7 @@ function Projects() {
                 <p className="text-base font-bold text-white/80 mb-4">
                   {video.date}
                 </p>
-                <div className="flex w-full gap-4 mt-auto">
+                <div className="flex w-full flex-wrap gap-4 mt-auto">
                   <a href={video.link} target="_blank" rel="noopener noreferrer">
                     <ShimmerButton
                       borderRadius="10px"
@@ -306,6 +363,20 @@ function Projects() {
                       Go to slides
                     </ShimmerButton>
                   </a>
+                  {authStatus.isBoardMember && (
+                    <ShimmerButton
+                      type="button"
+                      borderRadius="10px"
+                      background="#00272b"
+                      className="py-2 px-8  text-base font-light w-fit shadow-md"
+                      onClick={() => handleDeleteLectureRequest(video)}
+                      disabled={deletingLectureKey === (video.id ?? `${video.name}-${video.date}-${video.link}`)}
+                    >
+                      {deletingLectureKey === (video.id ?? `${video.name}-${video.date}-${video.link}`)
+                        ? "Deleting..."
+                        : "Delete lecture"}
+                    </ShimmerButton>
+                  )}
                 </div>
               </div>
             ))}
@@ -317,6 +388,18 @@ function Projects() {
         <AddLectureModal
           onClose={() => setAddModalOpen(false)}
           onAdded={fetchLectures}
+        />
+      )}
+      {lectureToDelete && (
+        <DeleteLectureModal
+          lectureName={lectureToDelete.name}
+          loading={deletingLectureKey !== null}
+          onClose={() => {
+            if (!deletingLectureKey) {
+              setLectureToDelete(null);
+            }
+          }}
+          onConfirm={confirmDeleteLecture}
         />
       )}
     </>

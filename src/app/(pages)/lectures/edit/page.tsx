@@ -3,7 +3,7 @@ import Link from "next/link";
 import { createServerClient } from "@/lib/supabase-server";
 import { isBoardMemberEmail } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
-import { LecturesEditView } from "./LecturesEditView";
+import { LecturesEditView, type Lecture } from "./LecturesEditView";
 
 export default async function LecturesEditPage() {
   const supabase = await createServerClient();
@@ -25,9 +25,20 @@ export default async function LecturesEditPage() {
     );
   }
 
+  const { data: lecturesData, error: lecturesError } = await supabase
+    .from("lectures")
+    .select("*")
+    .order("date", { ascending: false });
+
+  if (lecturesError) {
+    console.error("[LecturesEditPage] Failed to fetch lectures", lecturesError);
+  }
+
+  const lectures = (lecturesData ?? []) as Lecture[];
+
   return (
     <div className="w-full max-w-7xl mx-auto px-4 md:px-10 my-32">
-      <LecturesEditView />
+      <LecturesEditView initialLectures={lectures} />
     </div>
   );
 }
