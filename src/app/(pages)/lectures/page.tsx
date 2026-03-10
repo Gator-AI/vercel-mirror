@@ -2,14 +2,11 @@
 
 import React, { useEffect } from "react";
 import Image from "next/image";
-import { Plus } from "react-feather";
+import { Edit2 } from "react-feather";
 import ShimmerButton from "@/components/ui/shimmer-button";
 import { SearchBar } from "@/components/ui/search-bar";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
-import { AddLectureModal } from "@/components/AddLectureModal";
-import { DeleteLectureModal } from "@/components/DeleteLectureModal";
-import { deleteLecture } from "@/lib/lecture-actions";
 
 interface Lecture {
   id?: string;
@@ -37,11 +34,7 @@ function Projects() {
     isAuthenticated: false,
   });
   const [checkingBoardStatus, setCheckingBoardStatus] = React.useState(true);
-  const [addModalOpen, setAddModalOpen] = React.useState(false);
   const [accessError, setAccessError] = React.useState("");
-  const [deleteError, setDeleteError] = React.useState("");
-  const [deletingLectureKey, setDeletingLectureKey] = React.useState<string | null>(null);
-  const [lectureToDelete, setLectureToDelete] = React.useState<Lecture | null>(null);
 
   const fetchLectures = React.useCallback(async () => {
     try {
@@ -129,23 +122,22 @@ function Projects() {
     };
   }, []);
 
-  const handleAddLectureClick = React.useCallback(() => {
+  const handleEditLecturesClick = React.useCallback(() => {
     if (checkingBoardStatus) return;
 
     if (!authStatus.isAuthenticated) {
-      window.location.href = "/login?next=/lectures";
+      window.location.href = "/login?next=/lectures/edit";
       return;
     }
 
     if (!authStatus.isBoardMember) {
-      setAccessError("Only board members can add lectures.");
+      setAccessError("Only board members can edit lectures.");
       return;
     }
 
     setAccessError("");
-    setAddModalOpen(true);
+    window.location.href = "/lectures/edit";
   }, [authStatus, checkingBoardStatus]);
-
   const filteredVideos = React.useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
     return videos.filter((video) => {
@@ -169,53 +161,6 @@ function Projects() {
       return haystack.includes(normalizedQuery);
     });
   }, [query, semester, videos]);
-
-  const handleDeleteLectureRequest = React.useCallback(
-    (lecture: Lecture) => {
-
-      if (!authStatus.isBoardMember) {
-        setDeleteError("Only board members can delete lectures.");
-        return;
-      }
-
-      setLectureToDelete(lecture);
-    },
-    [authStatus.isBoardMember]
-  );
-
-  const confirmDeleteLecture = React.useCallback(async () => {
-    if (!lectureToDelete) return;
-    const lectureKey =
-      lectureToDelete.id ??
-      `${lectureToDelete.name}-${lectureToDelete.date}-${lectureToDelete.link}`;
-
-      setDeleteError("");
-      setDeletingLectureKey(lectureKey);
-
-      try {
-        const result = await deleteLecture({
-          id: lectureToDelete.id,
-          name: lectureToDelete.name,
-          date: lectureToDelete.date,
-          semester: lectureToDelete.semester,
-          link: lectureToDelete.link,
-        });
-        if (!result.ok) {
-          setDeleteError(result.error);
-          return;
-        }
-
-        await fetchLectures();
-        setLectureToDelete(null);
-      } catch (deleteErr) {
-        console.error("Failed to delete lecture:", deleteErr);
-        setDeleteError("Failed to delete lecture. Please try again.");
-      } finally {
-        setDeletingLectureKey(null);
-      }
-    },
-    [fetchLectures, lectureToDelete]
-  );
 
   if (loading) {
     return (
@@ -241,11 +186,6 @@ function Projects() {
     <>
       <div className="my-32 min-h-screen w-screen flex items-center justify-center">
       <div className="w-[90%] max-w-5xl lg:max-w-7xl h-full flex flex-col items-start justify-start gap-8">
-        {deleteError && (
-          <div className="w-full rounded-xl border border-red-500/30 bg-red-500/5 p-4 text-sm text-red-200">
-            {deleteError}
-          </div>
-        )}
         <div className="flex flex-col items-start justify-start w-full">
           <div className="mb-4 flex items-start justify-between gap-4 w-full flex-wrap">
             <div>
@@ -261,11 +201,11 @@ function Projects() {
                 type="button"
                 variant="secondaryOutline"
                 className="shrink-0 text-sm font-medium"
-                onClick={handleAddLectureClick}
+                onClick={handleEditLecturesClick}
                 disabled={checkingBoardStatus}
               >
-                <Plus size={16} className="mr-2 inline-block" />
-                Add lecture
+                <Edit2 size={16} className="mr-2 inline-block" />
+                Edit lectures
               </Button>
               {accessError && (
                 <p className="text-xs text-red-300 text-right max-w-[220px]">
@@ -363,20 +303,6 @@ function Projects() {
                       Go to slides
                     </ShimmerButton>
                   </a>
-                  {authStatus.isBoardMember && (
-                    <ShimmerButton
-                      type="button"
-                      borderRadius="10px"
-                      background="#00272b"
-                      className="py-2 px-8  text-base font-light w-fit shadow-md"
-                      onClick={() => handleDeleteLectureRequest(video)}
-                      disabled={deletingLectureKey === (video.id ?? `${video.name}-${video.date}-${video.link}`)}
-                    >
-                      {deletingLectureKey === (video.id ?? `${video.name}-${video.date}-${video.link}`)
-                        ? "Deleting..."
-                        : "Delete lecture"}
-                    </ShimmerButton>
-                  )}
                 </div>
               </div>
             ))}
@@ -384,24 +310,6 @@ function Projects() {
         )}
         </div>
       </div>
-      {addModalOpen && authStatus.isBoardMember && (
-        <AddLectureModal
-          onClose={() => setAddModalOpen(false)}
-          onAdded={fetchLectures}
-        />
-      )}
-      {lectureToDelete && (
-        <DeleteLectureModal
-          lectureName={lectureToDelete.name}
-          loading={deletingLectureKey !== null}
-          onClose={() => {
-            if (!deletingLectureKey) {
-              setLectureToDelete(null);
-            }
-          }}
-          onConfirm={confirmDeleteLecture}
-        />
-      )}
     </>
   );
 }
