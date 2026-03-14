@@ -3,200 +3,199 @@
 import React from "react";
 import Image from "next/image";
 import ShimmerButton from "@/components/ui/shimmer-button";
-import { GitHub } from "react-feather";
+import { Edit2, GitHub } from "react-feather";
+import { createClient } from "@/lib/supabase/client";
+import { Button } from "@/components/ui/button";
 
-const baseUrl = process.env.NEXT_PUBLIC_BLOB_BASE_URL;
-if (!baseUrl) {
-  throw new Error("NEXT_PUBLIC_BLOB_BASE_URL is not set");
+const blobBaseUrl = process.env.NEXT_PUBLIC_BLOB_BASE_URL?.replace(/\/$/, "") ?? "";
+
+interface Project {
+  id?: string;
+  name: string;
+  description: string;
+  github_url: string | null;
+  learn_more_url: string | null;
+  tech_stack: string[] | null;
+  difficulty: string | null;
+  image: string | null;
 }
 
-const PROJECTS = [
-  {
-    name: "SafeTrip IQ",
-    description: "AI powered travel safety advisor",
-    link: "https://github.com/ufgatorai",
-    techStack: [
-      "Python",
-      "Javascript",
-      "HF Transformers",
-      "XGBoost",
-      "FastAPI",
-      "Selenium",
-      "Docker",
-      "MLflow",
-    ],
-    difficulty: "Intermediate",
-    image: `${baseUrl}/images/projects/safetrip-iq.png`,
-  },
-  {
-    name: "CanvasGPT",
-    description: "Create a safe, Course-Specific AI tutor in minutes",
-    techStack: [
-      "Python",
-      "FastAPI",
-      "Hugging Face",
-      "LlamaIndex, Chroma, React, Canvas LTI",
-    ],
-    difficulty: "Intermediate",
-    link: "https://github.com/ufgatorai",
-    image: "https://placehold.co/320x180",
-  },
-  {
-    name: "ContentAI",
-    description:
-      "An AI-powered, full-stack system that autonomously ideates, creates, and posts engaging content on Instagram daily.",
-    techStack: [
-      "CrewAI/Autogen",
-      "LlamaIndex",
-      "Instagram Graph API",
-      "FastAPI",
-      "ReactJs",
-    ],
-    difficulty: "Advanced",
-    link: "https://github.com/ufgatorai",
-    image: `${baseUrl}/images/projects/content-ai.png`,
-  },
-  {
-    name: "Gator Course Advisor",
-    description:
-      "Gator Course Advisor uses AI to find the perfect UF electives tailored just for you.",
-    link: "https://github.com/ufgatorai",
-    techStack: ["Python", "Pandas", "SkLearn", "Surprise", "Streamlit/Flask"],
-    difficulty: "Intermediate",
-    image: `${baseUrl}/images/projects/course-advisor.png`,
-  },
-  {
-    name: "Quant Lab",
-    description:
-      "A platform to test trading strategies on past data with an ML model suggesting improvements.",
-    link: "https://github.com/ufgatorai",
-    techStack: [
-      "Python",
-      "Pandas",
-      "NumPy",
-      "APIs (Yahoo Finance, Quandl)",
-      "Matplotlib",
-      "SkLearn",
-      "SQL",
-    ],
-    difficulty: "Intermediate",
-    image: "https://placehold.co/320x180",
-  },
-  {
-    name: "Keyframe",
-    description:
-      "AI-powered video generator to create entertaining videos of your liking.",
-    link: "https://github.com/ufgatorai",
-    techStack: [
-      "HTML + CSS",
-      "Python",
-      "MoviePy",
-      "DeepSeek/OpenAI",
-      "Suno/Aiva",
-      "ElevenLabs",
-    ],
-    difficulty: "Intermediate",
-    image: `${baseUrl}/images/projects/keyframe.png`,
-  },
-  {
-    name: "AI-Assisted Roblox Game Development Lab",
-    description: "Use AI tools to help build a playable Roblox game",
-    link: "https://github.com/ufgatorai",
-    techStack: ["Python", "Pandas", "SkLearn", "Surprise", "Streamlit/Flask"],
-    difficulty: "Beginner",
-    image: "https://placehold.co/320x180",
-  },
-  {
-    name: "Cryptocurrency Fraud Detection",
-    description: "Train an AI model to detect front running attempts",
-    link: "https://github.com/ufgatorai",
-    techStack: ["Tensorflow", "MongoDB", "Websocket"],
-    difficulty: "Beginner/Hard",
-    image: `${baseUrl}/images/projects/crypto-fraud.png`,
-  },
-  {
-    name: "Market Risk Identification",
-    description:
-      "Identify clusters of risk in financial markets through unsupervised ML",
-    link: "https://github.com/ufgatorai",
-    techStack: [
-      "Python, PyTorch, SkLearn",
-      "Pandas",
-      "Matplotlib",
-      "BeautifulSoup",
-      "Requests",
-      "APIs",
-    ],
-    difficulty: "Intermediate",
-    image: `${baseUrl}/images/projects/unsupervised-market-risk.png`,
-  },
-  {
-    name: "Study Buddy (SAT Prep)",
-    description:
-      "Study platform using adaptive learning and AI to deliver personalized flashcards, quizzes, and progress tracking.",
-    link: "https://github.com/ufgatorai",
-    techStack: [
-      "HTML + CSS",
-      "Node.js + Express",
-      "Render",
-      "React",
-      "MongoDB",
-      "OpenAI",
-    ],
-    difficulty: "Intermediate",
-    image: `${baseUrl}/images/projects/study-buddy.png`,
-  },
-  {
-    name: "HuntingParty.ai",
-    description:
-      "AI powered financial modeling solution for commercial real estate investors",
-    link: "https://github.com/ufgatorai",
-    techStack: [
-      "Python",
-      "Streamlit",
-      "PyTorch",
-      "TensorFlow",
-      "Pandas",
-      "NumPy",
-      "OpenAI",
-      "SkLearn",
-      "APIs",
-    ],
-    difficulty: "Advanced",
-    image: `${baseUrl}/images/projects/huntingparty-ai.png`,
-  },
-  {
-    name: "Theory of Mind Simulator",
-    description: "AI powered prisoner's dilemma simulation",
-    link: "https://github.com/ufgatorai",
-    techStack: ["Python", "Streamlit", "PyTorch", "TensorFlow", "OpenAI"],
-    difficulty: "Advanced",
-    image: `${baseUrl}/images/projects/theory-of-mind.png`,
-  },
-  {
-    name: "Real-time Lane Departure Warning System",
-    description:
-      "Real-time AI System capable of detecting lane departures to enhance driving safety",
-    link: "https://github.com/ufgatorai",
-    techStack: ["Python", "PyTorch", "NumPy", "Raspberry Pi"],
-    difficulty: "Advanced",
-    image: "https://placehold.co/320x180",
-  },
-];
+function normalizeTechStack(value: unknown): string[] {
+  if (Array.isArray(value)) {
+    return value.filter((item): item is string => typeof item === "string");
+  }
+  return [];
+}
+
+function resolveImageUrl(image: string | null): string | null {
+  if (!image) {
+    return null;
+  }
+
+  if (image.startsWith("http://") || image.startsWith("https://")) {
+    return image;
+  }
+
+  if (image.startsWith("/") && blobBaseUrl) {
+    return `${blobBaseUrl}${image}`;
+  }
+
+  return image;
+}
 
 function Projects() {
+  const [projects, setProjects] = React.useState<Project[]>([]);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState<string | null>(null);
+  const [authStatus, setAuthStatus] = React.useState({
+    isBoardMember: false,
+    isAuthenticated: false,
+  });
+  const [checkingBoardStatus, setCheckingBoardStatus] = React.useState(true);
+  const [accessError, setAccessError] = React.useState("");
+
+  const fetchProjects = React.useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const supabase = createClient();
+      const { data, error: fetchError } = await supabase
+        .from("projects")
+        .select("*")
+        .order("sort_order", { ascending: true })
+        .order("name", { ascending: true });
+
+      if (fetchError) {
+        throw new Error(fetchError.message);
+      }
+
+      const normalized = ((data ?? []) as Project[]).map((project) => ({
+        ...project,
+        tech_stack: normalizeTechStack(project.tech_stack),
+      }));
+
+      setProjects(normalized);
+    } catch (err) {
+      console.error("Error fetching projects:", err);
+      setError(err instanceof Error ? err.message : "Failed to load projects");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    void fetchProjects();
+  }, [fetchProjects]);
+
+  React.useEffect(() => {
+    let isMounted = true;
+
+    async function fetchBoardStatus() {
+      try {
+        const response = await fetch("/api/auth/board-status", {
+          credentials: "include",
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch board status");
+        }
+
+        const data = await response.json();
+        if (isMounted) {
+          setAuthStatus({
+            isBoardMember: Boolean(data?.isBoardMember),
+            isAuthenticated: Boolean(data?.isAuthenticated),
+          });
+        }
+      } catch (fetchError) {
+        console.error("Error checking board status:", fetchError);
+        if (isMounted) {
+          setAuthStatus({ isBoardMember: false, isAuthenticated: false });
+        }
+      } finally {
+        if (isMounted) {
+          setCheckingBoardStatus(false);
+        }
+      }
+    }
+
+    void fetchBoardStatus();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleEditProjectsClick = React.useCallback(() => {
+    if (checkingBoardStatus) return;
+
+    if (!authStatus.isAuthenticated) {
+      window.location.href = "/login?next=/projects/edit";
+      return;
+    }
+
+    if (!authStatus.isBoardMember) {
+      setAccessError("Only board members can edit projects.");
+      return;
+    }
+
+    setAccessError("");
+    window.location.href = "/projects/edit";
+  }, [authStatus, checkingBoardStatus]);
+
+  if (loading) {
+    return (
+      <div className="my-32 min-h-screen w-screen flex items-center justify-center">
+        <div className="w-[90%] max-w-5xl lg:max-w-7xl h-full flex flex-col items-center justify-center gap-8">
+          <p className="text-white/80">Loading projects...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="my-32 min-h-screen w-screen flex items-center justify-center">
+        <div className="w-[90%] max-w-5xl lg:max-w-7xl h-full flex flex-col items-center justify-center gap-8">
+          <p className="text-red-300">{error}</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="my-32 min-h-screen w-screen flex items-center justify-center">
       <div className="w-[90%] max-w-5xl lg:max-w-7xl h-full flex flex-col items-start justify-start gap-8">
-        <div className="flex flex-col items-start justify-start">
-          <h1 className="text-2xl md:text-5xl font-thin leading-none">
-            Projects
-          </h1>
-          <p className="mt-2 text-white/80 text-xl">
-            Explore our club&apos;s latest projects and contributions.
-          </p>
-          <div className="mt-8 flex items-center gap-4">
-            <a href="https://linktr.ee/thegaitorclub" target="_blank">
+        <div className="flex flex-col items-start justify-start w-full">
+          <div className="mb-4 flex items-start justify-between gap-4 w-full flex-wrap">
+            <div>
+              <h1 className="text-2xl md:text-5xl font-thin leading-none">Projects</h1>
+              <p className="mt-2 text-white/80 text-xl">
+                Explore our club&apos;s latest projects and contributions.
+              </p>
+            </div>
+            <div className="flex flex-col items-end gap-2">
+              <Button
+                type="button"
+                variant="secondaryOutline"
+                className="shrink-0 text-sm font-medium"
+                onClick={handleEditProjectsClick}
+                disabled={checkingBoardStatus}
+              >
+                <Edit2 size={16} className="mr-2 inline-block" />
+                Edit projects
+              </Button>
+              {accessError && (
+                <p className="text-xs text-red-300 text-right max-w-[240px]">
+                  {accessError}
+                </p>
+              )}
+            </div>
+          </div>
+
+          <div className="mt-4 flex items-center gap-4">
+            <a href="https://linktr.ee/thegaitorclub" target="_blank" rel="noopener noreferrer">
               <ShimmerButton
                 borderRadius="10px"
                 background="#00272b"
@@ -207,70 +206,91 @@ function Projects() {
             </a>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-          {PROJECTS.map((project) => (
-            <div
-              key={project.name}
-              className="bg-white/10 border border-white/20 rounded-xl p-6 shadow-lg flex flex-col gap-3 hover:scale-[1.01] transition-transform duration-200"
-            >
-              <div className="w-full h-40 bg-white/20 rounded mb-2 flex items-center justify-center">
-                <Image
-                  src={typeof project.image === "string" ? project.image.replace("/public", "") : (project.image as { src: string }).src}
-                  alt={project.name + " image"}
-                  width={320}
-                  height={160}
-                  className="object-contain w-full h-full"
-                  style={{ maxHeight: "100%", maxWidth: "100%" }}
-                  priority={false}
-                />
-              </div>
-              <div className="flex flex-col items-start justify-between gap-1 h-full min-h-[180px]">
-                <div>
-                  <h2 className="font-bold text-xl md:text-2xl text-white mb-1">
-                    {project.name}
-                  </h2>
-                  <p className="text-[#F59E0B] text-md leading-none">
-                    {project.description}
-                  </p>
-                </div>
-                {/* <div className="flex-grow" /> */}
-                {project.techStack?.length ? (
-                  <div className="bg-[#00272b]/50 p-2 rounded-md flex flex-col gap-1">
-                    <p className=" w-fit text-md">
-                      Difficulty:{" "}
-                      <span className="bg-[#F59E0B] rounded-full px-2 py-[2px] ">
-                        {project.difficulty}
-                      </span>
-                    </p>
-                    <p>Tech Stack:</p>
-                    <p className="text-[#6FFFE4]">
-                      {project.techStack.join(", ")}
-                    </p>
-                  </div>
-                ) : null}
-              </div>
 
-              <div className="flex w-full justify-between mt-auto">
-                <a href="/events/gbm1-08-09-25" target="_blank">
-                  <ShimmerButton
-                    borderRadius="10px"
-                    background="#00272b"
-                    className="py-2 px-8  text-base font-light w-fit shadow-md"
-                  >
-                    Learn More
-                  </ShimmerButton>
-                </a>
-                <a
-                  href="https://github.com/ufgatorai"
-                  target="_blank"
-                  className="bg-white/50 p-2 rounded-full hover:scale-105 transition-transform"
+        {projects.length === 0 ? (
+          <div className="w-full rounded-xl border border-white/10 bg-white/5 p-10 text-center text-white/80">
+            <p>No projects found yet.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+            {projects.map((project) => {
+              const imageUrl = resolveImageUrl(project.image);
+
+              return (
+                <div
+                  key={project.id ?? project.name}
+                  className="bg-white/10 border border-white/20 rounded-xl p-6 shadow-lg flex flex-col gap-3 hover:scale-[1.01] transition-transform duration-200"
                 >
-                  <GitHub />
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
+                  <div className="w-full h-40 bg-white/20 rounded mb-2 flex items-center justify-center">
+                    {imageUrl ? (
+                      <Image
+                        src={imageUrl}
+                        alt={`${project.name} image`}
+                        width={320}
+                        height={160}
+                        className="object-contain w-full h-full"
+                        style={{ maxHeight: "100%", maxWidth: "100%" }}
+                        priority={false}
+                        unoptimized
+                      />
+                    ) : (
+                      <p className="text-sm text-white/70">No image</p>
+                    )}
+                  </div>
+
+                  <div className="flex flex-col items-start justify-between gap-1 h-full min-h-[180px]">
+                    <div>
+                      <h2 className="font-bold text-xl md:text-2xl text-white mb-1">
+                        {project.name}
+                      </h2>
+                      <p className="text-[#F59E0B] text-md leading-none">{project.description}</p>
+                    </div>
+
+                    {project.tech_stack?.length ? (
+                      <div className="bg-[#00272b]/50 p-2 rounded-md flex flex-col gap-1">
+                        <p className="w-fit text-md">
+                          Difficulty:{" "}
+                          <span className="bg-[#F59E0B] rounded-full px-2 py-[2px]">
+                            {project.difficulty ?? "Unknown"}
+                          </span>
+                        </p>
+                        <p>Tech Stack:</p>
+                        <p className="text-[#6FFFE4]">{project.tech_stack.join(", ")}</p>
+                      </div>
+                    ) : null}
+                  </div>
+
+                  <div className="flex w-full justify-between mt-auto">
+                    {project.learn_more_url ? (
+                      <a href={project.learn_more_url} target="_blank" rel="noopener noreferrer">
+                        <ShimmerButton
+                          borderRadius="10px"
+                          background="#00272b"
+                          className="py-2 px-8 text-base font-light w-fit shadow-md"
+                        >
+                          Learn More
+                        </ShimmerButton>
+                      </a>
+                    ) : (
+                      <span />
+                    )}
+
+                    {project.github_url ? (
+                      <a
+                        href={project.github_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-white/50 p-2 rounded-full hover:scale-105 transition-transform"
+                      >
+                        <GitHub />
+                      </a>
+                    ) : null}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
