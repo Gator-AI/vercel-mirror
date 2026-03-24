@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 // import trailMixSocial from "@/images/events-photos/trail-mix-social.jpg";
 // import gbm2 from "@/images/events-photos/gbm2-photos/GBM-2-Fall-2025.jpg";
 // import gbm1 from "@/images/events-photos/gbm1-photos/GBM1-Fall-2025.jpg";
@@ -8,6 +8,15 @@ import { motion } from "framer-motion";
 // import bakeSale from "@/images/events-photos/bake-sale.png";
 import Link from "next/link";
 import Image from "next/image";
+
+type TimelineItem = {
+  title: string;
+  dateLabel: string;
+  date?: string;
+  description: string;
+  image: string;
+  slug: string;
+};
 
 const getFileName = (url: string, fallback: string) => {
   try {
@@ -27,59 +36,61 @@ if (!baseUrl) {
   throw new Error("NEXT_PUBLIC_BLOB_BASE_URL is not set");
 }
 
-// Data for the gallery items (these will link to their respective pages with a short description of the activity)
-const items = [
+// Data for the timeline entries.
+const timelineItems: TimelineItem[] = [
   {
-    text: "Trail Mix Social",
-    type: "default",
+    title: "Trail Mix Social",
+    dateLabel: "Community Social",
+    description:
+      "A relaxed social meetup where members connected, shared project ideas, and welcomed new faces.",
     image: "https://placehold.co/320x180",
     slug: "trail-mix-social",
   },
   {
-    text: "General Body Meeting 1 - 08/09/2025",
-    type: "large",
+    title: "General Body Meeting 1",
+    dateLabel: "Aug 9, 2025",
+    date: "2025-08-09",
+    description:
+      "Kickoff session for the semester featuring announcements, tracks, and opportunities to get involved.",
     image: `${baseUrl}/images/event-photos/gbm1-photos-fall-2025/GBM1-Fall-2025.jpg`,
     slug: "gbm1-08-09-25",
   },
   {
-    text: "HyperGator Tour",
-    type: "default",
+    title: "HyperGator Tour",
+    dateLabel: "Technical Visit",
+    description:
+      "Members explored campus compute resources and learned practical tips for scaling ML workflows.",
     image: "https://placehold.co/320x180",
     slug: "hypergator-tour",
   },
   {
-    text: "General Body Meeting 2 - 10/22/2025",
-    type: "large",
+    title: "General Body Meeting 2",
+    dateLabel: "Oct 22, 2025",
+    date: "2025-10-22",
+    description:
+      "Mid-semester updates and community highlights with demos from ongoing student initiatives.",
     image: `${baseUrl}/images/event-photos/gbm2-photos-fall-2025/GBM-2-Fall-2025.jpg`,
     slug: "gbm2-10-22-25",
   },
 
   {
-    text: "GatorAI Bake Sale",
-    type: "large",
+    title: "GatorAI Bake Sale",
+    dateLabel: "Fundraiser",
+    description:
+      "A community fundraiser supporting club activities and new learning events for members.",
     image: "https://placehold.co/320x180",
     slug: "bake-sale",
   },
   {
-    text: "ML Monday 1 - 09/15/2025",
-    type: "default",
+    title: "ML Monday 1",
+    dateLabel: "Sep 15, 2025",
+    date: "2025-09-15",
+    description:
+      "Hands-on intro session focused on practical ML workflows, tooling, and beginner-friendly projects.",
     image: `${baseUrl}/images/ml-monday-1.jpg`,
     slug: "ml-monday-1",
   },
 ];
-
-const getItemClasses = (type: string) => {
-  switch (type) {
-    case "medium":
-      return "row-span-3";
-    case "large":
-      return "row-span-3";
-    case "full":
-      return "row-span-1 md:col-span-full md:row-span-2";
-    default:
-      return "row-span-2";
-  }
-};
 
 const containerVariants = {
   rest: { scale: 1 },
@@ -89,6 +100,11 @@ const containerVariants = {
 const overlayVariants = {
   rest: { opacity: 0.3 },
   hover: { opacity: 0 },
+};
+
+const panelVariants = {
+  collapsed: { opacity: 0, height: 0, marginTop: 0 },
+  expanded: { opacity: 1, height: "auto", marginTop: 16 },
 };
 
 const triggerImageDownload = async (
@@ -127,80 +143,184 @@ const triggerImageDownload = async (
 };
 
 const EventsGallery = () => {
+  const sortedItems = React.useMemo(() => {
+    const datedItems = timelineItems.filter((item) => Boolean(item.date));
+    const undatedItems = timelineItems.filter((item) => !item.date);
+
+    datedItems.sort((a, b) => {
+      const first = new Date(a.date as string).getTime();
+      const second = new Date(b.date as string).getTime();
+      return second - first;
+    });
+
+    return [...datedItems, ...undatedItems];
+  }, []);
+
+  const [activeSlug, setActiveSlug] = React.useState(sortedItems[0]?.slug ?? "");
+
   return (
-    <div className="min-h-screen w-full flex flex-col items-center">
-      <div
-        className="grid gap-[30px] w-full"
-        style={{
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-          gridAutoRows: "150px",
-          gridAutoFlow: "row dense",
-        }}
-      >
-        {items.map((item, index) => (
-          <motion.div
-            key={index}
-            variants={containerVariants}
-            initial="rest"
-            whileHover="hover"
-            className={`relative flex flex-col justify-end shadow-lg cursor-pointer ${getItemClasses(
-              item.type
-            )}`}
-            style={{ borderRadius: "8px", overflow: "hidden" }}
-          >
-            <Image
-              src={item.image}
-              alt={item.text}
-              fill
-              style={{ objectFit: "cover" }}
-            />
+    <div className="w-full">
+      <div className="relative mx-auto w-full max-w-6xl">
+        <div className="absolute left-6 top-0 h-full w-px bg-gradient-to-b from-[#6fffe4]/15 via-[#6fffe4]/70 to-transparent md:left-1/2 md:-translate-x-1/2" />
 
-            <motion.div
-              variants={overlayVariants}
-              transition={{ duration: 0.3 }}
-              className="absolute inset-0 bg-black pointer-events-none"
-            />
+        <div className="space-y-4 md:space-y-6">
+          {sortedItems.map((item, index) => {
+            const isActive = activeSlug === item.slug;
+            const isEven = index % 2 === 0;
 
-            <div className="relative z-10 p-4 bg-white text-gray-500 text-sm tracking-wide">
-              <p className="">{item.text}</p>
-            </div>
+            return (
+              <div key={item.slug} className="relative">
+                <button
+                  type="button"
+                  onClick={() => setActiveSlug(item.slug)}
+                  className="group w-full text-left"
+                >
+                  <div className="grid grid-cols-[48px_1fr] gap-4 md:grid-cols-[1fr_56px_1fr] md:gap-8">
+                    <div className={`${isEven ? "md:block" : "md:hidden"} hidden`} />
 
-            <button
-              type="button"
-              onClick={(event) =>
-                triggerImageDownload(
-                  event,
-                  item.image,
-                  getFileName(item.image, item.slug)
-                )
-              }
-              className="absolute top-3 right-3 z-30 rounded-md bg-black/60 p-2 text-white hover:bg-black/75"
-              aria-label={`Download ${item.text} image`}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-4 w-4"
-                aria-hidden="true"
-              >
-                <path d="M12 3v12" />
-                <path d="m7 10 5 5 5-5" />
-                <path d="M5 21h14" />
-              </svg>
-            </button>
+                    <div className="relative flex items-start justify-center">
+                      <motion.span
+                        initial={false}
+                        animate={{
+                          scale: isActive ? 1.15 : 1,
+                          boxShadow: isActive
+                            ? "0 0 0 8px rgba(111,255,228,0.15)"
+                            : "0 0 0 0 rgba(111,255,228,0)",
+                        }}
+                        transition={{ duration: 0.2 }}
+                        className={`mt-3 block h-4 w-4 rounded-full border ${
+                          isActive
+                            ? "border-[#6fffe4] bg-[#6fffe4]"
+                            : "border-[#6fffe4]/70 bg-[#00252c]"
+                        }`}
+                      />
+                    </div>
 
-            <Link
-              href={`/events/${item.slug}`}
-              className="absolute inset-0 z-20"
-              aria-label={item.text}
-            />
-          </motion.div>
-        ))}
+                    <motion.div
+                      variants={containerVariants}
+                      initial="rest"
+                      whileHover="hover"
+                      className={`rounded-xl border px-4 py-3 md:px-5 md:py-4 ${
+                        isActive
+                          ? "border-[#6fffe4]/70 bg-[#001f25] ring-2 ring-[#6fffe4]/55 shadow-[0_0_0_1px_rgba(111,255,228,0.25)]"
+                          : "border-white/10 bg-white/[0.03]"
+                      } ${isEven ? "md:col-start-3" : "md:col-start-1"}`}
+                    >
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="rounded-full border border-[#6fffe4]/45 bg-[#6fffe4]/10 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#90ffe9]">
+                          {item.dateLabel}
+                        </span>
+                        {isActive ? (
+                          <span className="text-xs uppercase tracking-[0.12em] text-white/65">
+                            Open
+                          </span>
+                        ) : null}
+                      </div>
+                      <h3 className="mt-2 text-xl font-semibold text-white md:text-2xl">
+                        {item.title}
+                      </h3>
+
+                      <div className="mt-3 grid items-start gap-3 md:grid-cols-[1fr_200px]">
+                        <p className="max-w-xl text-sm leading-relaxed text-white/75 md:text-base">
+                          {item.description}
+                        </p>
+
+                        <div className="relative overflow-hidden rounded-lg border border-white/20 bg-black/30">
+                          <div className="relative aspect-[4/3] w-full">
+                            <Image
+                              src={item.image}
+                              alt={`${item.title} preview`}
+                              fill
+                              style={{ objectFit: "cover" }}
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {isActive ? (
+                    <motion.div
+                      key={`${item.slug}-panel`}
+                      variants={panelVariants}
+                      initial="collapsed"
+                      animate="expanded"
+                      exit="collapsed"
+                      transition={{ duration: 0.25, ease: "easeOut" }}
+                      className="overflow-hidden pl-[64px] md:pl-0"
+                    >
+                      <div className="md:grid md:grid-cols-[1fr_56px_1fr]">
+                        <div className={`${isEven ? "md:col-start-3" : "md:col-start-1"}`}>
+                          <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-black/30">
+                            <div className="relative aspect-[16/9] w-full">
+                              <Image
+                                src={item.image}
+                                alt={item.title}
+                                fill
+                                style={{ objectFit: "cover" }}
+                              />
+
+                              <motion.div
+                                variants={overlayVariants}
+                                initial="rest"
+                                whileHover="hover"
+                                transition={{ duration: 0.3 }}
+                                className="absolute inset-0 bg-black/25 pointer-events-none"
+                              />
+
+                              <button
+                                type="button"
+                                onClick={(event) =>
+                                  triggerImageDownload(
+                                    event,
+                                    item.image,
+                                    getFileName(item.image, item.slug)
+                                  )
+                                }
+                                className="absolute right-3 top-3 z-20 rounded-md border border-white/25 bg-black/55 p-2 text-white hover:bg-black/75"
+                                aria-label={`Download ${item.title} image`}
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  className="h-4 w-4"
+                                  aria-hidden="true"
+                                >
+                                  <path d="M12 3v12" />
+                                  <path d="m7 10 5 5 5-5" />
+                                  <path d="M5 21h14" />
+                                </svg>
+                              </button>
+                            </div>
+
+                            <div className="flex items-center justify-between gap-3 px-4 py-3 md:px-5">
+                              <p className="text-sm text-white/70">View full photo collection</p>
+                              <Link
+                                href={`/events/${item.slug}`}
+                                className="rounded-full border border-[#6fffe4]/55 bg-[#6fffe4]/10 px-4 py-2 text-sm font-semibold text-[#a0fff0] transition hover:bg-[#6fffe4]/20"
+                                aria-label={`Open ${item.title}`}
+                              >
+                                Open Event
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ) : null}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

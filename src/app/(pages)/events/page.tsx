@@ -11,7 +11,7 @@ function Events() {
             Events
           </h1>
           <p className="mt-2 font-bold text-white/80">
-            See the latest events happening at GatorAI
+            Explore current events through a live timeline of GatorAI moments
           </p>
         </div>
         <EventsGallery />
