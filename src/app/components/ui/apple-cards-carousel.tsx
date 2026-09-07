@@ -165,9 +165,10 @@ interface CardProps {
 
 interface FlipCardProps {
   card: CardProps;
+  size?: "sm" | "md";
 }
 
-export const FlipCard: React.FC<FlipCardProps> = ({ card }) => {
+export const FlipCard: React.FC<FlipCardProps> = ({ card, size = "md" }) => {
   const [flipped, setFlipped] = useState(false);
 
   useEffect(() => {
@@ -183,7 +184,7 @@ export const FlipCard: React.FC<FlipCardProps> = ({ card }) => {
   return (
     <div className="relative perspective-1000">
       <motion.div
-        className="w-56 h-80 md:w-80 md:h-[28rem] relative"
+        className={size === "sm" ? "w-36 h-52 md:w-48 md:h-64 relative" : "w-56 h-80 md:w-80 md:h-[28rem] relative"}
         style={{ transformStyle: "preserve-3d" }}
         // animate={{ rotateY: flipped ? 180 : 0 }}
         // flip is disabled for now need to fix for firefox
@@ -197,23 +198,23 @@ export const FlipCard: React.FC<FlipCardProps> = ({ card }) => {
         >
           <div className="absolute h-full top-0 inset-x-0 bg-gradient-to-b from-black/50 via-transparent to-transparent z-30 pointer-events-none" />
 
+          {card.linkedin && (
+            <a
+              href={card.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute top-2 right-2 z-50 inline-flex items-center justify-center w-9 h-9 bg-white rounded-full shadow-md transition-all duration-200 hover:scale-110"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <LinkedInLogoIcon className="w-5 h-5 text-[#0A66C2]" />
+            </a>
+          )}
           <div className="absolute inset-0 flex flex-col justify-end z-40 p-4">
-            <div className="relative bg-primary/50 py-4 px-2 rounded-lg">
-              {card.linkedin && (
-                <a
-                  href={card.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute bottom-2 right-2 z-50 inline-flex items-center justify-center w-9 h-9 bg-white rounded-full shadow-md transition-all duration-200 hover:scale-110"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <LinkedInLogoIcon className="w-5 h-5 text-[#0A66C2]" />
-                </a>
-              )}
-              <motion.p className="text-white text-sm md:text-base font-medium bg-amber-500 w-fit px-2 rounded-full">
+            <div className="bg-primary/50 py-4 px-2 rounded-lg">
+              <motion.p className={`text-white font-medium bg-amber-500 w-fit px-2 rounded-full ${size === "sm" ? "text-xs" : "text-sm md:text-base"}`}>
                 {card.category}
               </motion.p>
-              <motion.p className="text-white text-xl md:text-2xl font-semibold max-w-fit mt-2">
+              <motion.p className={`text-white font-semibold max-w-fit mt-2 ${size === "sm" ? "text-sm md:text-base" : "text-xl md:text-2xl"}`}>
                 {card.title}
               </motion.p>
             </div>
